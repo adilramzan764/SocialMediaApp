@@ -28,6 +28,8 @@ class Post {
 
   final PostController controller = PostController();
 
+
+
   Post({
     required this.name,
     required this.post,
