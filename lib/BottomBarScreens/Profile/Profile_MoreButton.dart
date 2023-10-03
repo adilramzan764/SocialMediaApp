@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:socialmediaapp/ProfileMenuButton_Screens/Draft.dart';
 
 import '../../Models/SharePost_Model.dart';
 import '../../ProfileMenuButton_Screens/SavedPosts.dart';
@@ -42,7 +43,6 @@ class Profile_MoreButton extends StatelessWidget {
     'assets/sendMessage.svg',
 
 
-
     'assets/copy.svg',
     'assets/share.svg',
     // Add more items as needed
@@ -58,6 +58,8 @@ class Profile_MoreButton extends StatelessWidget {
     'Share this Profile',
     // Add more items as needed
   ];
+
+
   Profile_MoreButton({
     Key? key,
     required this.otherUserProfile, // Add this constructor parameter
@@ -73,14 +75,12 @@ class Profile_MoreButton extends StatelessWidget {
   }
 
 
-
-
-
-
-
   Widget ForUserProfile(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5, // Adjust the height as needed
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * 0.5, // Adjust the height as needed
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -99,22 +99,34 @@ class Profile_MoreButton extends StatelessWidget {
               itemCount: iconsforuserprofie.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-                  child: Container(
-                    height: 30,
-                    child: ListTile(
-                      leading: SvgPicture.asset(iconsforuserprofie[index]),
-                      title: Text(
-                        textsforuserprofile[index],
-                        style: TextStyle(fontSize: 14),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 10),
+                  child: InkWell(
+                    onTap: () {
+                      if (textsforuserprofile[index] == 'Saved') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Saved_Posts()),
+                        );
+                      }
+                      if (textsforuserprofile[index] == 'Draft') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Drafts()),
+                        );
+                      }
+                    },
+                    child: Container(
+                      height: 30,
+                      child: ListTile(
+                        leading: SvgPicture.asset(iconsforuserprofie[index]),
+                        title: Text(
+                          textsforuserprofile[index],
+                          style: TextStyle(fontSize: 14),
+                        ),
+
                       ),
-                      onTap: () {
-                        if(textsforuserprofile[index]=='Saved'){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Saved_Posts()),
-                          );                        }
-                      },
                     ),
                   ),
                 );
@@ -129,7 +141,8 @@ class Profile_MoreButton extends StatelessWidget {
 
   Widget ForOtherProfile(BuildContext context) {
     return Container(
-      height: 55 * iconsforotherprofie.length.toDouble(), // Adjust the height as needed
+      height: 55 * iconsforotherprofie.length.toDouble(),
+      // Adjust the height as needed
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -148,7 +161,8 @@ class Profile_MoreButton extends StatelessWidget {
               itemCount: iconsforotherprofie.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 10),
                   child: Container(
                     height: 30,
                     child: ListTile(

@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:socialmediaapp/BottomBarScreens/Profile/PersonalPosts.dart';
 
 import '../../Models/ProfileModel.dart';
 import '../../Utils/PicPost_Widget.dart';
@@ -29,7 +31,19 @@ class All_Tab extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             // Replace this with the content you want to display for each grid item
             print(userprofile.posts[index]);
-            return CreatePostPicWidget(userprofile.posts[index], 150, true);
+            return InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        // Return the widget for the detail screen here
+                        return PersonalPosts(); // Replace with your actual detail screen widget.
+                      },
+                    ),
+                  );
+                },
+                child: CreatePostPicWidget(userprofile.posts[index], 150, true));
           },
         ),
       ),
