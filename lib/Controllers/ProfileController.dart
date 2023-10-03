@@ -8,7 +8,7 @@ class ProfileController extends GetxController {
   final Rx<ProfileModel> userProfile = ProfileModel(
     profileimage: 'assets/profilepic.png',
     name: "Minha Anjum",
-    bio: "Graphic Designer/Animator/\nVediographer",
+    bio: "Graphic Designer/\nAnimator/Vediographer",
     numberOfPosts: "1458",
     numberOfFollowers: "321",
     numberOfFollowings: "154",
@@ -18,6 +18,14 @@ class ProfileController extends GetxController {
       "assets/model2.jpg",
       'assets/model3.jpg',
       'assets/model4.jpg',
+      'assets/model4.jpg',
+      'assets/model4.jpg',
+      'assets/model4.jpg',
+      'assets/model4.jpg',
+      'assets/model4.jpg',
+      "assets/model2.jpg",
+      "assets/model2.jpg",
+
     ],
   ).obs;
 

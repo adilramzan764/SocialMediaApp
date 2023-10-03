@@ -29,10 +29,10 @@ class MyTabBar extends StatelessWidget {
               child: TabBarView(
                 children: [
                   // Content for Tab 1
-                  PostFeedScreen(saved_posts_Screen: false,),
+                  PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,),
 
                   // Content for Tab 2
-                  PostFeedScreen(saved_posts_Screen: false,)
+                  PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,)
                 ],
               ),
             ),

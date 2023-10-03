@@ -18,6 +18,8 @@ class Post {
   final String name;
   final String post;
   final String profilepic;
+  final String postpic;
+
   final String caption;
   final String timestamp;
   final String likes;
@@ -34,6 +36,8 @@ class Post {
     required this.name,
     required this.post,
     required this.profilepic,
+    required this.postpic,
+
     required this.caption,
     required this.timestamp,
     required this.likes,

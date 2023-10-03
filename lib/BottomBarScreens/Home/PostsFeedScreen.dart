@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../Controllers/Post_Controller.dart';
 import '../../Utils/PicPost_Widget.dart';
-import '../../Utils/Post_Widget.dart';
+import '../../Utils/PostCard_Widget.dart';
 import '../Profile/Profile.dart';
 import 'FeedPost_MoreButton.dart';
 import 'SharePost.dart';
@@ -13,7 +13,9 @@ import 'SharePost.dart';
 
 class PostFeedScreen extends StatefulWidget {
   bool saved_posts_Screen;
-  PostFeedScreen({required this.saved_posts_Screen});
+  final bool ispersonalpost;
+
+  PostFeedScreen({required this.saved_posts_Screen,required this.ispersonalpost});
 
   @override
   State<PostFeedScreen> createState() => _PostFeedScreenState();
@@ -26,6 +28,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
       name: 'John Doe',
       post: 'Lorem ipsum dolor sit amet...',
       profilepic: 'assets/profilepic.png',
+      postpic: 'assets/model1.jpg',
       caption: '"Lost in the beauty of natures embrace. 🌿🌄',
       timestamp: '10 min ago',
       likes: '2555',
@@ -37,6 +40,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
       name: 'Jane Smith',
       post: 'Sed ut perspiciatis unde omnis iste...',
       profilepic: 'assets/profilepic.png',
+      postpic: 'assets/model4.jpg',
       caption: 'Exploring new places!',
       timestamp: '15 min ago',
       likes: '10',
@@ -49,6 +53,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
       name: 'Jane Smith',
       post: 'Sed ut perspiciatis unde omnis iste...',
       profilepic: 'assets/profilepic.png',
+      postpic:'assets/model2.jpg',
       caption: 'Exploring new places!',
       timestamp: '15 min ago',
       likes: '10',
@@ -61,6 +66,8 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
       name: 'Jane Smith',
       post: 'Sed ut perspiciatis unde omnis iste...',
       profilepic: 'assets/profilepic.png',
+      postpic: 'assets/model3.jpg',
+
       caption: 'Exploring new places!',
       timestamp: '15 min ago',
       likes: '10',
@@ -89,7 +96,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
         itemBuilder: (context, index) {
           final post = filteredPosts[index];
 
-          return PostCard(post: post);
+          return PostCard(post: post, ispersonalpost: widget.ispersonalpost,);
         },
       ),
     );

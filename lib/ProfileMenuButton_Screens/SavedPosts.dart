@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../BottomBarScreens/Home/PostsFeedScreen.dart';
+import '../BottomBarScreens/Profile/All_TAb.dart';
+import '../Controllers/ProfileController.dart';
 
 class Saved_Posts extends StatelessWidget {
-  const Saved_Posts({Key? key}) : super(key: key);
+   Saved_Posts({Key? key}) : super(key: key);
+  final ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +58,9 @@ class Saved_Posts extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       indicatorWeight: 3,
                       tabs: [
-                        Tab(text: 'All'),
-                        Tab(text: 'Images'),
-                        Tab(text: 'Videos'),
+                        Tab(text: 'Posts'),
+                        Tab(text: 'Media'),
+                        Tab(text: 'Like'),
                       ],
                     ),
                   ),
@@ -63,8 +68,8 @@ class Saved_Posts extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        PostFeedScreen(saved_posts_Screen: true,),
-                        Center(child: Text('Images')),
+                        PostFeedScreen(saved_posts_Screen: true, ispersonalpost: false,),
+                        All_Tab(userprofile: controller.userProfile.value),
                         Center(child: Text('Videos')),
                       ],
                     ),
