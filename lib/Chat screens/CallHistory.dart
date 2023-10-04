@@ -37,35 +37,24 @@ class _CallHistoryState extends State<CallHistory> {
                 IconButton(
                   onPressed: () {
                     Get.back();
-
-
-
-
-
-
-
-
-
                   },
-
-
                   icon: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.black,
                     size: 16,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 110.0),
-                  child: Text(
-                    "Call history",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                )
+                Text(
+                  "Call history",
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(height: 10,width: 10,)
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: chatHistory.length,
@@ -90,7 +79,6 @@ class _CallHistoryState extends State<CallHistory> {
           ),
         ],
       ),
-
     );
   }
 }

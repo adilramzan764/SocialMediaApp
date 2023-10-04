@@ -27,11 +27,12 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               SizedBox(
-                height: Get.height*0.01,
+                height: Get.height*0.05,
               ),
               Center(
                 child: SvgPicture.asset(
                   "assets/signup.svg",
+
                 ),
               ),
               SizedBox(
@@ -142,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                 },
                 child: Container(
                   height: 50,
-                  width: double.infinity,
+                  width:  MediaQuery.of(context).size.width * 0.6,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -151,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                     color: Color(0xffAC83F6),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                   child: Center(
                     child: Text(
@@ -162,43 +163,41 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               SizedBox(
-                height: Get.height*0.01,
+                height: Get.height*0.02,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Divider(
-                      color: Color(0xff707070),
-                      thickness: 1,
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.3),
+                        thickness: 1,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("OR",style: TextStyle(color: Color(0xff707070),fontSize: 12)),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color: Color(0xff707070),
-                      thickness: 1,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text("OR",style: TextStyle(color: Colors.grey,fontSize: 12)),
                     ),
-                  ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.3),
+                        thickness: 1,
+                      ),
+                    ),
 
-                ],
+                  ],
+                ),
               ),
               SizedBox(
-                height: Get.height*0.0001,
+                height: Get.height*0.02,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      // Handle login navigation
-                    },
-                    child: Text(
-                      'Already have an account?',
-                      style: TextStyle(color: Color(0xff707070)),
-                    ),
+                  Text(
+                    'Already have an account?',
+                    style: TextStyle(color: Color(0xff707070)),
                   ),
                   InkWell(onTap: () {
                     Get.to(()=>SignIn());

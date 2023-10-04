@@ -213,7 +213,7 @@ class Profile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 60),
                             if (otherUserProfile) SizedBox(height: 20),
                           ],
                         ),
@@ -237,17 +237,14 @@ class Profile extends StatelessWidget {
               ),
             ),
           ],
-          body: Center(
-            child: Container(
-              height:
-                  170 * controller.userProfile.value.posts.length.toDouble(),
-              child: TabBarView(
-                children: [
-                  All_Tab(userprofile: controller.userProfile.value),
-                  Center(child: Text('Images')),
-                  Center(child: Text('Videos')),
-                ],
-              ),
+          body: Container(
+               height: 175 * controller.userProfile.value.posts.length.toDouble(),
+            child: TabBarView(
+              children: [
+                All_Tab(userprofile: controller.userProfile.value),
+                Center(child: Text('Images')),
+                Center(child: Text('Videos')),
+              ],
             ),
           ),
         ),

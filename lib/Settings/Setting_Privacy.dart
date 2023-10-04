@@ -50,13 +50,11 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
                           size: 14,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 110.0),
-                        child: Text(
-                          "Setting Privacy",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      Text(
+                        "Setting Privacy",
+                        style: TextStyle(color: Colors.black),
                       ),
+                      SizedBox(height: 10,width: 10,)
                     ],
                   ),
                 ),
@@ -72,7 +70,7 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
           } else if (index == 2) {
             // Third item with notification switch
             return ListTile(
-              leading: SvgPicture.asset("assets/Notification.svg"),
+              leading: SvgPicture.asset("assets/notification.svg",color: Colors.blue,height: 20,width: 20,),
               title: Text("Notifications", style: TextStyle(color: Colors.black,fontSize: 12)),
               trailing: Transform.scale(scale: 0.8,
                 child: Obx(() => Switch(
@@ -89,7 +87,7 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
           } else if (index == 3) {
             // Fourth item with sound notification switch
             return ListTile(
-              leading: SvgPicture.asset("assets/Notification.svg"),
+              leading: SvgPicture.asset("assets/notification.svg",color: Colors.blue,height: 20,width: 20,),
               title: Text("Sound Notifications", style: TextStyle(color: Colors.black,fontSize: 12)),
               trailing: Transform.scale(scale: 0.8,
                 child: Obx(() => Switch(
@@ -98,7 +96,8 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
                     soundNotificationSwitchValue.value = newValue;
                     // Perform any other operations based on the switch value here
                   },
-                  activeColor: Colors.white,inactiveThumbColor: Colors.blue,inactiveTrackColor: Colors.white,
+                  inactiveTrackColor: Colors.white,
+                  activeColor: Colors.blue,
                 )),
               ),
             );

@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../Balance_Sheets/CurrentBalance.dart';
 import '../BottomBarScreens/Home/Home.dart';
 import '../BottomBarScreens/Profile/Profile.dart';
+import '../Chat screens/BottomNavigationBar_Chat.dart';
 import '../CreatePost/UploadFeed_Dialog.dart';
 
 class BottomNavBarV2 extends StatefulWidget {
@@ -30,9 +32,11 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
       body: Stack(
         children: [
           if (currentIndex == 0) Home(),
-          if (currentIndex == 1) Center(child: Text('Chat Screen')),
-          if (currentIndex == 2) Center(child: Text('Wallet Screen')),
+          if (currentIndex == 1) MyBottomNavigation_Chat(),
+          if (currentIndex == 2) CurrentBalance(),
+
           if (currentIndex == 3) Profile(otherUserProfile: false,),
+          if(currentIndex!=1)
           Positioned(
             bottom: 0,
             left: 0,

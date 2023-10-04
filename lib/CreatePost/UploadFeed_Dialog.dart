@@ -32,7 +32,14 @@ class UploadFedd_Dialog extends StatelessWidget {
                 Expanded(
                     flex: 1,child:Column(
                   children: [
-                    IconButton(onPressed: (){}, icon: SvgPicture.asset('assets/gallery.svg')),
+                    IconButton(onPressed: (){
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreatePost(),
+                        ),);
+                    }, icon: SvgPicture.asset('assets/gallery.svg')),
                     // SizedBox(height: 5,),
                     Text('From Gallery'),
                   ],
