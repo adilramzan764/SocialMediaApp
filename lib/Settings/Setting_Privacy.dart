@@ -3,9 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
-import '../Utils/CustomDialog.dart';
 import 'BlockSetting.dart';
 
 class SettingPrivacy extends StatefulWidget {
@@ -52,13 +50,11 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
                           size: 14,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 110.0),
-                        child: Text(
-                          "Setting Privacy",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      Text(
+                        "Setting Privacy",
+                        style: TextStyle(color: Colors.black),
                       ),
+                      SizedBox(height: 10,width: 10,)
                     ],
                   ),
                 ),
@@ -70,14 +66,11 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
             return ListTile(
               leading: SvgPicture.asset("assets/Square.svg"),
               title: Text("Edit Profile",style: TextStyle( color: Colors.black,fontSize: 12)),
-              onTap: (){
-                Get.to(ProfileEdit());
-              },
             );
           } else if (index == 2) {
             // Third item with notification switch
             return ListTile(
-              leading: SvgPicture.asset("assets/Notification.svg"),
+              leading: SvgPicture.asset("assets/notification.svg",color: Colors.blue,height: 20,width: 20,),
               title: Text("Notifications", style: TextStyle(color: Colors.black,fontSize: 12)),
               trailing: Transform.scale(scale: 0.8,
                 child: Obx(() => Switch(
@@ -94,7 +87,7 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
           } else if (index == 3) {
             // Fourth item with sound notification switch
             return ListTile(
-              leading: SvgPicture.asset("assets/Notification.svg"),
+              leading: SvgPicture.asset("assets/notification.svg",color: Colors.blue,height: 20,width: 20,),
               title: Text("Sound Notifications", style: TextStyle(color: Colors.black,fontSize: 12)),
               trailing: Transform.scale(scale: 0.8,
                 child: Obx(() => Switch(
@@ -103,7 +96,8 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
                     soundNotificationSwitchValue.value = newValue;
                     // Perform any other operations based on the switch value here
                   },
-                  activeColor: Colors.white,inactiveThumbColor: Colors.blue,inactiveTrackColor: Colors.white,
+                  inactiveTrackColor: Colors.white,
+                  activeColor: Colors.blue,
                 )),
               ),
             );
@@ -123,8 +117,73 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
               title: Text("Log Out", style: TextStyle(color: Colors.black,fontSize: 12)),
               onTap: () {
                 // Show a dialog when the phone icon button is pressed
-                CustomDialog.showcustomDialog(context,"Are you sure you want to Log out?","LogOut","Cancel");
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BackdropFilter( filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: AlertDialog(
+                        content: Text("Are you sure you want to Log out",style: TextStyle(fontSize: 11,color: Colors.black)),
+                        actions: <Widget>[
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 30,width: MediaQuery.of(context).size.width/3.5,
 
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 2.5,
+                                      ),
+                                    ],
+                                    color: Color(0xffFF4B4B),
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      " Log out",
+                                      style: TextStyle(color: Colors.white, fontSize: 11),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 30,width: MediaQuery.of(context).size.width/3.5,
+
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 2.5,
+                                      ),
+                                    ],
+                                    color: Color(0xffAC83F6),
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      " Cancel",
+                                      style: TextStyle(color: Colors.white, fontSize: 11),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
               },
             );
           }

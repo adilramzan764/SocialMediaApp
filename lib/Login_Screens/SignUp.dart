@@ -13,6 +13,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final TextEditingController firstname = TextEditingController();
+  final TextEditingController phonenumber = TextEditingController();
   final TextEditingController Idnumber = TextEditingController();
   final TextEditingController passwordname = TextEditingController();
   DateTime? _selectedDate; // Store the selected date
@@ -26,16 +27,16 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: Get.height*0.05,
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Image.asset(
-                  "assets/Group 12241.png",
+              Center(
+                child: SvgPicture.asset(
+                  "assets/signup.svg",
+
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: Get.height*0.02,
               ),
               Text(
                 'Sign Up',
@@ -46,44 +47,57 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: Get.height*0.02,
               ),
               CustomTextField(
                 prefixIcon: Transform.scale(
                   scale: 0.4,
                   child: SvgPicture.asset('assets/Iconly-Bulk-Profile.svg'),
                 ),
-                hintText: "Muniba Imtiaz",
+                hintText: "Ashraf Imtiaz",
                 controller: firstname,
               ),
               SizedBox(
-                height: 10,
+                height: Get.height*0.02,
               ),
               CustomTextField(
                 prefixIcon: Transform.scale(
-                  scale: 0.4,
+                  scale: 0.35,
+                  child: SvgPicture.asset('assets/Bold-Call.svg'),
+                ),
+                hintText: "03002255652",
+                controller: phonenumber,
+              ),
+              SizedBox(
+                height: Get.height*0.02,
+              ),
+              CustomTextField(
+                prefixIcon: Transform.scale(
+                  scale: 0.35,
                   child: SvgPicture.asset('assets/Iconly-Bulk-Message.svg'),
                 ),
                 hintText: "F2021218054",
                 controller: Idnumber,
               ),
+
+
               SizedBox(
-                height: 10,
+                height: Get.height*0.02,
               ),
               CustomTextField(
                 prefixIcon: Transform.scale(
-                  scale: 0.4,
+                  scale: 0.35,
                   child: SvgPicture.asset('assets/Lock.svg'),
                 ),
                 hintText: '........',
                 controller: passwordname,
               ),
               SizedBox(
-                height: 10,
+                height: Get.height*0.02,
               ),
               CustomTextField(
                 prefixIcon: Transform.scale(
-                  scale: 0.4,
+                  scale: 0.35,
                   child: SvgPicture.asset('assets/Iconly-Bold-Calendar.svg'),
                 ),
                 hintText: "date",
@@ -119,25 +133,17 @@ class _SignUpState extends State<SignUp> {
                   }
                 },
               ),
+
               SizedBox(
-                height: 10,
+                height: Get.height*0.04,
               ),
-              CustomTextField(
-                prefixIcon: Transform.scale(
-                  scale: 0.4,
-                  child: SvgPicture.asset('assets/Iconly-Bulk-Profile.svg'),
-                ),
-                hintText: "About Yourself",
-                controller: TextEditingController(),
-              ),
-              SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  // Handle sign-up logic
+                  Get.back();
                 },
                 child: Container(
                   height: 50,
-                  width: double.infinity,
+                  width:  MediaQuery.of(context).size.width * 0.6,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -146,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                     color: Color(0xffAC83F6),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                   child: Center(
                     child: Text(
@@ -156,21 +162,46 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: Get.height*0.02,
+              ),
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.3),
+                        thickness: 1,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text("OR",style: TextStyle(color: Colors.grey,fontSize: 12)),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.3),
+                        thickness: 1,
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: Get.height*0.02,
+              ),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      // Handle login navigation
-                    },
-                    child: Text(
-                      'Already have an account?',
-                      style: TextStyle(color: Color(0xff707070)),
-                    ),
+                  Text(
+                    'Already have an account?',
+                    style: TextStyle(color: Color(0xff707070)),
                   ),
-                  TextButton(
-                    onPressed: () {
-                     Get.to(()=>SignIn());
-                    },
+                  InkWell(onTap: () {
+                    Get.to(()=>SignIn());
+                  },
                     child: Text(
                       'Sign In',
                       style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),

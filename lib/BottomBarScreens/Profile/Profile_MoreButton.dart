@@ -5,6 +5,7 @@ import 'package:socialmediaapp/ProfileMenuButton_Screens/Draft.dart';
 
 import '../../Models/SharePost_Model.dart';
 import '../../ProfileMenuButton_Screens/SavedPosts.dart';
+import '../../Settings/Setting_Privacy.dart';
 import '../../Utils/SharePost_Widget.dart';
 
 class Profile_MoreButton extends StatelessWidget {
@@ -103,6 +104,13 @@ class Profile_MoreButton extends StatelessWidget {
                       horizontal: 8.0, vertical: 10),
                   child: InkWell(
                     onTap: () {
+                      if (textsforuserprofile[index] == 'Setting and Privacy') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingPrivacy()),
+                        );
+                      }
                       if (textsforuserprofile[index] == 'Saved') {
                         Navigator.push(
                           context,
@@ -171,9 +179,7 @@ class Profile_MoreButton extends StatelessWidget {
                         textsforotherprofile[index],
                         style: TextStyle(fontSize: 14),
                       ),
-                      onTap: () {
-                        // if(textsforotherprofile=='')
-                      },
+                      onTap: () {},
                     ),
                   ),
                 );

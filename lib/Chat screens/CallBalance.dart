@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:socialmediaapp/Chat%20screens/CallHistory.dart';
 
 import '../Balance_Sheets/Payment Method.dart';
 import '../Settings/Setting_Privacy.dart';
-import 'CallHistory.dart';
 
 class CallBalance extends StatefulWidget {
   const CallBalance({Key? key}) : super(key: key);
@@ -56,21 +56,23 @@ class _CallBalanceState extends State<CallBalance> {
                   icon: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.black,
-                    size: 14,
+                    size: 16,
                   ),
                 ),
-                 Text(
-                    "Call",
-                    style: TextStyle(color: Colors.black),
-                  ),
+                Text(
+                  "Call",
+                  style: TextStyle(color: Colors.black),
+                ),
 
                 IconButton(
-                  onPressed: () {
-                    Get.to(()=>CallHistory());
-                  },
-                  icon: Image.asset("assets/history.png")
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CallHistory()),
+                      );                  },
+                    icon: Image.asset("assets/history.png")
                 ),
-                
+
               ],
             ),
           ),
@@ -176,48 +178,6 @@ class _CallBalanceState extends State<CallBalance> {
           ),
           SizedBox(
             height: 10,
-          ),
-          TextButton(
-            onPressed: () {
-              // Your onPressed logic here
-            },
-            child: Container(
-              height: 40,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 2.5,
-                  ),
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      // Get.to(()=>CallBalance());
-                    },
-                    icon: Image.asset("assets/Home.png"),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // Get.to(()=>ProfileChatScreen());
-                    },
-                    icon: Image.asset("assets/simpleChat.png"),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Get.to(()=>SettingPrivacy());
-                    },
-                    icon: Image.asset("assets/Call.png",color: Colors.blue),
-                  ),
-                ],
-              ),
-            ),
           ),
         ],
       ),

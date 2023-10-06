@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Import GetX package
-import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
 import '../../Controllers/ProfileController.dart';
 import '../../Models/ProfileModel.dart';
@@ -29,7 +28,7 @@ class Profile extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
               leading:
-        otherUserProfile ?
+              otherUserProfile ?
 
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, top: 29),
@@ -87,8 +86,8 @@ class Profile extends StatelessWidget {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           Profile_MoreButton(
-                                        otherUserProfile: otherUserProfile,
-                                      ),
+                                            otherUserProfile: otherUserProfile,
+                                          ),
                                     );
                                   },
                                   icon: Icon(
@@ -165,9 +164,7 @@ class Profile extends StatelessWidget {
                                                 width: 120,
                                                 child: CustomButton(
                                                   text: 'Edit Profile',
-                                                  onPressed: () {
-                                                 Get.to(()=>ProfileEdit())  ;
-                                                  },
+                                                  onPressed: () {},
                                                 ),
                                               ),
                                             ),
@@ -217,7 +214,7 @@ class Profile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 60),
                             if (otherUserProfile) SizedBox(height: 20),
                           ],
                         ),
@@ -241,15 +238,14 @@ class Profile extends StatelessWidget {
               ),
             ),
           ],
-
           body: Container(
-               height: 175 * controller.userProfile.value.posts.length.toDouble(),
+            height: 175 * controller.userProfile.value.posts.length.toDouble(),
             child: TabBarView(
               children: [
                 PostFeedScreen(saved_posts_Screen: false, ispersonalpost: true,),
+
                 All_Tab(userprofile: controller.userProfile.value),
-                Center(child: Text('Like')),
-              ],
+                Center(child: Text('Likes')),],
             ),
           ),
         ),

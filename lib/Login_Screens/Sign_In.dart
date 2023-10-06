@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
-import '../Balance_Sheets/bottom navigation  bar.dart';
+import '../BottomNavigationBar/MyBottomNavigationBar.dart';
 import 'SignUp.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -17,16 +17,24 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset(
-                "assets/Group 498.png",
+              SizedBox(
+                height: Get.height * 0.1,
+              ),
+              Center(
+                child: SvgPicture.asset(
+                  "assets/signin.svg",
+                  height: 220,
+                  width: 220,
+                ),
               ),
               SizedBox(
-                height: 20,
+                height: Get.height * 0.02,
               ),
               Text(
                 'Sign In',
@@ -37,22 +45,27 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: Get.height * 0.03,
               ),
-              Container(height: 40,width:MediaQuery.of(context).size.width,
+              Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(color: Colors.grey, blurRadius: 2)
-                    ]),
-
+                    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)]),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: "Student I'D  number",hintStyle: TextStyle(fontSize: 12,),
-                      contentPadding: EdgeInsets.all(10),
-                      prefixIcon: Transform.scale(scale: 0.6,
-                          child: SvgPicture.asset('assets/Iconly-Bulk-Message.svg',)),
+                      hintText: "Student I'D  number",
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                      ),
+                      prefixIcon: Transform.scale(
+                          scale: 0.35,
+                          child: SvgPicture.asset(
+                            'assets/Iconly-Bulk-Message.svg',
+                          )),
+                      contentPadding: EdgeInsets.all(8),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -65,22 +78,27 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: Get.height * 0.02,
               ),
-              Container(height: 40,width:MediaQuery.of(context).size.width,
+              Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(color: Colors.grey, blurRadius: 2)
-                    ]),
-
+                    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)]),
                 child: TextField(
                   decoration: InputDecoration(
-                      hintText: ".......",hintStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      hintText: "Enter Phone number",
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                      ),
                       contentPadding: EdgeInsets.all(10),
-                      prefixIcon: Transform.scale(scale: 0.6,
-                          child: SvgPicture.asset('assets/Lock.svg',)),
+                      prefixIcon: Transform.scale(
+                          scale: 0.35,
+                          child: SvgPicture.asset(
+                            'assets/Bold-Call.svg',
+                          )),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -92,21 +110,60 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(30))),
                 ),
               ),
-              Align(alignment: Alignment.topRight,
-                child: TextButton(onPressed: (){
-                  // Get.to(()=>RecoverPassword());
-                }, child: Text('Forgot Password',style: TextStyle(color: Color(0xff707070),fontSize: 12),)),
+              SizedBox(
+                height: Get.height * 0.02,
               ),
-
-              SizedBox(height: 10,),
+              Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white,
+                    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)]),
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: ".......",
+                      hintStyle:
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      contentPadding: EdgeInsets.all(10),
+                      prefixIcon: Transform.scale(
+                          scale: 0.35,
+                          child: SvgPicture.asset(
+                            'assets/Lock.svg',
+                          )),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(30)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30))),
+                ),
+              ),
+              SizedBox(
+                height: Get.height * 0.01,
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: InkWell(
+                    onTap: () {},
+                    child: Text(
+                      'Forget Password',
+                      style: TextStyle(color: Color(0xff707070), fontSize: 12),
+                    )),
+              ),
+              SizedBox(
+                height: Get.height * 0.07,
+              ),
               TextButton(
                 onPressed: () {
-                  Get.to(()=>BottomNavBarV2());
+                  Get.to(() => BottomNavBarV2());
                 },
-
                 child: Container(
                   height: 40,
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width * 0.6,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -115,51 +172,67 @@ class _SignInState extends State<SignIn> {
                       ),
                     ],
                     color: Color(0xffAC83F6),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                   child: Center(
                     child: Text(
-                      "Next",
+                      "Sign In",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: Get.height * 0.02,
+              ),
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.3),
+                        thickness: 1,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text("OR",
+                          style:
+                          TextStyle(color: Colors.grey, fontSize: 12)),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.3),
+                        thickness: 1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: Get.height * 0.02,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Divider(
-                      color: Color(0xff707070),
-                      thickness: 1,
-                    ),
+                  Text(
+                    'Create new Account?',
+                    style:
+                    TextStyle(color: Color(0xff707070), fontSize: 12),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("OR"),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color: Color(0xff707070),
-                      thickness: 1,
-                    ),
-                  ),
-
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => SignUp());
+                      },
+                      child: Text(
+                        ' Sign up',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      )),
                 ],
               ),
-              SizedBox(height: 5,),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(onPressed: (){
-                    Get.to(()=>SignUp());
-                  }, child: Text('Create new Account?',style: TextStyle(color: Colors.black),)),
-                  TextButton(onPressed: (){
-                    Get.to(()=>SignUp());
-                  }, child: Text('Sign up',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),)),
-                ],
-              )
-
             ],
           ),
         ),

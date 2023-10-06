@@ -49,11 +49,9 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: MediaQuery.of(context).size.height * 0.03,
           ),
-          SizedBox(
-            height: 20,
-          ),
+
           if (_currentPage == 1) // Show text on the last page
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -84,39 +82,38 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               ),
             ),
           if (_currentPage == 0) // Show text button on the first page
-            if (_currentPage == 0) // Show text button on the first page
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: TextButton(
-                  onPressed: () {
-                    _controller.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                    );
-                  },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextButton(
+                onPressed: () {
+                  _controller.nextPage(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );
+                },
 
-                  child: Container(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 2.5,
-                        ),
-                      ],
-                      color: Color(0xffAC83F6),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Next",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                child: Container(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 2.5,
                       ),
+                    ],
+                    color: Color(0xffAC83F6),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Next",
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ),
                 ),
               ),
+            ),
 
         ],
       ),
@@ -133,16 +130,16 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
         Center(
           child: Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.05,
+              top: MediaQuery.of(context).size.height * 0.13,
             ),
             child: SvgPicture.asset(
               imagePath,
-              width: 290,
-              height: 210,
+              width: 300,
+              height: 240,
             ),
           ),
         ),
-        SizedBox(height: 20,),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
         Center(
           child: SmoothPageIndicator(
             controller: _controller,
@@ -156,14 +153,17 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             ),
           ),
         ),
-        SizedBox(height: 20,),
-        Text(
-          heading,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        SizedBox(height: MediaQuery.of(context).size.height * 0.06,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          child: Text(
+            heading,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
 
@@ -176,7 +176,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             description,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.grey,
               fontSize: 12,
             ),
           ),
@@ -187,8 +187,3 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: OnBoardScreen(),
-  ));
-}
