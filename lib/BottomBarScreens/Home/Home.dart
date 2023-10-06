@@ -25,7 +25,9 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+
+                },
                 icon: SvgPicture.asset('assets/profile.svg',
                     color: Colors.black),
               ),

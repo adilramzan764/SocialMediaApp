@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Import GetX package
+import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
 import '../../Controllers/ProfileController.dart';
 import '../../Models/ProfileModel.dart';
 import '../../Utils/CustomButton.dart';
 import '../../Utils/PicPost_Widget.dart';
+import '../Home/PostsFeedScreen.dart';
 import 'All_Tab.dart';
 import 'ProfileWidgets.dart';
 import 'Profile_MoreButton.dart';
@@ -163,7 +165,9 @@ class Profile extends StatelessWidget {
                                                 width: 120,
                                                 child: CustomButton(
                                                   text: 'Edit Profile',
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                 Get.to(()=>ProfileEdit())  ;
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -237,6 +241,7 @@ class Profile extends StatelessWidget {
               ),
             ),
           ],
+<<<<<<< Updated upstream
           body: Center(
             child: Container(
               height:
@@ -248,6 +253,16 @@ class Profile extends StatelessWidget {
                   Center(child: Text('Videos')),
                 ],
               ),
+=======
+          body: Container(
+               height: 175 * controller.userProfile.value.posts.length.toDouble(),
+            child: TabBarView(
+              children: [
+                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: true,),
+                All_Tab(userprofile: controller.userProfile.value),
+                Center(child: Text('Like')),
+              ],
+>>>>>>> Stashed changes
             ),
           ),
         ),

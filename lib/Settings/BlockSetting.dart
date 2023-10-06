@@ -16,6 +16,7 @@ class _BlockSettingState extends State<BlockSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView.builder(
         itemCount: names.length + 1, // Add 1 for the header
         itemBuilder: (context, index) {
@@ -46,13 +47,11 @@ class _BlockSettingState extends State<BlockSetting> {
                           size: 14,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 130.0),
-                        child: Text(
-                          "Block",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      Text(
+                        "Block",
+                        style: TextStyle(color: Colors.black),
                       ),
+                      SizedBox(height: 40,width: 40,)
                     ],
                   ),
                 ),

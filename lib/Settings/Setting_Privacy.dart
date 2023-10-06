@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
+import '../Utils/CustomDialog.dart';
 import 'BlockSetting.dart';
 
 class SettingPrivacy extends StatefulWidget {
@@ -68,6 +70,9 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
             return ListTile(
               leading: SvgPicture.asset("assets/Square.svg"),
               title: Text("Edit Profile",style: TextStyle( color: Colors.black,fontSize: 12)),
+              onTap: (){
+                Get.to(ProfileEdit());
+              },
             );
           } else if (index == 2) {
             // Third item with notification switch
@@ -118,73 +123,8 @@ class _SettingPrivacyState extends State<SettingPrivacy> {
               title: Text("Log Out", style: TextStyle(color: Colors.black,fontSize: 12)),
               onTap: () {
                 // Show a dialog when the phone icon button is pressed
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return BackdropFilter( filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      child: AlertDialog(
-                        content: Text("Are you sure you want to Log out",style: TextStyle(fontSize: 11,color: Colors.black)),
-                        actions: <Widget>[
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: Container(
-                                  height: 30,width: MediaQuery.of(context).size.width/3.5,
+                CustomDialog.showcustomDialog(context,"Are you sure you want to Log out?","LogOut","Cancel");
 
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 2.5,
-                                      ),
-                                    ],
-                                    color: Color(0xffFF4B4B),
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      " Log out",
-                                      style: TextStyle(color: Colors.white, fontSize: 11),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: Container(
-                                  height: 30,width: MediaQuery.of(context).size.width/3.5,
-
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 2.5,
-                                      ),
-                                    ],
-                                    color: Color(0xffAC83F6),
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      " Cancel",
-                                      style: TextStyle(color: Colors.white, fontSize: 11),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
               },
             );
           }

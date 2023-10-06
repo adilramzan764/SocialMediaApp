@@ -171,7 +171,9 @@ class Profile_MoreButton extends StatelessWidget {
                         textsforotherprofile[index],
                         style: TextStyle(fontSize: 14),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        // if(textsforotherprofile=='')
+                      },
                     ),
                   ),
                 );

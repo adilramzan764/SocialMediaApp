@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/Chat%20screens/PhoneTab.dart';
 
 class ProfileChatScreen extends StatefulWidget {
   const ProfileChatScreen({Key? key}) : super(key: key);
@@ -68,35 +69,39 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                             content: Text("Top Up your account to make Calls ",style: TextStyle(fontSize: 10,color: Colors.black)),
                             actions: <Widget>[
                               SizedBox(height: 10),
-                              TextButton(
-                                onPressed: () {
-                                  // Get.to(()=>PaymentMethod());
-                                },
-                                child: Container(
-                                  height: 40,width: MediaQuery.of(context).size.width,
+                              Center(
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Get.to(()=>PhoneTab());
+                                  },
+                                  child: Container(
+                                    height: 40,width: MediaQuery.of(context).size.width/2.5,
 
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 2.5,
-                                      ),
-                                    ],
-                                    color: Color(0xffAC83F6),
-                                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "   Top Up",
-                                          style: TextStyle(color: Colors.white, fontSize: 16),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 2.5,
                                         ),
-                                        IconButton(onPressed: () {
-                                          // Get.to(()=>PaymentMethod());
-                                        }, icon: Icon(Icons.arrow_forward, color: Colors.white)),
                                       ],
+                                      color: Color(0xffAC83F6),
+                                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "   Top Up",
+                                              style: TextStyle(color: Colors.white, fontSize: 16),
+                                            ),
+                                            Icon(Icons.arrow_forward, color: Colors.white),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),

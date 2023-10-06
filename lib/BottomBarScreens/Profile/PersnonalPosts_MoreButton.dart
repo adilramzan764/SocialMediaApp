@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:socialmediaapp/ProfileMenuButton_Screens/Draft.dart';
 
+import '../../Controllers/PersonalPost_MoreButtonController.dart';
 import '../../Models/SharePost_Model.dart';
 import '../../ProfileMenuButton_Screens/SavedPosts.dart';
 import '../../Utils/SharePost_Widget.dart';
@@ -40,7 +41,12 @@ class PersonalPosts_MoreButton extends StatelessWidget {
   }
 
   Widget ForPersonalPosts(BuildContext context) {
-    return Container(
+    return GetBuilder<PersonalPost_MoreButtonController>(
+        init: PersonalPost_MoreButtonController(),
+    builder: (controller) {
+    return
+
+    Container(
       height: 55 * iconsforperonalposts.length.toDouble(),
       // Adjust the height as needed
       width: double.infinity,
@@ -73,7 +79,10 @@ class PersonalPosts_MoreButton extends StatelessWidget {
                         textsforperonalposts[index],
                         style: TextStyle(fontSize: 14),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        controller.handleTapAction(index,context);
+
+                      },
                     ),
                   ),
                 );
@@ -82,6 +91,6 @@ class PersonalPosts_MoreButton extends StatelessWidget {
           ),
         ],
       ),
-    );
+    );});
   }
 }

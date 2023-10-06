@@ -59,7 +59,7 @@ class FeedPost_MoreButton extends StatelessWidget {
                           title: Text(texts[index], style: TextStyle(fontSize: 14),),
                           onTap: () {
                             // Handle tap actions here
-                            controller.handleTapAction(index);
+                            controller.handleTapAction(index,context);
                           },
                         ),
                       ),

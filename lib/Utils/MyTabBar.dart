@@ -33,6 +33,7 @@ class MyTabBar extends StatelessWidget {
 
                   // Content for Tab 2
                   PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,)
+
                 ],
               ),
             ),
