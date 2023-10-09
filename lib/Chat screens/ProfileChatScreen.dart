@@ -19,8 +19,11 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Container(
-            height: 100,
+            height: Get.height * 0.15,
             decoration: BoxDecoration(
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
               color: Colors.white,
@@ -37,25 +40,26 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                   },
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: Colors.black,size: 14,
+                    color: Colors.black,
+                    size: 16,
                   ),
                 ),
-                Image.asset("assets/avatar.png"),
+                Image.asset("assets/avatar.jpg"),
                 Column(
                   children: [
-                    SizedBox(
-                      height: 40,
-                    ),
+                    SizedBox(height: Get.height * 0.05),
                     Text('Rana Zeeshan',
                         style: TextStyle(color: Colors.black, fontSize: 12)),
+                    SizedBox(height: Get.height * 0.005),
                     Text('Active 5 minutes ago',
                         style: TextStyle(color: Colors.black, fontSize: 8)),
                   ],
                 ),
                 // SizedBox(width:20),
-                Expanded(child: Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(onPressed: (){}, icon: Image.asset("assets/Delete.png")))),
+                Expanded(
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: SvgPicture.asset("assets/Bold-Delete.svg"))),
                 // SizedBox(width: 10), // Adjust the width as needed
                 IconButton(
                   onPressed: () {
@@ -63,21 +67,25 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return BackdropFilter( filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        return BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                           child: AlertDialog(
-                            title: Image.asset("assets/dialog.png"),
-                            content: Text("Top Up your account to make Calls ",style: TextStyle(fontSize: 10,color: Colors.black)),
+                            title: SvgPicture.asset("assets/dilog.svg"),
+                            content: Text("       Top Up your account to make Calls ",
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black)),
                             actions: <Widget>[
                               SizedBox(height: 10),
                               Center(
                                 child: TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
-                                    Get.to(()=>PhoneTab());
+                                    Get.to(() => PhoneTab());
                                   },
                                   child: Container(
-                                    height: 40,width: MediaQuery.of(context).size.width/2.5,
-
+                                    height: 40,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.5,
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -86,19 +94,23 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                                         ),
                                       ],
                                       color: Color(0xffAC83F6),
-                                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
                                     ),
                                     child: Center(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               "   Top Up",
-                                              style: TextStyle(color: Colors.white, fontSize: 16),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16),
                                             ),
-                                            Icon(Icons.arrow_forward, color: Colors.white),
+                                           SvgPicture.asset("assets/Iconly-Light-Arrow - Right.svg",)
                                           ],
                                         ),
                                       ),
@@ -112,9 +124,8 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                       },
                     );
                   },
-                  icon: Image.asset("assets/IconCall.png"),
+                  icon: SvgPicture.asset("assets/phonebold.svg"),
                 )
-
               ],
             ),
           ),
@@ -123,7 +134,7 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
           ),
           Text(
             "Today",
-            style: TextStyle(color: Colors.black,fontSize: 12),
+            style: TextStyle(color: Colors.black, fontSize: 12),
           ),
           SizedBox(
             height: 10,
@@ -137,15 +148,15 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
 
                 return ListTile(
                   leading: isSender
-                      ? Image.asset("assets/avatar.png")
-                      : SizedBox(width: 40), // Empty space for receiver
+                      ? Image.asset("assets/avatar.jpg")
+                      : SizedBox(width: Get.width*0.1), // Empty space for receiver
                   trailing: isSender
-                      ? SizedBox(width: 40) // Empty space for sender
-                      : Image.asset("assets/avatar.png"),
+                      ? SizedBox(width: Get.width*0.1) // Empty space for sender
+                      : Image.asset("assets/avator1.jpg"),
                   title: Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: isSender ? Colors.blue : Colors.grey,
+                      color: isSender ? Color(0XFF3EA7FF) : Color(0XFFAC83F6),
                       // Color for sender and receiver
                       borderRadius: isSender
                           ? BorderRadius.only(
@@ -175,12 +186,12 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.only(right: 10),
             child: Container(
-              height: 40,
+              height: 45,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)],
               ),
@@ -190,18 +201,14 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                   hintStyle: TextStyle(
                     fontSize: 12,
                   ),
-                  contentPadding: EdgeInsets.all(10),
+                  contentPadding: EdgeInsets.all(8),
                   suffixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                     SvgPicture.asset("assets/Bold-Camera.svg"),
+
                       IconButton(
-                        icon: Image.asset("assets/Camera.png"),
-                        onPressed: () {
-                          // Handle camera icon tap
-                        },
-                      ),
-                      IconButton(
-                        icon: Image.asset("assets/voice.png"),
+                        icon: SvgPicture.asset("assets/Bold-Voice 2.svg"),
                         onPressed: () {
                           // Handle voice icon tap
                         },
@@ -212,18 +219,20 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                     borderSide: BorderSide(
                       color: Colors.white,
                     ),
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),topRight: Radius.circular(20)),
                   ),
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
                   ),
                 ),
               ),
             ),
           ),
-SizedBox(height: 10,)
+          SizedBox(
+            height: 10,
+          )
         ],
       ),
     );

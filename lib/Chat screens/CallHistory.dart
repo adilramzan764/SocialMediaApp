@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CallHistory extends StatefulWidget {
@@ -10,10 +11,20 @@ class CallHistory extends StatefulWidget {
 
 class _CallHistoryState extends State<CallHistory> {
   List<String> chatHistory = [
-    "Chat Item 1",
-    "Chat Item 2",
-    "Chat Item 3",
-  ]; // List to store chat history items
+    "Minha Anjum",
+    "Zarish",
+    "sehrish",
+  ];
+  List<String> time = [
+    "54 min,10 min ago",
+    "50 min,5 min ago",
+    "30 min,4 min ago",
+  ];
+  List<String> imges = [
+    "assets/h1.jpg",
+    "assets/h2.jpg",
+    "assets/h3.jpg",
+  ]; // // List to store chat history items
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +33,7 @@ class _CallHistoryState extends State<CallHistory> {
         children: [
           SizedBox(height: 30),
           Container(
-            height: 80,
+            height: Get.height*0.1,
             decoration: BoxDecoration(
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
               color: Colors.white,
@@ -37,35 +48,27 @@ class _CallHistoryState extends State<CallHistory> {
                 IconButton(
                   onPressed: () {
                     Get.back();
-
-
-
-
-
-
-
-
-
                   },
-
-
                   icon: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.black,
                     size: 16,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 110.0),
-                  child: Text(
-                    "Call history",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                )
+                Text(
+                  "Call history",
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 50,
+                ),
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: chatHistory.length,
@@ -76,13 +79,23 @@ class _CallHistoryState extends State<CallHistory> {
                     style: TextStyle(color: Colors.black, fontSize: 12),
                   ),
                   subtitle: Text(
-                    "10 min ago",
-                    style: TextStyle(color: Colors.black, fontSize: 10),
+                    time[index],
+                    style: TextStyle(color: Color(0xffD8D8D8), fontSize: 10),
                   ),
-                  leading: Image.asset("assets/callprofile.png"),
+                  leading:
+                  Container(
+                    height: Get.height*0.10,
+                    width: Get.width*0.10,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Color(0xffAC83F6)),
+                        image: DecorationImage(
+                            image: AssetImage(imges[index]),fit: BoxFit.cover
+                            )),
+                  ),
                   trailing: Transform.scale(
                     scale: 0.8,
-                    child: Image.asset("assets/IconCall.png"),
+                    child: SvgPicture.asset("assets/phonebold.svg"),
                   ),
                 );
               },
@@ -90,7 +103,6 @@ class _CallHistoryState extends State<CallHistory> {
           ),
         ],
       ),
-
     );
   }
 }

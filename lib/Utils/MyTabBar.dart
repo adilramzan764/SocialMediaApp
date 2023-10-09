@@ -14,7 +14,7 @@ class MyTabBar extends StatelessWidget {
       child: Column(
         children: [
           TabBar(
-            labelStyle: TextStyle(fontSize: 16),
+            labelStyle: TextStyle(fontSize: 14),
             indicatorColor: Color(0xffAC83F6),
             indicatorWeight: 3,
             indicatorSize: TabBarIndicatorSize.tab,
@@ -23,19 +23,17 @@ class MyTabBar extends StatelessWidget {
               Tab(text: 'Friends Feed'), // Second tab
             ],
           ),
-          SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height*0.7,
-              child: TabBarView(
-                children: [
-                  // Content for Tab 1
-                  PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,),
+          Expanded(
+            // height: MediaQuery.of(context).size.height*0.6,
+            child: TabBarView(
+              children: [
+                // Content for Tab 1
+                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,),
 
-                  // Content for Tab 2
-                  PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,)
+                // Content for Tab 2
+                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: false,)
 
-                ],
-              ),
+              ],
             ),
           ),
 

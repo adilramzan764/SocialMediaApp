@@ -65,7 +65,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigation_Chat> {
                   label: '',
                 ),
                 BottomNavigationBarItem(
-                  icon: Image.asset("assets/Call.png",color: _currentIndex == 2
+                  icon: Image.asset("assets/Bold-Call.svg",color: _currentIndex == 2
                       ? Color(0xffAC83F6)
                       : null),
                   label: '',

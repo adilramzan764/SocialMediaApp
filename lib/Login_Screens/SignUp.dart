@@ -16,6 +16,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController phonenumber = TextEditingController();
   final TextEditingController Idnumber = TextEditingController();
   final TextEditingController passwordname = TextEditingController();
+  final TextEditingController datename = TextEditingController();
   DateTime? _selectedDate; // Store the selected date
 
   @override

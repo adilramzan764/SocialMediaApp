@@ -41,8 +41,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(
-                    height: 20,
-                    width: 20,
+                    height: 30,
+                    width: 30,
                   )
                 ],
               ),

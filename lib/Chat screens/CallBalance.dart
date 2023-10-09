@@ -23,16 +23,16 @@ class _CallBalanceState extends State<CallBalance> {
     "Aniqa Sulman",
   ]; // List to store chat history items
   List<String> profileImages = [
-    "assets/profile1.png",
-    "assets/profile2.png",
-    "assets/profile3.png",
-    "assets/profile4.png",
-    "assets/profile3.png",
-    "assets/profile3.png",
+    "assets/model1.jpg",
+    "assets/model2.jpg",
+    "assets/model3.jpg",
+    "assets/model4.jpg",
+    "assets/h1.jpg",
+    "assets/h3.jpg",
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       body: Column(
         children: [
           SizedBox(height: 30),
@@ -70,7 +70,7 @@ class _CallBalanceState extends State<CallBalance> {
                         context,
                         MaterialPageRoute(builder: (context) => CallHistory()),
                       );                  },
-                    icon: Image.asset("assets/history.png")
+                    icon: SvgPicture.asset("assets/history-icon.svg")
                 ),
 
               ],
@@ -86,27 +86,31 @@ class _CallBalanceState extends State<CallBalance> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Container(
-              height: 90,
+              height: Get.height*0.1,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration( color: Color(0xff3EA7FF),
                   borderRadius: BorderRadius.circular(20)),
 
               child: ListTile(
                 dense: true,
-                leading: SvgPicture.asset("assets/increase-up-profit-icon.svg"),
-                title: Text(
-                  "2.71%",
-                  style: TextStyle(color: Colors.white),
+                title: Row(
+                  children: [SvgPicture.asset("assets/increase-up-profit-icon.svg"),
+                    SizedBox(width: Get.width*0.02,),
+                    Text(
+                      "2.71%",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
                 ),
                 subtitle: Text(
                   '21,554.80\$',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-                trailing: Image.asset(
-                  "assets/Group 10492.png",
-                  fit: BoxFit.cover,
-                  width: 50,
-                  height: 150,
+                trailing: SvgPicture.asset(
+                  "assets/flower.svg",
+                  // fit: BoxFit.cover,
+                  // width: 150,
+                  // height: 150,
                 ),
                 onTap: () {},
               ),
@@ -167,10 +171,19 @@ class _CallBalanceState extends State<CallBalance> {
                     chatHistory[index],
                     style: TextStyle(color: Colors.black, fontSize: 12),
                   ),
-                  leading: Image.asset(profileImages[index]), // Use the corresponding profile image for each chat item
+                  leading:  Container(
+                    height: Get.height*0.10,
+                    width: Get.width*0.10,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Color(0xffAC83F6)),
+                        image: DecorationImage(
+                            image: AssetImage(profileImages[index]),fit: BoxFit.cover
+                        )),
+                  ), // Use the corresponding profile image for each chat item
                   trailing: Transform.scale(
                     scale: 0.8,
-                    child: Image.asset("assets/IconCall.png"),
+                    child: SvgPicture.asset("assets/phonebold.svg"),
                   ),
                 );
               },

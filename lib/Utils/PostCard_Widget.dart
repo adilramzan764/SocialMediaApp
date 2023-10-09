@@ -36,7 +36,7 @@ class PostCard extends StatelessWidget {
                       ),
                     );
                   },
-                  child: ProfilePicWidget(post.profilepic, 50, 50),
+                  child: ProfilePicWidget(post.profilepic, 45, 45),
                 ),
                 SizedBox(width: 10),
                 Column(
@@ -47,12 +47,12 @@ class PostCard extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w400,
-                        fontSize: 16,
+                        fontSize: 13,
                       ),
                     ),
                     Text(
                       post.timestamp,
-                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                      style: TextStyle(color: Colors.grey, fontSize: 11),
                     ),
                   ],
                 ),
@@ -193,14 +193,14 @@ class PostCard extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               post.caption,
-              style: TextStyle(fontSize: 14.0),
+              style: TextStyle(fontSize: 13.0),
             ),
             SizedBox(height: 3.0),
             Wrap(
               children: post.hashtags
                   .map((hashtag) => Text(
                 '#$hashtag ',
-                style: TextStyle(color: Color(0xff7F7F7F)),
+                style: TextStyle(color: Color(0xff7F7F7F),fontSize: 13),
               ))
                   .toList(),
             ),
