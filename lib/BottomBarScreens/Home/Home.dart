@@ -6,7 +6,10 @@ import '../../BottomNavigationBar/BotttomBar_Widget.dart';
 import '../../BottomNavigationBar/MyBottomNavigationBar.dart';
 import '../../Chat screens/CallBalance.dart';
 import '../../Chat screens/MainChatScreens.dart';
+import '../../Chat screens/NotificationScreen.dart';
+import '../../Chat screens/PhoneTab.dart';
 import '../../Controllers/ProfileController.dart';
+import '../../CreatePost/CreatePost.dart';
 import '../../Drawer/CustomDrawer.dart';
 import '../../Utils/MyTabBar.dart';
 import '../../Utils/PicPost_Widget.dart';
@@ -30,7 +33,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _screens = [
     HomeScreenContent(scaffoldKey: _scaffoldKey,),
     MainChatScreens(),
-    CallBalance(),
+    PhoneTab(),
   ];
 
   List<String> profileIcons = [
@@ -51,9 +54,9 @@ class _HomeState extends State<Home> {
       key: _scaffoldKey,
       drawer: MyDrawer(),
       backgroundColor: Colors.white,
-      bottomNavigationBar:  CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
+      bottomNavigationBar:  _currentIndex!=2 ? CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
         _currentIndex = int;
-      }); },),
+      }); },): SizedBox(),
       body:_screens[_currentIndex],
     );
   }
@@ -104,7 +107,9 @@ class HomeScreenContent extends StatelessWidget {
                       onPressed: () {},
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(NotificationScreen());
+                      },
                       icon: SvgPicture.asset('assets/notification.svg',
                           height: 23, width: 23, color: Colors.black),
                     )
@@ -128,7 +133,7 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: Color(0xffAC83F6),
             foregroundColor: Colors.white,
             onPressed: () {
-              // Handle FAB tap event
+              Get.to(CreatePost());
             },
             child: Icon(Icons.add, size: 30),
           ),

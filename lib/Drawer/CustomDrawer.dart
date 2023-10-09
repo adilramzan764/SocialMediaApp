@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../Balance_Sheets/CurrentBalance.dart';
 import '../BottomBarScreens/Profile/Profile.dart';
 import '../BottomBarScreens/Profile/ProfileWidgets.dart';
+import '../ProfileMenuButton_Screens/SavedPosts.dart';
+import '../Settings/Setting_Privacy.dart';
 import '../Utils/PicPost_Widget.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -76,7 +81,23 @@ class MyDrawer extends StatelessWidget {
                     title: Text(names[index]),
                     onTap: () {
                       if(index==0){
-                        Profile(otherUserProfile: false,);
+                        Navigator.pop(context);
+                       Get.to(Profile(otherUserProfile: false,)) ;
+                      }
+                      if(index==1){
+                        Navigator.pop(context);
+                        Get.to(Saved_Posts()) ;
+                      }
+                      if(index==2){
+                        Navigator.pop(context);
+                        Get.to(SettingPrivacy()) ;
+                      }
+                      if(index==3){
+                        // Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CurrentBalance()),
+                        );
                       }
                     },
                   );

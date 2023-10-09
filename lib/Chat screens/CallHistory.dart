@@ -29,9 +29,9 @@ class _CallHistoryState extends State<CallHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: 30),
           Container(
             height: Get.height*0.1,
             decoration: BoxDecoration(
@@ -42,33 +42,34 @@ class _CallHistoryState extends State<CallHistory> {
                 bottomRight: Radius.circular(20),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                    size: 16,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 16,
+                    ),
                   ),
-                ),
-                Text(
-                  "Call history",
-                  style: TextStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 50,
-                ),
-              ],
+                  Text(
+                    "Call history",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+
           Expanded(
             child: ListView.builder(
               itemCount: chatHistory.length,

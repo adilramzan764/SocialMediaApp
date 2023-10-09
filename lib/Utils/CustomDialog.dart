@@ -27,7 +27,7 @@ class CustomDialog {
                   child: TextButton(
                     onPressed: () {
                       // Perform logout actions here
-                      Get.back(); // Close the dialog
+                      // Get.back(); // Close the dialog
                     },
                     child: Container(
                       height: 30,
@@ -55,7 +55,7 @@ class CustomDialog {
                   flex: 1,
                   child: TextButton(
                     onPressed: () {
-                      Get.back(); // Close the dialog
+Navigator.pop(context);
                     },
                     child: Container(
                       height: 30,

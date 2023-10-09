@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -28,51 +29,34 @@ class _CurrentBalanceState extends State<CurrentBalance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SingleChildScrollView(scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              SizedBox(height: 30),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text("Wallet", style: TextStyle(color: Colors.black, fontSize: 13)),
+      body: SingleChildScrollView(scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            SizedBox(height: 30),
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             children: [
+               IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.left_chevron,size: 16,)),
+               Text("Wallet",style: TextStyle(fontSize: 15),),
+               SizedBox(height: 40,width: 40,)
+             ],
+           ),
+            SizedBox(height: 10),
+
+            Container(height: 50,
+              decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey,blurRadius: 2)],color: Colors.white),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("Minutes left for International calls", style: TextStyle(color: Colors.black,fontSize: 10)),
+                  Text("78.6 min",style: TextStyle(color: Color(0xffAC83F6),fontWeight: FontWeight.w500),)
+                ],
               ),
-              SizedBox(height: 10),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text("Current Balance", style: TextStyle(color: Colors.black, fontSize: 13)),
-              ),
-              SizedBox(height: 10),
-              Container(
-                height: 70,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Color(0xff3EA7FF),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ListTile(
-                  dense: true,
-                  leading: SvgPicture.asset("assets/increase-up-profit-icon.svg"),
-                  title: Text(
-                    "2.71%",
-                    style: TextStyle(color: Colors.white,fontSize: 13),
-                  ),
-                  subtitle: Text(
-                    '21,554.80\$',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-                  ),
-                  trailing: Image.asset(
-                    "assets/Group 10492.png",
-                    fit: BoxFit.cover,
-                    width: 50,
-                    height: 150,
-                  ),
-                  onTap: () {},
-                ),
-              ),
-              SizedBox(height: 10),
-              TextButton(
+
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: TextButton(
                 onPressed: () {
                   Get.to(()=>PaymentMethod());
                 },
@@ -89,7 +73,9 @@ class _CurrentBalanceState extends State<CurrentBalance> {
                     color: Color(0xffAC83F6),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
-                  child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -105,13 +91,19 @@ class _CurrentBalanceState extends State<CurrentBalance> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Align(
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Align(
                 alignment: Alignment.topLeft,
                 child: Text("Recent Top ups",style: TextStyle(color:Colors.black, fontSize: 13, fontWeight: FontWeight.bold)),
               ),
-              SizedBox(height: 5),
-              Row(
+            ),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
@@ -132,14 +124,17 @@ class _CurrentBalanceState extends State<CurrentBalance> {
                   ),
                 ],
               ),
-              SizedBox(height: 5),
-              buildListTile('Top Up', '04-15-2023', '\$2154'),
-              SizedBox(height: 5),
-              buildListTile('Top Up', '04-15-2023', '\$2154'),
-              SizedBox(height: 5),
-              buildListTile('Top Up', '04-15-2023', '\$2154'),
-              SizedBox(height: 5),
-              Row(
+            ),
+            SizedBox(height: 5),
+            buildListTile('Top Up', '04-15-2023', '\$2154'),
+            SizedBox(height: 5),
+            buildListTile('Top Up', '04-15-2023', '\$2154'),
+            SizedBox(height: 5),
+            buildListTile('Top Up', '04-15-2023', '\$2154'),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
@@ -160,13 +155,13 @@ class _CurrentBalanceState extends State<CurrentBalance> {
                   ),
                 ],
               ),
-              SizedBox(height: 5),
-              buildListTile('Top Up', '04-15-2023', '\$2154'),
-              SizedBox(height: 5),
-              buildListTile('Top Up', '04-15-2023', '\$2154'),
-              SizedBox(height: 5),
-            ],
-          ),
+            ),
+            SizedBox(height: 5),
+            buildListTile('Top Up', '04-15-2023', '\$2154'),
+            SizedBox(height: 5),
+            buildListTile('Top Up', '04-15-2023', '\$2154'),
+            SizedBox(height: 5),
+          ],
         ),
       ),
     );

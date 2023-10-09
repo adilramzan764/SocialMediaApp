@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Import GetX package
+import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
 import '../../Controllers/ProfileController.dart';
 import '../../Models/ProfileModel.dart';
@@ -164,7 +165,7 @@ class Profile extends StatelessWidget {
                                                 width: 120,
                                                 child: CustomButton(
                                                   text: 'Edit Profile',
-                                                  onPressed: () {},
+                                                  onPressed: () {Get.to(ProfileEdit());},
                                                 ),
                                               ),
                                             ),

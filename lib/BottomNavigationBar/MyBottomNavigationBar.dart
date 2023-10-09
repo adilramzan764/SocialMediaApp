@@ -6,6 +6,7 @@ import '../BottomBarScreens/Home/Home.dart';
 import '../BottomNavigationBar/MyBottomNavigationBar.dart';
 import '../Chat screens/CallBalance.dart';
 import '../Chat screens/MainChatScreens.dart';
+import '../Chat screens/PhoneTab.dart';
 import 'BotttomBar_Widget.dart';
 
 
@@ -15,12 +16,12 @@ class BottomNavBarV2 extends StatefulWidget {
 }
 
 class _MyBottomNavigationBarState extends State<BottomNavBarV2> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   final List<Widget> _screens = [
     Home(),
     MainChatScreens(),
-    CallBalance(),
+    PhoneTab(),
   ];
 
   @override

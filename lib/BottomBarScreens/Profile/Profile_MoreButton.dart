@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:socialmediaapp/ProfileMenuButton_Screens/Draft.dart';
 
+import '../../Controllers/OtherUser_MoreButtonContoller.dart';
 import '../../Models/SharePost_Model.dart';
 import '../../ProfileMenuButton_Screens/SavedPosts.dart';
 import '../../Settings/Setting_Privacy.dart';
@@ -36,13 +37,10 @@ class Profile_MoreButton extends StatelessWidget {
   ];
 
   final List<String> iconsforotherprofie = [
-
-
     'assets/report.svg',
     'assets/block.svg',
     'assets/unfollow.svg',
     'assets/sendMessage.svg',
-
 
     'assets/copy.svg',
     'assets/share.svg',
@@ -60,7 +58,6 @@ class Profile_MoreButton extends StatelessWidget {
     // Add more items as needed
   ];
 
-
   Profile_MoreButton({
     Key? key,
     required this.otherUserProfile, // Add this constructor parameter
@@ -75,13 +72,10 @@ class Profile_MoreButton extends StatelessWidget {
     }
   }
 
-
   Widget ForUserProfile(BuildContext context) {
     return Container(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height * 0.5, // Adjust the height as needed
+      height: MediaQuery.of(context).size.height *
+          0.5, // Adjust the height as needed
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -89,7 +83,9 @@ class Profile_MoreButton extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           Container(
             height: 3,
             width: 90,
@@ -100,8 +96,8 @@ class Profile_MoreButton extends StatelessWidget {
               itemCount: iconsforuserprofie.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
                   child: InkWell(
                     onTap: () {
                       if (textsforuserprofile[index] == 'Setting and Privacy') {
@@ -133,7 +129,6 @@ class Profile_MoreButton extends StatelessWidget {
                           textsforuserprofile[index],
                           style: TextStyle(fontSize: 14),
                         ),
-
                       ),
                     ),
                   ),
@@ -145,50 +140,58 @@ class Profile_MoreButton extends StatelessWidget {
       ),
     );
   }
-
 
   Widget ForOtherProfile(BuildContext context) {
-    return Container(
-      height: 55 * iconsforotherprofie.length.toDouble(),
-      // Adjust the height as needed
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 5,),
-          Container(
-            height: 3,
-            width: 90,
-            color: Color(0xff707070),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: iconsforotherprofie.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 10),
-                  child: Container(
-                    height: 30,
-                    child: ListTile(
-                      leading: SvgPicture.asset(iconsforotherprofie[index]),
-                      title: Text(
-                        textsforotherprofile[index],
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      onTap: () {},
-                    ),
-                  ),
-                );
-              },
+    return GetBuilder<Otheruser_MoreButtonController>(
+        init: Otheruser_MoreButtonController(),
+        builder: (controller) {
+          return Container(
+            height: 55 * iconsforotherprofie.length.toDouble(),
+            // Adjust the height as needed
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(25),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  height: 3,
+                  width: 90,
+                  color: Color(0xff707070),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: iconsforotherprofie.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 10),
+                        child: Container(
+                          height: 30,
+                          child: ListTile(
+                            leading:
+                                SvgPicture.asset(iconsforotherprofie[index]),
+                            title: Text(
+                              textsforotherprofile[index],
+                              style: TextStyle(fontSize: 14),
+                            ),
+                            onTap: () {
+                              controller.handleTapAction(index,context);
 
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
 }

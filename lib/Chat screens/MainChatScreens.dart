@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'CallBalance.dart';
+import 'CallHistory.dart';
 import 'NotificationScreen.dart';
 import 'ProfileChatScreen.dart';
 
@@ -91,8 +92,8 @@ class _MainChatScreensState extends State<MainChatScreens> {
                           width: Get.width * 0.35,
                         ),
                         Container(
-                          height: 30,
-                          width: 50,
+                          height: 35,
+                          width: 60,
                           decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -101,7 +102,8 @@ class _MainChatScreensState extends State<MainChatScreens> {
                               ],
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16)),
-                          child: Center(
+                          child: TextButton(
+                            onPressed: () { Get.to(CallHistory()); },
                             child: Text("Calls",
                                 style: TextStyle(color: Color(0xffAC83F6))),
                           ),
@@ -148,7 +150,7 @@ class _MainChatScreensState extends State<MainChatScreens> {
                   ],
                 ),
               ),
-              Expanded(
+              Flexible(
                 child: ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (BuildContext context, int index) {
