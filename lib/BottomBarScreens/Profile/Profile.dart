@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart'; // Import GetX package
 import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 
@@ -247,11 +248,45 @@ class Profile extends StatelessWidget {
                 PostFeedScreen(saved_posts_Screen: false, ispersonalpost: !otherUserProfile,),
 
                 All_Tab(userprofile: controller.userProfile.value),
-                Center(child: Text('Likes')),],
+                Center(child: InkWell(onTap: () {
+                  _showBottomSlider(context);
+                },
+                    child: Text('Likes'))),],
             ),
           ),
         ),
       ),
+    );
+  }
+  void _showBottomSlider(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset("assets/Bulk-Send.svg") ,// Your icon here
+                  SizedBox(width: 20),
+                  Text('Share on Profile',style: TextStyle(color: Colors.black)),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  SvgPicture.asset("assets/Bulk-Delete.svg") ,
+                  SizedBox(width: 20),
+                  Text('Delete this post',style: TextStyle(color: Colors.black)),
+                ],
+              ),
+              // Add more rows with icons and text as needed
+            ],
+          ),
+        );
+      },
     );
   }
 }
