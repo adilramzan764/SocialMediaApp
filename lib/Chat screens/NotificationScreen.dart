@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Utils/PicPost_Widget.dart';
 import 'ModelNotification.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -46,7 +47,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [ SizedBox(height: 30),
+        children: [
           Container(
             height: 80,
             decoration: BoxDecoration(
@@ -57,27 +58,28 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 bottomRight: Radius.circular(20),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                    size: 14,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 14,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 110.0),
-                  child: Text(
+                  Text(
                     "Notifications",
                     style: TextStyle(color: Colors.black),
                   ),
-                ),
-              ],
+                  SizedBox(height: 40,width: 40,)
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -106,10 +108,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             ),
                           ),
                         ListTile(
-                          leading: CircleAvatar(
-                            // You can customize the avatar here
-                            backgroundImage: AssetImage("assets/callprofile.png"),
-                          ),
+                          leading: ProfilePicWidget("assets/model1.jpg",40,40),
                           title: Text(""),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +119,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   Text("+1 Mutual",style: TextStyle(fontSize: 12)),
                                   if (notification.isRequestAccepted) ...[
                                     Container(
-                                      height: 28,
+                                      height: 25,
                                       width: 70,
                                       child: TextButton(
                                         onPressed: () {
@@ -134,7 +133,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                         ),
                                         child: Text(
                                           notification.hasLiked ? "Reply" : "Message",
-                                          style: TextStyle(color: Colors.white, fontSize: 10),
+                                          style: TextStyle(color: Colors.white, fontSize: 8),
                                         ),
                                       ),
                                     ),

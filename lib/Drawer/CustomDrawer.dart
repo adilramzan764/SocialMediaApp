@@ -78,7 +78,7 @@ class MyDrawer extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: SvgPicture.asset(profileIcons[index]),
-                    title: Text(names[index]),
+                    title: Text(names[index],style: TextStyle(fontSize: 15),),
                     onTap: () {
                       if(index==0){
                         Navigator.pop(context);

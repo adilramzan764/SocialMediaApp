@@ -6,6 +6,7 @@ import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_E
 import 'package:socialmediaapp/CreatePost/CreatePost.dart';
 
 import '../BottomBarScreens/Home/SharePost.dart';
+import '../BottomBarScreens/Profile/Copy_URL.dart';
 import '../ProfileMenuButton_Screens/SavedPosts.dart';
 import '../Utils/CustomDialog.dart';
 
@@ -16,35 +17,34 @@ class Otheruser_MoreButtonController extends GetxController {
   void handleTapAction(int index,BuildContext context) {
     switch (index) {
       case 0:
-      // Handle the "Saved" action
-      print("pressed");
+      // Handle the "report" action
+        print("pressed");
         CustomDialog.showcustomDialog(context,"Are you sure you want to Report?","Report","Cancel");
 
 
         break;
       case 1:
-      // Handle the "Archive" action
+      // Handle the "block" action
         CustomDialog.showcustomDialog(context,"Are you sure you want to Block?","Block","Cancel");
 
         break;
       case 2:
-      // Handle the "Hide Likes" action
+      // Handle the "unfollow" action
         CustomDialog.showcustomDialog(context,"Are you sure you want to Unfollow?","Unfollow","Cancel");
 
         break;
       case 3:
-      // Handle the "Turn off comments" action
+      // Handle the "send message" action
 
         break;
       case 4:
-      // Handle the "Report Post" action
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CreatePost()),
-        );
+      // Handle the "copy profile URL" action
+
+        showCopyURLDialog(context); // Call the function to show the dialog
         break;
       case 5:
+      // Handle the "Share the Profile" action
+
         showModalBottomSheet(
           context: context,
           builder: (BuildContext context) => MyBottomSheet(),

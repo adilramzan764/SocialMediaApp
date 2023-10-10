@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:socialmediaapp/BottomBarScreens/Profile/TopUp_Option.dart';
 
 import 'Payment Method.dart';
 
@@ -25,6 +26,59 @@ class _CurrentBalanceState extends State<CurrentBalance> {
   }
 
   int _currentIndex = 0; // Declare and initialize _currentIndex
+  void _showTopUpOptionsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(child: Text('Select Your Top-Up Option', style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold))),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Handle the first button press
+                  Navigator.pop(context);
+Get.to(PaymentMethod());                },
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('10 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
+                    Text("\$ 10",style: TextStyle(color: Color(0xff3EA7FF)),)
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle the first button press
+                  Navigator.pop(context); // Close the dialog
+                  Get.to(PaymentMethod());
+                },
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('30 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
+                    Text("\$ 30",style: TextStyle(color: Color(0xff3EA7FF)),)
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle the first button press
+                  Navigator.pop(context); // Close the dialog
+                  Get.to(PaymentMethod());
+                },
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('60 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
+                    Text("\$ 60",style: TextStyle(color: Color(0xff3EA7FF)),)
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +90,9 @@ class _CurrentBalanceState extends State<CurrentBalance> {
            Row(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
-               IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.left_chevron,size: 16,)),
+               IconButton(onPressed: (){
+                 Navigator.pop(context);
+               }, icon: Icon(CupertinoIcons.left_chevron,size: 16,)),
                Text("Wallet",style: TextStyle(fontSize: 15),),
                SizedBox(height: 40,width: 40,)
              ],
@@ -58,7 +114,7 @@ class _CurrentBalanceState extends State<CurrentBalance> {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: TextButton(
                 onPressed: () {
-                  Get.to(()=>PaymentMethod());
+                  _showTopUpOptionsDialog(context);
                 },
                 child: Container(
                   height: 50,
@@ -84,7 +140,8 @@ class _CurrentBalanceState extends State<CurrentBalance> {
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         IconButton(onPressed: () {
-                          Get.to(()=>PaymentMethod());
+
+                           // Get.to(()=>TopUpOption());
                         }, icon: Icon(Icons.arrow_forward, color: Colors.white,size: 14,)),
                       ],
                     ),

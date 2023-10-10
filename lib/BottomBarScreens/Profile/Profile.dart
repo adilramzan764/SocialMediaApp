@@ -41,7 +41,8 @@ class Profile extends StatelessWidget {
                       CupertinoIcons.left_chevron,
                       color: Colors.black,
                     )),
-              ) : SizedBox(),
+              ) :
+              SizedBox(),
               automaticallyImplyLeading: false,
               expandedHeight: 400,
               pinned: true,

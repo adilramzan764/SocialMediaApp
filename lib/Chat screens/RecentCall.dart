@@ -21,7 +21,13 @@ class _RecentCallState extends State<RecentCall> {
     "1 new post",
     "Followed by Yasir ",
 
-  ];// List to store chat history items
+  ];
+  final List<String> pictures=[
+    "assets/h1.jpg",
+    "assets/h2.jpg",
+    "assets/h3.jpg",
+
+  ];// Lis// List to store chat history items
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +106,7 @@ class _RecentCallState extends State<RecentCall> {
                       shape: BoxShape.circle,
                       border: Border.all(color: Color(0xffAC83F6)),
                       image: DecorationImage(
-                          image: AssetImage('assets/model1.jpg'),
+                          image: AssetImage(pictures[index]),
                           fit: BoxFit.cover)),
                 ),
                 trailing: Transform.scale(
