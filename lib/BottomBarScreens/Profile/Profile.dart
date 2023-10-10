@@ -243,7 +243,7 @@ class Profile extends StatelessWidget {
             height: 175 * controller.userProfile.value.posts.length.toDouble(),
             child: TabBarView(
               children: [
-                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: true,),
+                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: !otherUserProfile,),
 
                 All_Tab(userprofile: controller.userProfile.value),
                 Center(child: Text('Likes')),],

@@ -29,9 +29,9 @@ class _MyBottomNavigationBarState extends State<BottomNavBarV2> {
     return Scaffold(
       // backgroundColor: Colors.white,
       body: _screens[_currentIndex],
-      bottomNavigationBar: _currentIndex != 0
+      bottomNavigationBar: _currentIndex == 1
           ? Padding(
-        padding: const EdgeInsets.only(bottom: 20.0,left: 10,right: 10),
+        padding: const EdgeInsets.only(bottom: 10.0,left: 10,right: 10),
         child: CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
           _currentIndex = int;
         }); },)

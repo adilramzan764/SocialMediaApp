@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
 import 'package:socialmediaapp/ProfileMenuButton_Screens/Draft.dart';
+import 'package:socialmediaapp/Settings/BlockSetting.dart';
 
 import '../../Controllers/OtherUser_MoreButtonContoller.dart';
 import '../../Models/SharePost_Model.dart';
@@ -13,7 +15,6 @@ class Profile_MoreButton extends StatelessWidget {
   final bool otherUserProfile; // Add this line
 
   final List<String> iconsforuserprofie = [
-    'assets/settings.svg',
     'assets/archive.svg',
     'assets/save_blue.svg',
     'assets/draft.svg',
@@ -25,7 +26,6 @@ class Profile_MoreButton extends StatelessWidget {
   ];
 
   final List<String> textsforuserprofile = [
-    'Setting and Privacy',
     'Archive',
     'Saved',
     'Draft',
@@ -75,7 +75,7 @@ class Profile_MoreButton extends StatelessWidget {
   Widget ForUserProfile(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height *
-          0.5, // Adjust the height as needed
+          0.45, // Adjust the height as needed
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -100,13 +100,7 @@ class Profile_MoreButton extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
                   child: InkWell(
                     onTap: () {
-                      if (textsforuserprofile[index] == 'Setting and Privacy') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingPrivacy()),
-                        );
-                      }
+
                       if (textsforuserprofile[index] == 'Saved') {
                         Navigator.push(
                           context,
@@ -118,6 +112,18 @@ class Profile_MoreButton extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => Drafts()),
+                        );
+                      }
+                      if (textsforuserprofile[index] == 'Edit Profile') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProfileEdit()),
+                        );
+                      }
+                      if (textsforuserprofile[index] == 'Block') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => BlockSetting()),
                         );
                       }
                     },

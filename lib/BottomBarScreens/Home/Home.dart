@@ -10,6 +10,7 @@ import '../../Chat screens/NotificationScreen.dart';
 import '../../Chat screens/PhoneTab.dart';
 import '../../Controllers/ProfileController.dart';
 import '../../CreatePost/CreatePost.dart';
+import '../../CreatePost/UploadFeed_Dialog.dart';
 import '../../Drawer/CustomDrawer.dart';
 import '../../Utils/MyTabBar.dart';
 import '../../Utils/PicPost_Widget.dart';
@@ -54,9 +55,12 @@ class _HomeState extends State<Home> {
       key: _scaffoldKey,
       drawer: MyDrawer(),
       backgroundColor: Colors.white,
-      bottomNavigationBar:  _currentIndex!=2 ? CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
-        _currentIndex = int;
-      }); },): SizedBox(),
+      bottomNavigationBar:  _currentIndex!=2 ? Padding(
+        padding:  const EdgeInsets.only(bottom: 10.0,left: 10,right: 10),
+        child: CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
+          _currentIndex = int;
+        }); },),
+      ): SizedBox(),
       body:_screens[_currentIndex],
     );
   }
@@ -87,7 +91,7 @@ class HomeScreenContent extends StatelessWidget {
                     onPressed: () {
                       scaffoldKey.currentState!.openDrawer();
                     },
-                    icon: SvgPicture.asset('assets/profile.svg',
+                    icon: SvgPicture.asset('assets/profile.svg',height: 18,width: 18,
                         color: Colors.black),
                   ),
                 ),
@@ -95,15 +99,14 @@ class HomeScreenContent extends StatelessWidget {
                   'Explore',
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
+                      fontSize: 18),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
                       icon: SvgPicture.asset('assets/search.svg',
-                          height: 23, width: 23, color: Colors.black),
+                          height: 18, width: 18, color: Colors.black),
                       onPressed: () {},
                     ),
                     IconButton(
@@ -111,14 +114,14 @@ class HomeScreenContent extends StatelessWidget {
                         Get.to(NotificationScreen());
                       },
                       icon: SvgPicture.asset('assets/notification.svg',
-                          height: 23, width: 23, color: Colors.black),
+                          height: 18, width: 18, color: Colors.black),
                     )
                   ],
                 )
               ],
             ),
             SizedBox(
-              height: 30,
+              height: 10,
             ),
             Expanded(child: MyTabBar()),
           ],
@@ -133,8 +136,12 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: Color(0xffAC83F6),
             foregroundColor: Colors.white,
             onPressed: () {
-              Get.to(CreatePost());
-            },
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return UploadFedd_Dialog();
+                },
+              );            },
             child: Icon(Icons.add, size: 30),
           ),
         ),
