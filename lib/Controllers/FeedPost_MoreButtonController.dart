@@ -2,9 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
-import '../BottomBarScreens/Home/SharePost.dart';
-import '../Utils/CustomDialog.dart';
+import '../View/BottomBarScreens/Home/SharePost.dart';
+import '../Widgets/CustomDialog.dart';
 
 
 class FeedPost_MoreButtonController extends GetxController {

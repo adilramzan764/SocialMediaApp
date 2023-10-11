@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import '../Models/ProfileModel.dart';
+import '../Models/ProfileModels.dart';
+
+
 
 class ProfileController extends GetxController {
   // Define your ProfileModel as an observable object

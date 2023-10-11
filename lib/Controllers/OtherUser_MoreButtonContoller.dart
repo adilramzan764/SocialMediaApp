@@ -2,13 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:socialmediaapp/BottomBarScreens/Profile/Profile%20Edit/Profile_Edit.dart';
-import 'package:socialmediaapp/CreatePost/CreatePost.dart';
-
-import '../BottomBarScreens/Home/SharePost.dart';
-import '../BottomBarScreens/Profile/Copy_URL.dart';
-import '../ProfileMenuButton_Screens/SavedPosts.dart';
-import '../Utils/CustomDialog.dart';
+import '../View/BottomBarScreens/Home/SharePost.dart';
+import '../View/BottomBarScreens/Profile/Copy_URL.dart';
+import '../Widgets/CustomDialog.dart';
 
 
 class Otheruser_MoreButtonController extends GetxController {
