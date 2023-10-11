@@ -10,6 +10,7 @@ import '../../Models/SharePost_Model.dart';
 import '../../ProfileMenuButton_Screens/SavedPosts.dart';
 import '../../Settings/Setting_Privacy.dart';
 import '../../Utils/SharePost_Widget.dart';
+import 'Copy_URL.dart';
 
 class Profile_MoreButton extends StatelessWidget {
   final bool otherUserProfile; // Add this line
@@ -125,6 +126,9 @@ class Profile_MoreButton extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) => BlockSetting()),
                         );
+                      }
+                      if (textsforuserprofile[index] == 'Copy profile URL') {
+                        showCopyURLDialog(context); // Call the function to show the dialog
                       }
                     },
                     child: Container(

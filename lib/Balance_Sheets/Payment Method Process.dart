@@ -32,6 +32,7 @@ class _PaymentMethodProcessState extends State<PaymentMethodProcess> {
                     icon: Icon(
                       Icons.arrow_back_ios_new_sharp,
                       color: Colors.black,
+                      size: 16,
                     ),
                   ),
                   Text(

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,50 +32,54 @@ class _CurrentBalanceState extends State<CurrentBalance> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(child: Text('Select Your Top-Up Option', style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold))),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  // Handle the first button press
-                  Navigator.pop(context);
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+
+          child: AlertDialog(
+            title: Center(child: Text('Select Your Top-Up Option', style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold))),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the first button press
+                    Navigator.pop(context);
 Get.to(PaymentMethod());                },
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('10 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
-                    Text("\$ 10",style: TextStyle(color: Color(0xff3EA7FF)),)
-                  ],
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('10 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
+                      Text("\$ 10",style: TextStyle(color: Color(0xff3EA7FF)),)
+                    ],
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle the first button press
-                  Navigator.pop(context); // Close the dialog
-                  Get.to(PaymentMethod());
-                },
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('30 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
-                    Text("\$ 30",style: TextStyle(color: Color(0xff3EA7FF)),)
-                  ],
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the first button press
+                    Navigator.pop(context); // Close the dialog
+                    Get.to(PaymentMethod());
+                  },
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('30 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
+                      Text("\$ 30",style: TextStyle(color: Color(0xff3EA7FF)),)
+                    ],
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle the first button press
-                  Navigator.pop(context); // Close the dialog
-                  Get.to(PaymentMethod());
-                },
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('60 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
-                    Text("\$ 60",style: TextStyle(color: Color(0xff3EA7FF)),)
-                  ],
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the first button press
+                    Navigator.pop(context); // Close the dialog
+                    Get.to(PaymentMethod());
+                  },
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('60 minutes',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400)),
+                      Text("\$ 60",style: TextStyle(color: Color(0xff3EA7FF)),)
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
