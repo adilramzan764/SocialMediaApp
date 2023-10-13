@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../View/BottomBarScreens/Home/Home.dart';
 import '../../View/Chat screens/MainChatScreens.dart';
 import '../../View/Chat screens/PhoneTab.dart';
-import 'MyBottomNavigationBar.dart';
-
 import 'BotttomBar_Widget.dart';
-
 
 class BottomNavBarV2 extends StatefulWidget {
   @override
-  _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+  _StackedBottomNavigationBarState createState() =>
+      _StackedBottomNavigationBarState();
 }
 
-class _MyBottomNavigationBarState extends State<BottomNavBarV2> {
+class _StackedBottomNavigationBarState extends State<BottomNavBarV2> {
   int _currentIndex = 1;
 
   final List<Widget> _screens = [
@@ -26,86 +23,25 @@ class _MyBottomNavigationBarState extends State<BottomNavBarV2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-      body: _screens[_currentIndex],
-      bottomNavigationBar: _currentIndex == 1
-          ? Padding(
-        padding: const EdgeInsets.only(bottom: 10.0,left: 10,right: 10),
-        child: CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
-          _currentIndex = int;
-        }); },)
-        ,
-      )
-          : SizedBox(),
+      body: Stack(
+        children: [
+          _screens[_currentIndex],
+          if(_currentIndex==1)
+          Positioned(
+            left: 10,
+            right: 10,
+            bottom: 20,
+            child: CustomBottomNavigationBar(
+              currentIndex: _currentIndex,
+              onTap: (int index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
-
-// Container(
-// height: 50, // Set your desired height here
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(32),
-// boxShadow: [
-// BoxShadow(
-// color: Colors.grey,
-// blurRadius: 2.5,
-// ),
-// ],
-// color: Colors.white,
-// ),
-// child: ClipRRect(
-// borderRadius: BorderRadius.circular(32),
-// child: BottomNavigationBar(
-// showSelectedLabels: false,
-// showUnselectedLabels: false,
-// selectedItemColor: Color(0xffAC83F6),
-// selectedLabelStyle: TextStyle(fontSize: 0),
-// currentIndex: _currentIndex,
-// onTap: (int index) {
-// setState(() {
-// _currentIndex = index;
-// });
-// },
-// items: [
-// BottomNavigationBarItem(
-// icon: Container(
-// height: 35,width: 35,decoration: BoxDecoration(shape: BoxShape.circle,color: _currentIndex == 0? Color(0xffAC83F6).withOpacity(0.3):null),
-// child: Center(
-// child: SvgPicture.asset("assets/home.svg",color: _currentIndex == 0
-// ? Color(0xffAC83F6)
-//     : null,width: 20,height:20),
-// ),
-// ),
-// label: '',
-// ),
-// BottomNavigationBarItem(
-// icon: Container(
-// height: 35,width: 35,decoration: BoxDecoration(shape: BoxShape.circle,color: _currentIndex == 1? Color(0xffAC83F6).withOpacity(0.3):null),
-// child: Center(
-// child: SvgPicture.asset("assets/Chat.svg",color: _currentIndex == 1
-// ? Color(0xffAC83F6)
-//     : null,width: 20,height:20),
-// ),
-// ),
-// label: '',
-// ),
-// BottomNavigationBarItem(
-// icon: Container(
-// height: 35,width: 35,decoration: BoxDecoration(shape: BoxShape.circle,color: _currentIndex == 2? Color(0xffAC83F6).withOpacity(0.3):null),
-// child: Center(
-// child: SvgPicture.asset("assets/callto.svg",color: _currentIndex == 2
-// ? Color(0xffAC83F6)
-//     : null,width: 20,height:20),
-// ),
-// ),
-// label: '',
-// ),
-// ],
-// ),
-// ),
-// )
-
-
-
-

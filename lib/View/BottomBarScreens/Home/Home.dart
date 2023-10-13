@@ -54,13 +54,34 @@ class _HomeState extends State<Home> {
       key: _scaffoldKey,
       drawer: MyDrawer(),
       backgroundColor: Colors.white,
-      bottomNavigationBar:  _currentIndex!=2 ? Padding(
-        padding:  const EdgeInsets.only(bottom: 10.0,left: 10,right: 10),
-        child: CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
-          _currentIndex = int;
-        }); },),
-      ): SizedBox(),
-      body:_screens[_currentIndex],
+      // bottomNavigationBar:  _currentIndex!=2 ? Padding(
+      //   padding:  const EdgeInsets.only(bottom: 10.0,left: 10,right: 10),
+      //   child: CustomBottomNavigationBar(currentIndex: _currentIndex, onTap: (int ) {   setState(() {
+      //     _currentIndex = int;
+      //   }); },),
+      // ): SizedBox(),
+      body:
+
+
+      Stack(
+        children: [
+          _screens[_currentIndex],
+          if (_currentIndex != 2)
+            Positioned(
+              left: 10,
+              right: 10,
+              bottom: 20,
+              child: CustomBottomNavigationBar(
+                currentIndex: _currentIndex,
+                onTap: (int index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -123,10 +144,11 @@ class HomeScreenContent extends StatelessWidget {
               height: 10,
             ),
             Expanded(child: MyTabBar()),
+
           ],
         ),
         Positioned(
-          bottom: 20,
+          bottom: 80,
           right: 20,
           child: FloatingActionButton(
             shape: OutlineInputBorder(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -12,35 +13,32 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0, left: 10, right: 10),
-      child: Container(
-        height: 50, // Set your desired height here
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 2.5,
-            ),
-          ],
-          color: Colors.white,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            selectedItemColor: Color(0xffAC83F6),
-            selectedLabelStyle: TextStyle(fontSize: 0),
-            currentIndex: currentIndex,
-            onTap: onTap,
-            items: [
-              _buildNavItem("assets/home.svg", currentIndex, 0),
-              _buildNavItem("assets/Chat.svg", currentIndex, 1),
-              _buildNavItem("assets/callto.svg", currentIndex, 2),
-            ],
+    return Container(
+      height: 50, // Set your desired height here
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 2.5,
           ),
+        ],
+        color: Colors.white,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: Color(0xffAC83F6),
+          selectedLabelStyle: TextStyle(fontSize: 0),
+          currentIndex: currentIndex,
+          onTap: onTap,
+          items: [
+            _buildNavItem("assets/home.svg", currentIndex, 0),
+            _buildNavItem("assets/Chat.svg", currentIndex, 1),
+            _buildNavItem("assets/callto.svg", currentIndex, 2),
+          ],
         ),
       ),
     );

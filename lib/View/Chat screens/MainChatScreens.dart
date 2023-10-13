@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'CallBalance.dart';
 import 'CallHistory.dart';
@@ -19,14 +20,14 @@ class _MainChatScreensState extends State<MainChatScreens> {
       'name': 'Anna Bella',
       'description': 'Great! Thank you soo much',
       'time': '11:54 PM',
-      'messages': '1',
+      'messages': '1343',
     },
     {
       'image': 'assets/model2.jpg',
       'name': 'Zeeshan',
       'description': "Hey! Bro what's Going on",
       'time': '11:54 PM',
-      'messages': '2',
+      'messages': '100',
     },
     {
       'image': 'assets/model3.jpg',
@@ -49,11 +50,110 @@ class _MainChatScreensState extends State<MainChatScreens> {
       'time': '11:54 PM',
       'messages': '2',
     },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '27799',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '2',
+    },
+    {
+      'image': 'assets/h3.jpg',
+      'name': 'Usman',
+      'description': "Great! Thank you soo much",
+      'time': '11:54 PM',
+      'messages': '255',
+    },
     // Add more data items as needed
   ];
 
   @override
   Widget build(BuildContext context) {
+    int zeeshan=999;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -61,7 +161,7 @@ class _MainChatScreensState extends State<MainChatScreens> {
           Column(
             children: [
               Container(
-                height: Get.height*0.21,
+                height: Get.height * 0.21,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -83,9 +183,9 @@ class _MainChatScreensState extends State<MainChatScreens> {
                             "   Anna Bella",
                             style: TextStyle(color: Colors.black, fontSize: 12),
                           ),
-
                           Expanded(
-                            child: Align(alignment:Alignment.centerRight ,
+                            child: Align(
+                              alignment: Alignment.centerRight,
                               child: Container(
                                 height: 35,
                                 width: 60,
@@ -98,9 +198,12 @@ class _MainChatScreensState extends State<MainChatScreens> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(16)),
                                 child: TextButton(
-                                  onPressed: () { Get.to(CallHistory()); },
+                                  onPressed: () {
+                                    Get.to(CallHistory());
+                                  },
                                   child: Text("Calls",
-                                      style: TextStyle(color: Color(0xffAC83F6))),
+                                      style:
+                                          TextStyle(color: Color(0xffAC83F6))),
                                 ),
                               ),
                             ),
@@ -152,6 +255,9 @@ class _MainChatScreensState extends State<MainChatScreens> {
                 child: ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (BuildContext context, int index) {
+                    int messageCount = int.parse(data[index]['messages']);
+
+                    print(data[index]['messages']);
                     return InkWell(
                       onTap: () {
                         Navigator.push(
@@ -162,23 +268,23 @@ class _MainChatScreensState extends State<MainChatScreens> {
                       },
                       child: ListTile(
                         leading: Container(
-                          height: Get.height*0.10,
-                          width: Get.width*0.10,
+                          height: Get.height * 0.10,
+                          width: Get.width * 0.10,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(color: Color(0xffAC83F6)),
                               image: DecorationImage(
-                                  image: AssetImage(data[index]["image"]),fit: BoxFit.cover
-                              )),
+                                  image: AssetImage(data[index]["image"]),
+                                  fit: BoxFit.cover)),
                         ),
                         title: Text(data[index]['name'],
-                            style: TextStyle(
-                                fontSize: 12, color: Colors.black)),
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.black)),
                         subtitle: Text(data[index]['description'],
-                            style: TextStyle(
-                                color: Colors.black, fontSize: 9)),
+                            style: TextStyle(color: Colors.black, fontSize: 9)),
                         trailing: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(data[index]['time'],
                                 style: TextStyle(
@@ -187,17 +293,26 @@ class _MainChatScreensState extends State<MainChatScreens> {
                               height: Get.height * 0.003,
                             ),
                             Container(
-                                height: 16,
-                                width: 16,
+                                height: messageCount < zeeshan ? 20 : 23,
+                                width: messageCount < zeeshan ? 20 : 23,
                                 decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius:
-                                    BorderRadius.circular(20)),
-                                child: Center(
-                                    child: Text(data[index]['messages'],
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.white)))),
+                                    color: Colors.blue, shape: BoxShape.circle),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (messageCount < zeeshan)
+                                    Center(
+                                      child: Text(data[index]['messages'],
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.white)),
+                                    ),
+                                    if (messageCount > 999) Text("999+",  style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.white))
+
+                                  ],
+                                )),
                           ],
                         ),
                       ),
@@ -208,7 +323,7 @@ class _MainChatScreensState extends State<MainChatScreens> {
             ],
           ),
           Positioned(
-            bottom: 20,
+            bottom: 80,
             right: 20,
             child: FloatingActionButton(
               shape: OutlineInputBorder(
@@ -219,7 +334,7 @@ class _MainChatScreensState extends State<MainChatScreens> {
               onPressed: () {
                 // Handle FAB tap event
               },
-              child: Icon(Icons.add,size: 30),
+              child: Icon(Icons.add, size: 30),
             ),
           ),
         ],
