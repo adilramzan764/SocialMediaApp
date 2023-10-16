@@ -54,21 +54,15 @@ class _UsernameCreationState extends State<UsernameCreation> {
                     ),
                     suffixIcon: Transform.scale(
                       scale: 0.7,
-                      child: Theme(
-                        data: ThemeData(
-                          unselectedWidgetColor: Color(0xff3EA7FF), // Border color
-                          toggleableActiveColor: Color(0xff3EA7FF), // Fill color when checked
-                        ),
-                        child: Checkbox(
-                          activeColor: Color(0xff3EA7FF), //The color to use when this checkbox is checked.
+                      child: Checkbox(
+                        activeColor: Color(0xff3EA7FF), //The color to use when this checkbox is checked.
 
-                          value: _isChecked,
-                          onChanged: (bool? newValue) {
-                            setState(() {
-                              _isChecked = newValue ?? false;
-                            });
-                          },
-                        ),
+                        value: _isChecked,
+                        onChanged: (bool? newValue) {
+                          setState(() {
+                            _isChecked = newValue ?? false;
+                          });
+                        },
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(

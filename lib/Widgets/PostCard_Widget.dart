@@ -63,12 +63,24 @@ class PostCard extends StatelessWidget {
                         if(!ispersonalpost){
 
                         showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(25),
+                                topLeft: Radius.circular(
+                                    25)), // Set circular border radius here
+                          ),
                           context: context,
                           builder: (BuildContext context) =>
                               FeedPost_MoreButton(),
                         );}
                         else{
                           showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(25),
+                                  topLeft: Radius.circular(
+                                      25)), // Set circular border radius here
+                            ),
                             context: context,
                             builder: (BuildContext context) =>
                                 PersonalPosts_MoreButton(),
@@ -158,6 +170,12 @@ class PostCard extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(25),
+                                topLeft: Radius.circular(
+                                    25)), // Set circular border radius here
+                          ),
                           context: context,
                           builder: (BuildContext context) => MyBottomSheet(),
                         );

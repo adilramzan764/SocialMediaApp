@@ -21,10 +21,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple), // Use fromSwatch for color scheme
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
+
           home: OnBoardScreen(),
         );
       },

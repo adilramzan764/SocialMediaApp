@@ -7,6 +7,10 @@ class UploadFedd_Dialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25
+        ), // Set circular border radius here
+      ),
       title: Center(child: Text("Upload Feed",style: TextStyle(fontSize: 14),)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -26,7 +30,7 @@ class UploadFedd_Dialog extends StatelessWidget {
                     ),);
                   }, icon: SvgPicture.asset('assets/Camera.svg')),
                   // SizedBox(height: 5,),
-                  Text('Take Photo')
+                  Text('Take Photo',style: TextStyle(fontSize: 14),)
                 ],
               ))  ,
                 Expanded(
@@ -34,7 +38,7 @@ class UploadFedd_Dialog extends StatelessWidget {
                   children: [
                     IconButton(onPressed: (){}, icon: SvgPicture.asset('assets/gallery.svg')),
                     // SizedBox(height: 5,),
-                    Text('From Gallery'),
+                    Text('From Gallery',style: TextStyle(fontSize: 14)),
                   ],
                 ))
               ],

@@ -27,21 +27,20 @@ class Profile extends StatelessWidget {
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
-              leading:
-              otherUserProfile ?
-
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 29),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      CupertinoIcons.left_chevron,
-                      color: Colors.black,
-                    )),
-              ) :
-              SizedBox(),
+              backgroundColor: Colors.white,
+              leading: otherUserProfile
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 15.0, top: 29),
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            CupertinoIcons.left_chevron,
+                            color: Colors.black,
+                          )),
+                    )
+                  : SizedBox(),
               automaticallyImplyLeading: false,
               expandedHeight: 400,
               pinned: true,
@@ -84,11 +83,17 @@ class Profile extends StatelessWidget {
                                 child: IconButton(
                                   onPressed: () {
                                     showModalBottomSheet(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(25),
+                                            topLeft: Radius.circular(
+                                                25)), // Set circular border radius here
+                                      ),
                                       context: context,
                                       builder: (BuildContext context) =>
                                           Profile_MoreButton(
-                                            otherUserProfile: otherUserProfile,
-                                          ),
+                                        otherUserProfile: otherUserProfile,
+                                      ),
                                     );
                                   },
                                   icon: Icon(
@@ -165,7 +170,9 @@ class Profile extends StatelessWidget {
                                                 width: 120,
                                                 child: CustomButton(
                                                   text: 'Edit Profile',
-                                                  onPressed: () {Get.to(ProfileEdit());},
+                                                  onPressed: () {
+                                                    Get.to(ProfileEdit());
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -227,7 +234,10 @@ class Profile extends StatelessWidget {
               forceElevated: innerBoxIsScrolled,
               bottom: TabBar(
                 indicatorSize: TabBarIndicatorSize.tab,
-                labelStyle: TextStyle(fontSize: 14),
+                labelColor: Colors.black,
+                labelStyle: TextStyle(
+                  fontSize: 14,
+                ),
                 indicatorColor: Color(0xffAC83F6),
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 indicatorWeight: 3,
@@ -243,10 +253,16 @@ class Profile extends StatelessWidget {
             height: 175 * controller.userProfile.value.posts.length.toDouble(),
             child: TabBarView(
               children: [
-                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: !otherUserProfile,),
+                PostFeedScreen(
+                  saved_posts_Screen: false,
+                  ispersonalpost: !otherUserProfile,
+                ),
 
                 All_Tab(userprofile: controller.userProfile.value),
-                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: !otherUserProfile,),
+                PostFeedScreen(
+                  saved_posts_Screen: false,
+                  ispersonalpost: !otherUserProfile,
+                ),
 
                 // Center(child: InkWell(onTap: () {
                 //   _showBottomSlider(context);
@@ -259,8 +275,15 @@ class Profile extends StatelessWidget {
       ),
     );
   }
+
   void _showBottomSlider(BuildContext context) {
     showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(25),
+            topLeft: Radius.circular(
+                25)), // Set circular border radius here
+      ),
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -270,17 +293,19 @@ class Profile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SvgPicture.asset("assets/Bulk-Send.svg") ,// Your icon here
+                  SvgPicture.asset("assets/Bulk-Send.svg"), // Your icon here
                   SizedBox(width: 20),
-                  Text('Share on Profile',style: TextStyle(color: Colors.black)),
+                  Text('Share on Profile',
+                      style: TextStyle(color: Colors.black)),
                 ],
               ),
               SizedBox(height: 20),
               Row(
                 children: [
-                  SvgPicture.asset("assets/Bulk-Delete.svg") ,
+                  SvgPicture.asset("assets/Bulk-Delete.svg"),
                   SizedBox(width: 20),
-                  Text('Delete this post',style: TextStyle(color: Colors.black)),
+                  Text('Delete this post',
+                      style: TextStyle(color: Colors.black)),
                 ],
               ),
               // Add more rows with icons and text as needed

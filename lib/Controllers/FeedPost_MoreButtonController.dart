@@ -14,6 +14,12 @@ class FeedPost_MoreButtonController extends GetxController {
       case 0:
       // Handle the "Share this post" action
         showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(25),
+                topLeft: Radius.circular(
+                    25)), // Set circular border radius here
+          ),
           context: context,
           builder: (BuildContext context) => MyBottomSheet(),
         );

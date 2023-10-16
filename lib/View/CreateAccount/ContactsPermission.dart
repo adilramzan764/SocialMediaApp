@@ -87,6 +87,12 @@ class ContactsPermission extends StatelessWidget {
                   text: 'Continue',
                   onPressed: () {
                     showModalBottomSheet(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(25),
+                            topLeft: Radius.circular(
+                                25)), // Set circular border radius here
+                      ),
                       context: context,
                       builder: (BuildContext context) =>
                           ContactsPermission_Dialog(),

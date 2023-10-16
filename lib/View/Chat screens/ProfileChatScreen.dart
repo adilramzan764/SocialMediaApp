@@ -21,11 +21,9 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
+
           Container(
-            height: Get.height * 0.15,
+            height: Get.height * 0.14,
             decoration: BoxDecoration(
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
               color: Colors.white,
@@ -34,101 +32,110 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                 bottomRight: Radius.circular(20),
               ),
             ),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                    size: 16,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 16,
+                    ),
                   ),
-                ),
-                Image.asset("assets/avatar.jpg"),
-                Column(
-                  children: [
-                    SizedBox(height: Get.height * 0.05),
-                    Text('Rana Zeeshan',
-                        style: TextStyle(color: Colors.black, fontSize: 12)),
-                    SizedBox(height: Get.height * 0.005),
-                    Text('Active 5 minutes ago',
-                        style: TextStyle(color: Colors.black, fontSize: 8)),
-                  ],
-                ),
-                // SizedBox(width:20),
-                Expanded(
-                    child: Align(
-                        alignment: Alignment.centerRight,
-                        child: SvgPicture.asset("assets/Bold-Delete.svg"))),
-                // SizedBox(width: 10), // Adjust the width as needed
-                IconButton(
-                  onPressed: () {
-                    // Show a dialog when the phone icon button is pressed
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                          child: AlertDialog(
-                            title: SvgPicture.asset("assets/dilog.svg"),
-                            content: Text("       Top Up your account to make Calls ",
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.black)),
-                            actions: <Widget>[
-                              SizedBox(height: 10),
-                              Center(
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    Get.to(() => PhoneTab());
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.5,
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 2.5,
-                                        ),
-                                      ],
-                                      color: Color(0xffAC83F6),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "   Top Up",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16),
-                                            ),
-                                           SvgPicture.asset("assets/Iconly-Light-Arrow - Right.svg",)
-                                          ],
+                  Image.asset("assets/avatar.jpg"),
+                  Column(
+                    children: [
+                      SizedBox(height: Get.height * 0.05),
+                      Text('Rana Zeeshan',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      SizedBox(height: Get.height * 0.005),
+                      Text('Active 5 minutes ago',
+                          style: TextStyle(color: Colors.black, fontSize: 8)),
+                    ],
+                  ),
+                  // SizedBox(width:20),
+                  Expanded(
+                      child: Align(
+                          alignment: Alignment.centerRight,
+                          child: SvgPicture.asset("assets/Bold-Delete.svg"))),
+                  // SizedBox(width: 10), // Adjust the width as needed
+                  IconButton(
+                    onPressed: () {
+                      // Show a dialog when the phone icon button is pressed
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                            child: AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25
+                                ), // Set circular border radius here
+                              ),
+                              title: SvgPicture.asset("assets/dilog.svg"),
+                              content: Text("       Top Up your account to make Calls ",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.black)),
+                              actions: <Widget>[
+                                SizedBox(height: 10),
+                                Center(
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Get.to(() => PhoneTab());
+                                    },
+                                    child: Container(
+                                      height: 40,
+                                      width:
+                                          MediaQuery.of(context).size.width / 2.5,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 2.5,
+                                          ),
+                                        ],
+                                        color: Color(0xffAC83F6),
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(15)),
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "   Top Up",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                              ),
+                                             SvgPicture.asset("assets/Iconly-Light-Arrow - Right.svg",)
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  icon: SvgPicture.asset("assets/phonebold.svg"),
-                )
-              ],
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: SvgPicture.asset("assets/phonebold.svg"),
+                  )
+                ],
+              ),
             ),
           ),
           SizedBox(

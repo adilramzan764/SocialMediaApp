@@ -12,6 +12,8 @@ class MyTabBar extends StatelessWidget {
       child: Column(
         children: [
           TabBar(
+            labelColor: Colors.black,
+
             labelStyle: TextStyle(fontSize: 14),
             indicatorColor: Color(0xffAC83F6),
             indicatorWeight: 3,

@@ -248,8 +248,4 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: NotificationScreen(),
-  ));
-}
+

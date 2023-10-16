@@ -30,6 +30,8 @@ class _PhoneTabState extends State<PhoneTab> with SingleTickerProviderStateMixin
       bottomNavigationBar:  Container(
         height: 35,
         child: TabBar(
+          labelColor: Colors.black,
+
           controller: _tabController,
           labelStyle: TextStyle(fontSize: 13),
           indicatorColor: Color(0xffAC83F6),

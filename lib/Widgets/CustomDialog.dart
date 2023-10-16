@@ -8,11 +8,16 @@ import 'package:get/get_core/src/get_main.dart';
 class CustomDialog {
   static void showcustomDialog(BuildContext context,String heading,String button1, String button2) {
     showDialog(
+
       context: context,
       builder: (BuildContext context) {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
           child: AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25
+                 ), // Set circular border radius here
+            ),
             title: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(

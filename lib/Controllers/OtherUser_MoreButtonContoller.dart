@@ -42,6 +42,12 @@ class Otheruser_MoreButtonController extends GetxController {
       // Handle the "Share the Profile" action
 
         showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(25),
+                topLeft: Radius.circular(
+                    25)), // Set circular border radius here
+          ),
           context: context,
           builder: (BuildContext context) => MyBottomSheet(),
         );

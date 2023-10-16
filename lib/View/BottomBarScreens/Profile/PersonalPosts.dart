@@ -53,6 +53,8 @@ class PersonalPosts extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TabBar(
+                      labelColor: Colors.black,
+
                       indicatorSize: TabBarIndicatorSize.tab,
                       labelStyle: TextStyle(fontSize: 16),
                       indicatorColor: Color(0xffAC83F6),
