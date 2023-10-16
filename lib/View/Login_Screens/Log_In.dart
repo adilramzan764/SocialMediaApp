@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/View/Login_Screens/Sign_In.dart';
 import '../../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
-import '../CreateAccount/SignUp.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+
+class LogIn extends StatefulWidget {
+  const LogIn({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _SignInState extends State<SignIn> {
+class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,7 @@ class _SignInState extends State<SignIn> {
               ),
               Align(alignment: Alignment.centerLeft,
                 child: Text(
-                  'Enter your Password',
+                  'To get started, first enter your phone, email\n address or @username',
                   style: TextStyle(
                     color: Colors.black,fontWeight: FontWeight.w500,
                     fontSize: 13,
@@ -56,7 +57,7 @@ class _SignInState extends State<SignIn> {
                     boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
                 child: TextField(
                   decoration: InputDecoration(
-                      hintText: "     @username",
+                      hintText: "    Phone,email address,or username",
                       hintStyle: TextStyle(color: Color(0XFF707070),
                         fontSize: 11,
                       ),
@@ -71,55 +72,13 @@ class _SignInState extends State<SignIn> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30))),
                 ),
-              ),
-              SizedBox(
-                height: Get.height * 0.02,
-              ),
-              Container(
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                    boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-                child: TextField(obscureText: true,
-                  decoration: InputDecoration(
-                      hintText: "      Password",
-                      hintStyle: TextStyle(color: Color(0XFF707070),
-                        fontSize: 11,
-                      ),
-                      suffixIcon:Transform.scale(scale: 0.5,
-                          child: SvgPicture.asset("assets/Show.svg")) ,
-
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(30)),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30))),
-                ),
-              ),
-              SizedBox(
-                height: Get.height * 0.013,
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: InkWell(
-                    onTap: () {},
-                    child: Text(
-                      'Forget Password',
-                      style: TextStyle(color: Color(0xff707070), fontSize: 12),
-                    )),
               ),
               SizedBox(
                 height: Get.height * 0.07,
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => BottomNavBarV2());
+                  Get.to(() => SignIn());
                   // Get.to(() => BottomNavBarV2());
                 },
                 child: Container(
@@ -137,7 +96,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   child: Center(
                     child: Text(
-                      "Log in",
+                      "Next",
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ),

@@ -24,11 +24,11 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                spreadRadius:  text=='Draft' ?1 :0,
+                spreadRadius:  text=='Draft' || text=='Skip for now' || text=='Allow' ?1 :0,
                 color: Colors.grey.withOpacity(0.4)
             )
           ],
-          color: text=='Draft' ?Colors.white :Color(0xffAC83F6)
+          color: text=='Draft' || text=='Skip for now' || text=='Allow' ?Colors.white :Color(0xffAC83F6)
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -37,11 +37,12 @@ class CustomButton extends StatelessWidget {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+
           ),
         ),
         child: Text(
           text,
-          style: TextStyle(color: text!='Draft' ?Colors.white :Color(0xffAC83F6),fontSize: 13),
+          style: TextStyle(color: text=='Draft' || text=='Skip for now' || text=='Allow' ? Color(0xffAC83F6) : Colors.white,fontSize: 13),
         ),
       ),
     );

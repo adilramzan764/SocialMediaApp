@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../Login_Screens/Sign_In.dart';
+import 'ContinueWithGoogle.dart';
 
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
@@ -57,7 +58,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: TextButton(
                 onPressed: () {
-                  Get.to(()=>SignIn());
+                  Get.to(()=>ContinueWithGoogle());
                 },
                 child: Container(
                   height: 40,

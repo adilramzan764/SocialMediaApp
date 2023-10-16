@@ -23,4 +23,8 @@ ios       1:151028918126:ios:27a895539964808651037f
 macos     1:151028918126:ios:bdba53e6563e46a951037f
 
 
-Flutter (Channel stable, 3.13.5, on Microsoft Windows [Version 10.0.19045.3448], locale en-US)
+
+Flutter 3.13.5 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 12fccda598 (3 weeks ago) • 2023-09-19 13:56:11 -0700
+Engine • revision bd986c5ed2
+Tools • Dart 3.1.2 • DevTools 2.25.0
