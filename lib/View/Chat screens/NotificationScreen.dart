@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,29 +12,46 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-
   final List<NotificationModel> notifications = [
     NotificationModel(
-      // name: 'Minha Anjum',
-      notification: 'Minha Anjum @Arslan284 mentioned you in a post',
-      hasMentioned: false,
-      time: '2023-09-28 10:30:00', // Replace with your actual time
+      profilepic: 'assets/model1.jpg',
+      name: '@Maya284',
+      notification: ' mentioned you in a post',
+      hasMentioned: true,
+      time: '2023-10-28 10:30:00', // Replace with your actual time
     ),
     NotificationModel(
-      // name: 'Furqan26',
-      notification: 'Furqan26 has accepted your request',
+      profilepic: 'assets/model2.jpg',
+      name: '@aina26',
+      notification: ' has accepted your request',
       isRequestAccepted: true,
       time: '2023-09-27 14:15:00', // Replace with your actual time
     ),
     NotificationModel(
-      // name: 'Furqan26',
-      notification: 'Furqan26 like your story',
-      isRequestAccepted: true,
+      profilepic: 'assets/model3.jpg',
+      name: '@Jimmy26',
+      notification: ' like your story',
+      hasstoryLiked: true,
       time: '2023-09-27 14:15:00', // Replace with your actual time
     ),
     NotificationModel(
-      // name: 'ZEESHAN',
-      notification: 'zeeshan like your story',
+      profilepic: 'assets/model4.jpg',
+      name: '@Maha284',
+      notification: ' like your story',
+      hasstoryLiked: true,
+      time: '2023-10-27 14:15:00', // Replace with your actual time
+    ),
+    NotificationModel(
+      profilepic: 'assets/model1.jpg',
+      name: '@Maya284',
+      notification: ' like your story',
+      hasstoryLiked: true,
+      time: '2023-09-27 14:15:00', // Replace with your actual time
+    ),
+    NotificationModel(
+      profilepic: 'assets/model4.jpg',
+      name: '@aina26',
+      notification: ' has accepted your request',
       isRequestAccepted: true,
       time: '2023-10-27 14:15:00', // Replace with your actual time
     ),
@@ -43,13 +59,22 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // Add more notifications here
   ];
 
+
+  @override
+  void initState() {
+    super.initState();
+    // Sort notifications by date
+    notifications.sort((a, b) => (a.time ?? '').compareTo(b.time ?? ''));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
-            height: 80,
+            height: 90,
             decoration: BoxDecoration(
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
               color: Colors.white,
@@ -59,7 +84,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 25.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,70 +112,91 @@ class _NotificationScreenState extends State<NotificationScreen> {
               itemCount: notifications.length,
               itemBuilder: (context, index) {
                 final notification = notifications[index];
-                return Container(
-                  // height: 110,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (index == 0 ||
-                            !_isSameDay(
-                                notifications[index - 1].time, notification.time))
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              _getFormattedDate(notification.time ?? ""),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (index == 0 ||
+                        !_isSameDay(
+                            notifications[index - 1].time, notification.time))
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          _getFormattedDate(notification.time ?? ""),
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ListTile(
-                          leading: ProfilePicWidget("assets/model1.jpg",40,40),
-                          title: Text(""),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        ),
+                      ),
+                    ListTile(
+                      leading: Padding(
+                        padding: const EdgeInsets.only(top: 15.0),
+                        child: ProfilePicWidget(notification.profilepic, 40, 40),
+                      ),
+                      title: Text(""),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              Text(notification.notification,style: TextStyle(fontSize: 12)),
-                              Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("+1 Mutual",style: TextStyle(fontSize: 12)),
-                                  if (notification.isRequestAccepted) ...[
-                                    Container(
-                                      height: 25,
-                                      width: 70,
-                                      child: TextButton(
-                                        onPressed: () {
-                                          // Handle button click action here
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.blue,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          notification.hasLiked ? "Reply" : "Message",
-                                          style: TextStyle(color: Colors.white, fontSize: 8),
+                              Text(
+                                notification.name,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: !notification.isRequestAccepted
+                                      ? Colors.blue
+                                      : Colors.black, // Change the color here
+                                ),
+                              ),
+                              Text(notification.notification,
+                                  style: TextStyle(fontSize: 12)),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (notification.isRequestAccepted)
+
+                                Text("+1 Mutual", style: TextStyle(fontSize: 12))
+                              else
+                                Text("10 min ago",
+                                    style: TextStyle(
+                                        color: Color(0xff7F7F7F), fontSize: 10)),                              if (notification.isRequestAccepted || notification.hasMentioned)
+                                ...[
+                                  Container(
+                                    height: 25,
+                                    width: 70,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        // Handle button click action here
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color(0xffAC83F6),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
+                                      child: Text(
+                                        !notification.isRequestAccepted
+                                            ? "Reply"
+                                            : "Message",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 8),
+                                      ),
                                     ),
-                                  ],
+                                  ),
                                 ],
-                              ),
-                              Text("10 min ago",style:TextStyle(color: Color(0xff7F7F7F), fontSize: 10)),
-
-
                             ],
-
                           ),
+                          if (notification.isRequestAccepted)
 
-                        ),
-                      ],
+                            Text("10 min ago",
+                              style: TextStyle(
+                                  color: Color(0xff7F7F7F), fontSize: 10)),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 );
               },
             ),
@@ -158,6 +204,20 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ],
       ),
     );
+  }
+
+  // Define helper functions to group notifications by date
+  Map<String, List<NotificationModel>> groupNotificationsByDate(
+      List<NotificationModel> notifications) {
+    final groupedNotifications = <String, List<NotificationModel>>{};
+    for (final notification in notifications) {
+      final date = _getFormattedDate(notification.time);
+      if (!groupedNotifications.containsKey(date)) {
+        groupedNotifications[date] = [];
+      }
+      groupedNotifications[date]!.add(notification);
+    }
+    return groupedNotifications;
   }
 
   bool _isSameDay(String? date1, String? date2) {
@@ -186,7 +246,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
     }
   }
-
 }
 
 void main() {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dialpad/flutter_dialpad.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../Balance_Sheets/CurrentBalance.dart';
 class DialCall_Widget extends StatelessWidget {
   const DialCall_Widget({Key? key}) : super(key: key);
 
@@ -55,7 +57,9 @@ class DialCall_Widget extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  _showBottomSlider(context);
+
+                  Get.to(CurrentBalance());
+                  // _showBottomSlider(context);
                 },
                 child: SvgPicture.asset("assets/dot.svg"),
               ),

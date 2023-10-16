@@ -246,10 +246,13 @@ class Profile extends StatelessWidget {
                 PostFeedScreen(saved_posts_Screen: false, ispersonalpost: !otherUserProfile,),
 
                 All_Tab(userprofile: controller.userProfile.value),
-                Center(child: InkWell(onTap: () {
-                  _showBottomSlider(context);
-                },
-                    child: Text('Likes'))),],
+                PostFeedScreen(saved_posts_Screen: false, ispersonalpost: !otherUserProfile,),
+
+                // Center(child: InkWell(onTap: () {
+                //   _showBottomSlider(context);
+                // },
+                //     child: Text('Likes'))),
+              ],
             ),
           ),
         ),
