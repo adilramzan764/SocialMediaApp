@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
+import '../../ViewModels/loginViewModel.dart';
 import '../CreateAccount/SignUp.dart';
 
 class SignIn extends StatefulWidget {
@@ -13,6 +14,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final LogInMV = Get.put(LoginViewModel()) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,9 +56,9 @@ class _SignInState extends State<SignIn> {
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white,
                     boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-                child: TextField(
+                child: TextFormField(controller:LogInMV.emailController.value ,
                   decoration: InputDecoration(
-                      hintText: "     @username",
+
                       hintStyle: TextStyle(color: Color(0XFF707070),
                         fontSize: 11,
                       ),
@@ -82,7 +84,8 @@ class _SignInState extends State<SignIn> {
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white,
                     boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-                child: TextField(obscureText: true,
+                child: TextFormField(controller:LogInMV.passwordController.value ,
+                  obscureText: true,
                   decoration: InputDecoration(
                       hintText: "      Password",
                       hintStyle: TextStyle(color: Color(0XFF707070),
@@ -118,10 +121,7 @@ class _SignInState extends State<SignIn> {
                 height: Get.height * 0.07,
               ),
               TextButton(
-                onPressed: () {
-                  Get.to(() => BottomNavBarV2());
-                  // Get.to(() => BottomNavBarV2());
-                },
+                onPressed: ()=>LogInMV.LogIn(),
                 child: Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width * 0.7,

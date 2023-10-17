@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/ViewModels/signUpViewModel.dart';
 
 import '../../Widgets/CustomButton.dart';
 import 'ContactsPermission.dart';
@@ -17,6 +18,7 @@ class UsernameCreation extends StatefulWidget {
 class _UsernameCreationState extends State<UsernameCreation> {
 
   bool _isChecked = true;
+  final registerVM = Get.put(RegisterViewModel()) ;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,8 @@ class _UsernameCreationState extends State<UsernameCreation> {
                   borderRadius: BorderRadius.circular(30),
                   color: Colors.white,
                   boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-              child: TextField(
+              child: TextFormField(
+                controller: registerVM.userNameController.value,
                 decoration: InputDecoration(
                     hintText: "Username",
                     hintStyle: TextStyle(color: Colors.black.withOpacity(0.7),
@@ -105,14 +108,7 @@ class _UsernameCreationState extends State<UsernameCreation> {
                   horizontal: MediaQuery.of(context).size.width * 0.1),
               child: CustomButton(
                 text: 'Next',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ContactsPermission(),
-                    ),
-                  );
-                },
+                onPressed: ()=>registerVM.signUp(),
               ),
             )
 

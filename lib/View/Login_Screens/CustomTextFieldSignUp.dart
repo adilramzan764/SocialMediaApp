@@ -4,8 +4,9 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final VoidCallback? onTap;
+  final validation;
   CustomTextField({
-
+    this.validation,
     required this.hintText,
     required this.controller,
     this.onTap,
@@ -32,6 +33,7 @@ class CustomTextField extends StatelessWidget {
             border: Border.all(color: const Color(0xffF0F3F6)),
           ),
           child: TextFormField(
+            validator: validation,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: controller,
             decoration: InputDecoration(

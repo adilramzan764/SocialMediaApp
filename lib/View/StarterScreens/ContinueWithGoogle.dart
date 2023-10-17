@@ -5,9 +5,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:socialmediaapp/View/Login_Screens/Log_In.dart';
 import 'package:socialmediaapp/View/CreateAccount/SignUp.dart';
 import 'package:socialmediaapp/View/Login_Screens/Sign_In.dart';
+import '../../Services/GoogleSignIn.dart';
 
 class ContinueWithGoogle extends StatefulWidget {
-  const ContinueWithGoogle({Key? key}) : super(key: key);
+   ContinueWithGoogle({Key? key}) : super(key: key);
 
   @override
   State<ContinueWithGoogle> createState() => _ContinueWithGoogleState();

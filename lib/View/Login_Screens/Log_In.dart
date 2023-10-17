@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:socialmediaapp/View/Login_Screens/Sign_In.dart';
 import '../../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
+import '../../ViewModels/loginViewModel.dart';
 
 
 class LogIn extends StatefulWidget {
@@ -14,6 +15,7 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  final LogInMV = Get.put(LoginViewModel()) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +57,7 @@ class _LogInState extends State<LogIn> {
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white,
                     boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-                child: TextField(
+                child: TextFormField(controller:LogInMV.emailController.value ,
                   decoration: InputDecoration(
                       hintText: "    Phone,email address,or username",
                       hintStyle: TextStyle(color: Color(0XFF707070),

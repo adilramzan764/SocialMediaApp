@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:socialmediaapp/Utis/validations.dart';
+import 'package:socialmediaapp/ViewModels/signUpViewModel.dart';
 
 import 'PixkProfilePicture.dart';
 
@@ -12,6 +14,8 @@ class PasswordScreen extends StatefulWidget {
   State<PasswordScreen> createState() => _PasswordScreenState();
 }
 class _PasswordScreenState extends State<PasswordScreen> {
+  final registerVM = Get.put(RegisterViewModel()) ;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 borderRadius: BorderRadius.circular(30),
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-            child: TextField(
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: Validations.validatePassword,
+              controller: registerVM.passwordController.value,
               decoration: InputDecoration(
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black.withOpacity(0.7),

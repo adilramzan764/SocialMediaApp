@@ -1,8 +1,15 @@
+import 'dart:ffi';
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/Utis/validations.dart';
+import 'package:socialmediaapp/View/CreateAccount/PasswordScreen.dart';
+import 'package:socialmediaapp/ViewModels/signUpViewModel.dart';
 
 import '../StarterScreens/ContinueWithGoogle.dart';
 import '../Login_Screens/CustomTextFieldSignUp.dart';
@@ -15,18 +22,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final TextEditingController firstname = TextEditingController();
-  final TextEditingController phonenumber = TextEditingController();
-  final TextEditingController datename = TextEditingController();
-  DateTime? _selectedDate; // Store the selected date
-GlobalKey<FormState>  _globalKey=GlobalKey<FormState>();
+  final registerVM = Get.put(RegisterViewModel()) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
-          child: Form(key: _globalKey,
+          child: Form(key: registerVM.globalKey,
             child: Column(
               children: [    SizedBox(
                 height: Get.height * 0.08,
@@ -44,7 +47,6 @@ GlobalKey<FormState>  _globalKey=GlobalKey<FormState>();
                 Center(
                   child: SvgPicture.asset(
                     "assets/signup.svg",
-
                   ),
                 ),
                 SizedBox(
@@ -63,56 +65,25 @@ GlobalKey<FormState>  _globalKey=GlobalKey<FormState>();
                   height: Get.height*0.02,
                 ),
                 CustomTextField(
-
+                  validation: Validations.validateName,
                   hintText: "   Name",
-                  controller: firstname,
+                  controller: registerVM.nameController.value,
                 ),
                 SizedBox(
                   height: Get.height*0.02,
                 ),
                 CustomTextField(
-
+                  validation: Validations.validateEmail,
                   hintText: "   Phone number or Email address",
-                  controller: phonenumber,
+                  controller: registerVM.emailController.value,
                 ),
 
                 SizedBox(
                   height: Get.height*0.02,
                 ),
                 CustomTextField(
-
                   hintText: "   Date of birth",
-                  controller: TextEditingController(
-                    text: _selectedDate != null
-                        ? "${_selectedDate?.day}-${_selectedDate?.month}-${_selectedDate?.year}"
-                        : "",
-                  ),
-                  onTap: () async {
-                    DateTime initialDate = _selectedDate ?? DateTime.now();
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: initialDate,
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                      builder: (BuildContext context, Widget? child) {
-                        return Theme(
-                          data: ThemeData.light().copyWith(
-                            primaryColor: Colors.blue,
-                            colorScheme: ColorScheme.light(primary: Colors.blue),
-                            buttonTheme: ButtonThemeData(
-                              textTheme: ButtonTextTheme.primary,
-                            ),
-                          ),
-                          child: child!,
-                        );
-                      },
-                    );
-                    if (pickedDate != null && pickedDate != _selectedDate) {
-                      setState(() {
-                        _selectedDate = pickedDate;
-                      });
-                    }
-                  },
+                  controller: registerVM.dobController.value,
                 ),
 
                 SizedBox(
@@ -120,8 +91,8 @@ GlobalKey<FormState>  _globalKey=GlobalKey<FormState>();
                 ),
                 TextButton(
                   onPressed: () {
-                   
-                    Get.to(VerificationCode());
+
+                    Get.to(PasswordScreen());
                   },
                   child: Container(
                     height: 40,

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/ViewModels/signUpViewModel.dart';
 
 import '../../Widgets/CustomButton.dart';
 import 'UsernameCreation.dart';
 
 class PickProfilePicture extends StatelessWidget {
-  const PickProfilePicture({Key? key}) : super(key: key);
+  PickProfilePicture({Key? key}) : super(key: key);
+  final registerVM = Get.put(RegisterViewModel()) ;
 
   @override
   Widget build(BuildContext context) {
