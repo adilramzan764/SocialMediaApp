@@ -30,7 +30,7 @@ class RegisterViewModel extends GetxController {
     FormState form = globalKey.currentState!;
     form.save();
     if (!form.validate()) {
-      validate = false;
+      validate = true;
       Utils.snackBar('Signup',"Please fix the errors in red before submitting.");
     }
     else{

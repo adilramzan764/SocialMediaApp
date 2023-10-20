@@ -26,7 +26,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final ProfileController controller = Get.put(ProfileController());
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   bool isDrawerOpen = false;
 
 

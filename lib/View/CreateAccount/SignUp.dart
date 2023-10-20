@@ -66,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 CustomTextField(
                   validation: Validations.validateName,
-                  hintText: "   Name",
+                  hintText: " Name",
                   controller: registerVM.nameController.value,
                 ),
                 SizedBox(
@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 CustomTextField(
                   validation: Validations.validateEmail,
-                  hintText: "   Phone number or Email address",
+                  hintText: " Phone number or Email address",
                   controller: registerVM.emailController.value,
                 ),
 
@@ -82,13 +82,14 @@ class _SignUpState extends State<SignUp> {
                   height: Get.height*0.02,
                 ),
                 CustomTextField(
-                  hintText: "   Date of birth",
+                  hintText: " Date of birth",
                   controller: registerVM.dobController.value,
                 ),
 
                 SizedBox(
                   height: Get.height*0.07,
                 ),
+
                 TextButton(
                   onPressed: () {
 

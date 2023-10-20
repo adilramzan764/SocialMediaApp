@@ -12,7 +12,7 @@ class BottomNavBarV2 extends StatefulWidget {
 }
 
 class _StackedBottomNavigationBarState extends State<BottomNavBarV2> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   final List<Widget> _screens = [
     Home(),

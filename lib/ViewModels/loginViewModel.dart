@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:socialmediaapp/Services/authServices.dart';
 import 'package:socialmediaapp/Utis/utils.dart';
+import 'package:socialmediaapp/View/BottomBarScreens/Home/Home.dart';
+import 'package:socialmediaapp/View/Chat%20screens/MainChatScreens.dart';
 import 'package:socialmediaapp/Widgets/CustomDialog.dart';
+
+import '../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
 
 class LoginViewModel extends GetxController {
 
   GlobalKey<FormState>  globalKey=GlobalKey<FormState>();
-  final emailController = TextEditingController().obs ;
-  final passwordController = TextEditingController().obs ;
+  final emailController = TextEditingController(text: "zee@gmail.com").obs ;
+  final passwordController = TextEditingController(text: "123456789").obs ;
   final emailFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
 
@@ -28,6 +32,7 @@ class LoginViewModel extends GetxController {
     );
     if(success==true){
       print("Hello to the new Screen");
+      Get.to(()=>BottomNavBarV2());
       // Navigator.push(
       //   context,
       //   MaterialPageRoute(
