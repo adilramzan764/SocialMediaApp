@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:socialmediaapp/Utis/colors.dart';
@@ -38,5 +39,15 @@ class Utils {
         backgroundColor: ColorValues.successColor,
         colorText: ColorValues.whiteColor
     );
+  }
+  static Future<void> startLoading({required String loadingStatus}) async {
+    await EasyLoading.show(
+      status: loadingStatus,
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await Future.delayed(Duration(seconds: 2));
+
+    await EasyLoading.dismiss();
   }
 }
