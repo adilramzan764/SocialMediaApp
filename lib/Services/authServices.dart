@@ -17,6 +17,7 @@ class AuthService {
         String? dob,
         String? userName,
         String? photoUrl,
+        String? phone,
       }) async {
     var res = await firebaseAuth.createUserWithEmailAndPassword(
       email: '$email',
