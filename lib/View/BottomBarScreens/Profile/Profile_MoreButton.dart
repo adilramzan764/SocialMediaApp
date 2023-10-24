@@ -100,19 +100,19 @@ class Profile_MoreButton extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
 
-                      if (textsforuserprofile[index] == 'Saved') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Saved_Posts()),
-                        );
-                      }
-                      if (textsforuserprofile[index] == 'Draft') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Drafts()),
-                        );
-                      }
+                      // if (textsforuserprofile[index] == 'Saved') {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => Saved_Posts()),
+                      //   );
+                      // }
+                      // if (textsforuserprofile[index] == 'Draft') {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(builder: (context) => Drafts()),
+                      //   );
+                      // }
                       if (textsforuserprofile[index] == 'Edit Profile') {
                         Navigator.push(
                           context,

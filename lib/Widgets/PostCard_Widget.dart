@@ -6,10 +6,11 @@ import 'package:socialmediaapp/View/BottomBarScreens/Home/SharePost.dart';
 import 'package:socialmediaapp/View/BottomBarScreens/Profile/PersnonalPosts_MoreButton.dart';
 import 'package:socialmediaapp/View/BottomBarScreens/Profile/Profile.dart';
 import '../Controllers/Post_Controller.dart';
+import '../Models/postModel.dart';
 import 'PicPost_Widget.dart';
 
 class PostCard extends StatelessWidget {
-  final Post post;
+  final PostModel post;
   final bool ispersonalpost;
 
   PostCard({required this.post,required this.ispersonalpost});

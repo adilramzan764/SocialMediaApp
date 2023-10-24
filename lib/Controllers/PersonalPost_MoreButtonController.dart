@@ -14,10 +14,10 @@ class PersonalPost_MoreButtonController extends GetxController {
     switch (index) {
       case 0:
       // Handle the "Saved" action
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Saved_Posts()));
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (context) => Saved_Posts()));
 
         break;
       case 1:
