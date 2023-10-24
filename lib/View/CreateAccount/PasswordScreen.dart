@@ -108,7 +108,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 18),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
                 ),

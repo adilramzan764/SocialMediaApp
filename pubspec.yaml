@@ -50,6 +50,9 @@ dependencies:
   uuid: ^4.1.0
   fluttertoast:
   image_picker: ^1.0.4
+  syncfusion_flutter_datepicker: ^23.1.41
+
+
 
 
 dev_dependencies:

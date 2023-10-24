@@ -11,11 +11,13 @@ class RegisterViewModel extends GetxController {
   GlobalKey<FormState>  globalKey=GlobalKey<FormState>();
   final nameController = TextEditingController().obs ;
   final emailController = TextEditingController().obs ;
+  final phoneController = TextEditingController().obs ;
   final dobController = TextEditingController().obs ;
   final userNameController = TextEditingController().obs ;
   final passwordController = TextEditingController().obs ;
   final Rx<FileImage> photoUrl = FileImage(File("")).obs;
   final emailFocusNode = FocusNode().obs;
+  final phoneFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
   final nameFocusNode = FocusNode().obs;
   final userNameFocusNode = FocusNode().obs;
@@ -37,6 +39,7 @@ class RegisterViewModel extends GetxController {
       bool success = await auth.createUser(
           name: nameController.value.text,
           email: emailController.value.text,
+          phone: phoneController.value.text,
           password: passwordController.value.text,
           dob: dobController.value.text,
           userName: userNameController.value.text,
