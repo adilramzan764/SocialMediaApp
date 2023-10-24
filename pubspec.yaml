@@ -50,6 +50,7 @@ dependencies:
   uuid: ^4.1.0
   fluttertoast:
   image_picker: ^1.0.4
+  firebase_database:
 
 
 dev_dependencies:

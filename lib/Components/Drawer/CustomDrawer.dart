@@ -87,7 +87,7 @@ class MyDrawer extends StatelessWidget {
                       }
                       if(index==1){
                         Navigator.pop(context);
-                        Get.to(Saved_Posts()) ;
+                        // Get.to(Saved_Posts()) ;
                       }
                       if(index==2){
                         Navigator.pop(context);

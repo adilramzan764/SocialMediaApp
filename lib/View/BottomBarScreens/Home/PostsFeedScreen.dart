@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 
 import '../../../Controllers/Post_Controller.dart';
+import '../../../Models/postModel.dart';
 import '../../../Widgets/PostCard_Widget.dart';
 import '../Profile/Profile.dart';
 import 'FeedPost_MoreButton.dart';
@@ -23,8 +24,8 @@ class PostFeedScreen extends StatefulWidget {
 
 class _PostFeedScreenState extends State<PostFeedScreen> {
   // Create a list of posts (you can replace this with actual data)
-  final List<Post> posts = [
-    Post(
+  final List<PostModel> posts = [
+    PostModel(
       name: 'John Doe',
       post: 'Lorem ipsum dolor sit amet...',
       profilepic: 'assets/profilepic.png',
@@ -36,7 +37,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
       postsaved: true,
       hashtags: ['nature', 'sunset'],
     ),
-    Post(
+    PostModel(
       name: 'Jane Smith',
       post: 'Sed ut perspiciatis unde omnis iste...',
       profilepic: 'assets/profilepic.png',
@@ -49,7 +50,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
 
       hashtags: ['travel', 'adventure'],
     ),
-    Post(
+    PostModel(
       name: 'Jane Smith',
       post: 'Sed ut perspiciatis unde omnis iste...',
       profilepic: 'assets/profilepic.png',
@@ -62,7 +63,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
 
       hashtags: ['travel', 'adventure'],
     ),
-    Post(
+    PostModel(
       name: 'Jane Smith',
       post: 'Sed ut perspiciatis unde omnis iste...',
       profilepic: 'assets/profilepic.png',

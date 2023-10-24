@@ -30,16 +30,16 @@ class Profile extends StatelessWidget {
               backgroundColor: Colors.white,
               leading: otherUserProfile
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 15.0, top: 29),
-                      child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            CupertinoIcons.left_chevron,
-                            color: Colors.black,
-                          )),
-                    )
+                padding: const EdgeInsets.only(left: 15.0, top: 29),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      CupertinoIcons.left_chevron,
+                      color: Colors.black,
+                    )),
+              )
                   : SizedBox(),
               automaticallyImplyLeading: false,
               expandedHeight: 400,
@@ -92,8 +92,8 @@ class Profile extends StatelessWidget {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           Profile_MoreButton(
-                                        otherUserProfile: otherUserProfile,
-                                      ),
+                                            otherUserProfile: otherUserProfile,
+                                          ),
                                     );
                                   },
                                   icon: Icon(

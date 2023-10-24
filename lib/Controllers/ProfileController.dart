@@ -10,6 +10,8 @@ class ProfileController extends GetxController {
   final Rx<ProfileModel> userProfile = ProfileModel(
     profileimage: 'assets/profilepic.png',
     name: "Minha Anjum",
+    dob: "29/6/2002",
+    location: 'Lahore',
     bio: "Graphic Designer/\nAnimator/Vediographer",
     numberOfPosts: "1458",
     numberOfFollowers: "321",

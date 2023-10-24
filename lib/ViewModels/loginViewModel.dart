@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,14 @@ class LoginViewModel extends GetxController {
 
     );
     if(success==true){
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String userId = user.uid;
+        print('User ID: $userId');
+      } else {
+        print('No user is currently authenticated.');
+      }
+
       print("Hello to the new Screen");
       Get.to(()=>BottomNavBarV2());
       // Navigator.push(
