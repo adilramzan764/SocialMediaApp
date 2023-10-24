@@ -1,7 +1,8 @@
-
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:socialmediaapp/View/Login_Screens/Log_In.dart';
+
+import '../View/Chat screens/MainChatScreens.dart';
 
 class GoogleSignInController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
@@ -11,18 +12,11 @@ class GoogleSignInController extends GetxController {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
-        // User canceled the Google Sign In process
         return;
       }
-
-      // Access the user details
       print('Google User Email: ${googleUser.email}');
-      // Add your logic to handle the Google Sign-In user data here
-
-      // Navigate to the desired screen after successful sign-in
-      Get.to(() => LogIn());
+      Get.offAll(() => MainChatScreens());
     } catch (error) {
-      // Handle errors during Google Sign-In
       print('Google Sign-In Error: $error');
     }
   }
