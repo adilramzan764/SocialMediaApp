@@ -6,6 +6,7 @@ import '../../../Components/BottomNavigationBar/BotttomBar_Widget.dart';
 import '../../../Components/Drawer/CustomDrawer.dart';
 import '../../../Controllers/ProfileController.dart';
 import '../../../Widgets/MyTabBar.dart';
+import '../../../Widgets/PicPost_Widget.dart';
 import '../../Chat screens/CallBalance.dart';
 import '../../Chat screens/MainChatScreens.dart';
 import '../../Chat screens/NotificationScreen.dart';
@@ -111,8 +112,11 @@ class HomeScreenContent extends StatelessWidget {
                     onPressed: () {
                       scaffoldKey.currentState!.openDrawer();
                     },
-                    icon: SvgPicture.asset('assets/profile.svg',height: 18,width: 18,
-                        color: Colors.black),
+                    icon:  ProfilePicWidget(
+                      'assets/model1.jpg',
+                      30,
+                      30,
+                    ),
                   ),
                 ),
                 Text(

@@ -53,8 +53,23 @@ class _ProfileEditState extends State<ProfileEdit> {
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(25),
-                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                    height: 25,
+                          width: 75,
+                          decoration: BoxDecoration(
+                            color: Colors.black38,
+                    borderRadius: BorderRadius.circular(10),
+
+                          ),
+                          child: TextButton(onPressed: () {  }, child: Text("Edit Cover",style: TextStyle(color: Colors.white,fontSize: 8),),)),
                     ),
                   ),
                 ),
