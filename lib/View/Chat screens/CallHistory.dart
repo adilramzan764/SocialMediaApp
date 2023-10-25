@@ -33,7 +33,7 @@ class _CallHistoryState extends State<CallHistory> {
       body: Column(
         children: [
           Container(
-            height: Get.height*0.1,
+            height: Get.height*0.09,
             decoration: BoxDecoration(
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
               color: Colors.white,
@@ -43,7 +43,7 @@ class _CallHistoryState extends State<CallHistory> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 32.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

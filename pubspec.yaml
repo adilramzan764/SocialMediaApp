@@ -51,6 +51,7 @@ dependencies:
   fluttertoast:
   image_picker: ^1.0.4
   syncfusion_flutter_datepicker: ^23.1.41
+  camera: ^0.10.5+5
 
 
 

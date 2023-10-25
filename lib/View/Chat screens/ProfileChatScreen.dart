@@ -1,10 +1,14 @@
 import 'dart:ui';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../Controllers/ProfileChatCamera.dart';
+import '../../Services/ChatFirebase_Services/ReceiverMessage.dart';
+import '../../Services/ChatFirebase_Services/SenderMessage.dart';
 import 'PhoneTab.dart';
 
 
@@ -16,6 +20,48 @@ class ProfileChatScreen extends StatefulWidget {
 }
 
 class _ProfileChatScreenState extends State<ProfileChatScreen> {
+
+
+  late Future<CameraController> _controllerFuture;
+  late CameraController _controller;
+  TextEditingController _messageController = TextEditingController();
+  List<String> _messages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerFuture = _initializeCameraController();
+  }
+
+  Future<CameraController> _initializeCameraController() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+    _controller = CameraController(firstCamera, ResolutionPreset.medium);
+    await _controller.initialize();
+    return _controller;
+  }
+
+  void _onCapturePressed() async {
+    try {
+      final XFile file = await _controller.takePicture();
+      // Handle the captured photo (file) as needed, for example, save it or display it.
+      print("Photo captured at: ${file.path}");
+      // Here you can upload the image to Firebase or save it locally, etc.
+    } catch (e) {
+      print("Error occurred while capturing photo: $e");
+    }
+  }
+  void _sendMessage(String message) {
+    if (message.trim().isNotEmpty) {
+      setState(() {
+        _messages.add(message);
+        _messageController.clear();
+      });
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,27 +85,31 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                     size: 16,
                   ),
                 ),
-                SizedBox(width: 6), // Added spacing between back button and profile image
+                SizedBox(width: 6),
+                // Added spacing between back button and profile image
                 CircleAvatar(
                   radius: 20,
                   backgroundImage: AssetImage("assets/model1.jpg"),
                 ),
-                SizedBox(width: 12), // Added spacing between profile image and text
+                SizedBox(width: 12),
+                // Added spacing between profile image and text
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [SizedBox(height: Get.height*0.025,),
+                  children: [SizedBox(height: Get.height * 0.025,),
                     Text(
                       'Rana Zeeshan',
                       style: TextStyle(color: Colors.black, fontSize: 12),
                     ),
-                    SizedBox(height: Get.height*0.008,),
+                    SizedBox(height: Get.height * 0.008,),
                     Text(
                       'Active 5 minutes ago',
-                      style: TextStyle(color: Colors.black.withOpacity(0.5), fontSize: 8),
+                      style: TextStyle(
+                          color: Colors.black.withOpacity(0.5), fontSize: 8),
                     ),
                   ],
                 ),
-                Expanded(child: Container()), // Expanded to push icons to the right
+                Expanded(child: Container()),
+                // Expanded to push icons to the right
                 Row(
                   children: [
                     IconButton(
@@ -76,7 +126,8 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                                   ), // Set circular border radius here
                                 ),
                                 title: SvgPicture.asset("assets/dilog.svg"),
-                                content: Text("       Top Up your account to make Calls ",
+                                content: Text(
+                                    "       Top Up your account to make Calls ",
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.black)),
                                 actions: <Widget>[
@@ -90,7 +141,10 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                                       child: Container(
                                         height: 40,
                                         width:
-                                        MediaQuery.of(context).size.width / 2.5,
+                                        MediaQuery
+                                            .of(context)
+                                            .size
+                                            .width / 2.5,
                                         decoration: BoxDecoration(
                                           boxShadow: [
                                             BoxShadow(
@@ -115,7 +169,8 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                                                       color: Colors.white,
                                                       fontSize: 16),
                                                 ),
-                                                SvgPicture.asset("assets/Iconly-Light-Arrow - Right.svg",)
+                                                SvgPicture.asset(
+                                                  "assets/Iconly-Light-Arrow - Right.svg",)
                                               ],
                                             ),
                                           ),
@@ -130,7 +185,8 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                         );
                       },
                       icon: Transform.scale(scale: 0.7,
-                          child: SvgPicture.asset("assets/Call.svg",color: Color(0XFF3EA7FF))),
+                          child: SvgPicture.asset(
+                              "assets/Call.svg", color: Color(0XFF3EA7FF))),
                     ),
                     IconButton(
                       onPressed: () {
@@ -163,63 +219,17 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 2, // Number of chat messages
+                itemCount: _messages.length,
                 itemBuilder: (BuildContext context, int index) {
-                  // You can use different logic to determine if the message is from the sender or receiver
-                  bool isSender = index % 2 == 0;
+                  bool isSender = index % 2 == 0; // For demonstration purposes
 
-                  return ListTile(
-                    leading: isSender
-
-                        ? Container(
-                        // width: 40, // Container ki width
-                        // height: 40, // Container ki height
-                        // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                        //
-                        //   image: DecorationImage(
-                        //     image: AssetImage('assets/avatar.jpg'),
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
-                      child: CircleAvatar(
-                        radius: 17,
-                        backgroundImage:AssetImage('assets/model1.jpg'),
-                      ),
-                    )
-                        : SizedBox(width: Get.width*0.01), // Empty space for receiver
-                    trailing: isSender
-                        ? SizedBox(width: Get.width*0.1) // Empty space for sender
-                        : SizedBox(),
-                    title: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: isSender ? Color(0XFF3EA7FF) : Color(0XFFAC83F6),
-                        // Color for sender and receiver
-                        borderRadius: isSender
-                            ?
-                        BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                              )
-                            : BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                              ),
-                      ),
-                      child: Text(
-                        'Lorem ipsum dolor sit amet, adipiscing elit',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10 // Text color for sender and receiver
-                            ),
-                      ),
-                    ),
-                  );
+                  return isSender
+                      ? SenderMessage(_messages[index])
+                      : ReceiverMessage(_messages[index]);
                 },
               ),
             ),
+
             SizedBox(
               height: 10,
             ),
@@ -227,44 +237,77 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
                 height: 45,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                   boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)],
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Type your message",
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                    ),
+                child: FutureBuilder<CameraController>(
+                  future: _controllerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      final controller = snapshot.data!;
+                      return TextField(
+                        decoration: InputDecoration(
+                          hintText: "Type your message",
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                          ),
+                          suffixIcon: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: SvgPicture.asset(
+                                    "assets/Bold-Camera.svg"),
+                                onPressed: () {
+                                  // Open camera when the camera icon is tapped
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CameraScreen(
+                                              controller, _onCapturePressed),
+                                    ),
+                                  );
+                                },
+                              ),
+                              IconButton(
+                                icon: SvgPicture.asset(
+                                    "assets/Bold-Voice 2.svg"),
+                                onPressed: () {
+                                  // Handle voice icon tap
+                                },
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  _sendMessage(_messageController.text);
+                                },
+                                child: Icon(Icons.send),
+                              )
 
-                    suffixIcon: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                       SvgPicture.asset("assets/Bold-Camera.svg"),
-
-                        IconButton(
-                          icon: SvgPicture.asset("assets/Bold-Voice 2.svg"),
-                          onPressed: () {
-                            // Handle voice icon tap
-                          },
+                            ],
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ],
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
               ),
             ),
@@ -276,4 +319,8 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
       ),
     );
   }
+
 }
+
+
+

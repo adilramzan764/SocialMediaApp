@@ -7,11 +7,14 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:socialmediaapp/View/StarterScreens/starterscreen1.dart';
 
+import 'Utis/firebase_options.dart';
 import 'ViewModels/ProfileViewModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Initialize Firebase (if needed)
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  ); // Initialize Firebase (if needed)
 
   runApp(MyApp());
   configLoading();

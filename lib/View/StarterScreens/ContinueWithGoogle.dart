@@ -38,8 +38,8 @@ class _ContinueWithGoogleState extends State<ContinueWithGoogle> {
             ),
             SizedBox(height: Get.height * 0.04),
             ElevatedButton.icon(
-              onPressed: () {
-                _googleSignInController.signInWithGoogle();
+              onPressed: () async {
+                await _googleSignInController.signInWithGoogle();
               },
               icon: SvgPicture.asset("assets/google.svg", height: 24, width: 24),
               label: Text(
