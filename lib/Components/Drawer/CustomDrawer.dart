@@ -28,9 +28,9 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Colors.white,
       shape: OutlineInputBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(140),
-        ),
+        // borderRadius: BorderRadius.only(
+        //   topRight: Radius.circular(20),
+        // ),
         borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
       ),
       child: Container(
