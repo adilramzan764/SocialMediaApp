@@ -30,9 +30,11 @@ class _ContinueWithGoogleState extends State<ContinueWithGoogle> {
               ),
             ),
             SizedBox(height: Get.height * 0.1),
-            Text(
-              "See What's happening in the world right now.",
-              style: TextStyle(color: Colors.black, fontSize: 13),
+            Align(alignment: Alignment.centerLeft,
+              child: Text(
+                "See What's happening in the world right now.",
+                style: TextStyle(color: Colors.black, fontSize: 13),
+              ),
             ),
             SizedBox(height: Get.height * 0.04),
             ElevatedButton.icon(
@@ -44,7 +46,7 @@ class _ContinueWithGoogleState extends State<ContinueWithGoogle> {
                 "Continue with Google",
                 style: TextStyle(color: Color(0xffAC83F6), fontSize: 14),
               ),
-              style: ElevatedButton.styleFrom(
+              style: ElevatedButton.styleFrom(fixedSize: Size(MediaQuery.of(context).size.width * 0.65, 40),
                 primary: Colors.white,
                 onPrimary: Colors.black,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -52,18 +54,33 @@ class _ContinueWithGoogleState extends State<ContinueWithGoogle> {
               ),
             ),
             SizedBox(height: Get.height * 0.01),
-            ElevatedButton(
+            SizedBox(
+              height: Get.height*0.01,
+            ),
+            TextButton(
               onPressed: () {
-                Get.to(() => SignUp());
+
+                Get.to(SignUp());
               },
-              child: Text(
-                "Create account",
-                style: TextStyle(color: Colors.white, fontSize: 14),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xffAC83F6),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                elevation: 2,
+              child: Container(
+                height: 40,
+                width:  MediaQuery.of(context).size.width * 0.65,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 2.5,
+                    ),
+                  ],
+                  color: Color(0xffAC83F6),
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: Center(
+                  child: Text(
+                    "Create account",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: Get.height * 0.04),
