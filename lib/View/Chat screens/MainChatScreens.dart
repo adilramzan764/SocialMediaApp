@@ -181,7 +181,7 @@ class _MainChatScreensState extends State<MainChatScreens> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ProfileChatScreen()),
+                          builder: (context) => ProfileChatScreen(userId: '', receiverId: '',)),
                     );
                   },
                   child: ListTile(

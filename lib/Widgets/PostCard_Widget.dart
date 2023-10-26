@@ -21,7 +21,7 @@ class PostCard extends StatelessWidget {
       color: Colors.white,
       elevation: 0.2,
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

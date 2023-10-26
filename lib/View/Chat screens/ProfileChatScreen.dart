@@ -1,25 +1,56 @@
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../Controllers/ProfileChatCamera.dart';
+import '../../Services/ChatFirebase_Services/ChatMessage_Model.dart';
+import '../../Services/ChatFirebase_Services/Firebase_Service.dart';
 import '../../Services/ChatFirebase_Services/ReceiverMessage.dart';
 import '../../Services/ChatFirebase_Services/SenderMessage.dart';
 import 'PhoneTab.dart';
 
 
 class ProfileChatScreen extends StatefulWidget {
-  const ProfileChatScreen({Key? key}) : super(key: key);
+  final String userId;
+  final String receiverId;
+
+  const ProfileChatScreen({Key? key, required this.userId, required this.receiverId}) : super(key: key);
+
+
 
   @override
   State<ProfileChatScreen> createState() => _ProfileChatScreenState();
 }
 
 class _ProfileChatScreenState extends State<ProfileChatScreen> {
+  final FirebaseService _firebaseService = FirebaseService();
+  Stream<List<Message>> getMessageStream(String userId) {
+    return FirebaseFirestore.instance
+        .collection('messages')
+        .where('participants', arrayContains: userId)
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map((snapshot) {
+      List<Message> messages = [];
+      snapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        messages.add(Message(
+          id: doc.id,
+          senderId: data['senderId'],
+          receiverId: data['receiverId'],
+          content: data['content'],
+          timestamp: data['timestamp'].toDate(),
+        ));
+      });
+      return messages;
+    });
+  }
+
 
 
   late Future<CameraController> _controllerFuture;
@@ -53,10 +84,11 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
   }
   void _sendMessage(String message) {
     if (message.trim().isNotEmpty) {
-      setState(() {
-        _messages.add(message);
-        _messageController.clear();
-      });
+      _firebaseService.sendMessage(
+        widget.userId, // Sender's ID
+        widget.receiverId, // Receiver's ID
+        message,
+      );
     }
   }
 
@@ -218,14 +250,28 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
               height: 10,
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: _messages.length,
-                itemBuilder: (BuildContext context, int index) {
-                  bool isSender = index % 2 == 0; // For demonstration purposes
+              child: StreamBuilder<List<Message>>(
+                stream: getMessageStream(widget.userId),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Message> messages = snapshot.data!;
 
-                  return isSender
-                      ? SenderMessage(_messages[index])
-                      : ReceiverMessage(_messages[index]);
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: messages.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          Message message = messages[index];
+                          bool isSender = message.senderId == widget.userId;
+
+                          return isSender
+                              ? SenderMessage(message.content)
+                              : ReceiverMessage(message.content);
+                        },
+                      ),
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
                 },
               ),
             ),
@@ -252,6 +298,11 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                     if (snapshot.connectionState == ConnectionState.done) {
                       final controller = snapshot.data!;
                       return TextField(
+                        controller: _messageController,
+                        onChanged: (text) {
+                          // Update the controller's value as text changes
+                          _messageController.text = text;
+                        },
                         decoration: InputDecoration(
                           hintText: "Type your message",
                           hintStyle: TextStyle(

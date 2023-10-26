@@ -1,17 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+class Message {
+  late String id; // Unique ID for each message
+  late String senderId; // Sender's user ID
+  late String receiverId; // Receiver's user ID
+  late String content; // Message content
+  late DateTime timestamp; // Timestamp when the message was sent
 
-class ChatMessage {
-  final String id;
-  final String text;
-  final String senderId;
-  final Timestamp timestamp;
-
-  ChatMessage({
+  Message({
     required this.id,
-    required this.text,
     required this.senderId,
+    required this.receiverId,
+    required this.content,
     required this.timestamp,
   });
 }
+
 
 

@@ -24,4 +24,4 @@ class SenderMessage extends StatelessWidget {
       ),
     );
   }
-}
+ }
