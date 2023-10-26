@@ -28,22 +28,50 @@ class Profile extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
               backgroundColor: Colors.white,
-              leading: otherUserProfile
-                  ? Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 29),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      CupertinoIcons.left_chevron,
-                      color: Colors.black,
-                    )),
-              )
-                  : SizedBox(),
+              leading: Padding(
+                    padding: const EdgeInsets.only(left: 15.0, top: 27),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          CupertinoIcons.left_chevron,
+                          color: Colors.black,
+                        ),
+                    iconSize: 18,),
+                  ),
               automaticallyImplyLeading: false,
               expandedHeight: 400,
               pinned: true,
+              title: innerBoxIsScrolled && (otherUserProfile || !otherUserProfile)
+                  ? Padding(
+                    padding: const EdgeInsets.only(top: 26.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Minha Anjum', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                            Text('5 Posts', style: TextStyle(fontSize: 10),),
+                        
+                        
+                          ],
+                        ),
+                        Expanded(child: Align(
+                            alignment: Alignment.centerRight,
+                            child: otherUserProfile ? Container(
+                                height: 25,
+                                width: 80,
+                                child: CustomButton(text: 'Follow', onPressed: () {  },)) :
+
+
+                            IconButton(icon: Icon(Icons.more_vert), onPressed: () {  },iconSize: 20,)
+                        ))
+                      ],
+                    ),
+                  )
+                  : null,
+
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
                   decoration: BoxDecoration(
@@ -76,7 +104,7 @@ class Profile extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            SizedBox(height: 60),
+                            SizedBox(height: 50),
                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerRight,
@@ -92,8 +120,8 @@ class Profile extends StatelessWidget {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           Profile_MoreButton(
-                                            otherUserProfile: otherUserProfile,
-                                          ),
+                                        otherUserProfile: otherUserProfile,
+                                      ),
                                     );
                                   },
                                   icon: Icon(
@@ -281,8 +309,7 @@ class Profile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(25),
-            topLeft: Radius.circular(
-                25)), // Set circular border radius here
+            topLeft: Radius.circular(25)), // Set circular border radius here
       ),
       context: context,
       builder: (BuildContext context) {
