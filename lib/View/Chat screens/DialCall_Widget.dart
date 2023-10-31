@@ -8,99 +8,109 @@ import '../BottomBarScreens/Home/Home.dart';
 class DialCall_Widget extends StatelessWidget {
   const DialCall_Widget({Key? key}) : super(key: key);
 
+
+  backToHome(){
+    Get.offAll(Home());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SizedBox(
-          height: Get.height * 0.03,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                child: Icon(Icons.arrow_back_ios, color: Colors.black, size: 16),
-                onTap: () {
-                  Get.offAll(Home());
-                },
-              ),
-              Container(
-                height: 40,
-                width: MediaQuery.of(context).size.width / 1.25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: Colors.white,
-                  boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
+    return WillPopScope(
+      onWillPop: () {
+       return backToHome();
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: Get.height * 0.03,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  child: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 16),
+                  onTap: () {
+                    Get.offAll(Home());
+                  },
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Search here",
-                    hintStyle: TextStyle(color: Color(0xffD8D8D8), fontSize: 12),
-                    contentPadding: EdgeInsets.all(8),
-                    prefixIcon: Transform.scale(
-                      scale: 0.3,
-                      child: SvgPicture.asset('assets/Bulk-Search.svg'),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                Container(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width / 1.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Colors.white,
+                    boxShadow: [const BoxShadow(color: Colors.grey, blurRadius: 1)],
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "Search here",
+                      hintStyle: const TextStyle(color: Color(0xffD8D8D8), fontSize: 12),
+                      contentPadding: const EdgeInsets.all(8),
+                      prefixIcon: Transform.scale(
+                        scale: 0.3,
+                        child: SvgPicture.asset('assets/Bulk-Search.svg'),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              InkWell(
-                onTap: () {
+                InkWell(
+                  onTap: () {
 
-                  Get.to(CurrentBalance());
-                  // _showBottomSlider(context);
-                },
-                child: SvgPicture.asset("assets/dot.svg"),
-              ),
-            ],
+                    Get.to(const CurrentBalance());
+                    // _showBottomSlider(context);
+                  },
+                  child: SvgPicture.asset("assets/dot.svg"),
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: Get.height * 0.03),
-        Container(
-          height: 50,
-          decoration: BoxDecoration(
-            boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)],
-            color: Colors.white,
+          SizedBox(height: Get.height * 0.03),
+          Container(
+            height: 50,
+            decoration: const BoxDecoration(
+              boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)],
+              color: Colors.white,
+            ),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Minutes left for International calls",
+                  style: TextStyle(color: Colors.black, fontSize: 10),
+                ),
+                Text(
+                  "78.6 min",
+                  style: TextStyle(color: Color(0xffAC83F6), fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                "Minutes left for International calls",
-                style: TextStyle(color: Colors.black, fontSize: 10),
-              ),
-              Text(
-                "78.6 min",
-                style: TextStyle(color: Color(0xffAC83F6), fontWeight: FontWeight.w500),
-              ),
-            ],
+          Expanded(
+            child: DialPad(
+              outputMask: "(000) 000-0000",
+              hideSubtitle: true,
+              backspaceButtonIconColor: Colors.red,
+              buttonTextColor: Colors.black,
+              dialOutputTextColor: Colors.black,
+              makeCall: (number) {
+                print(number);
+              },
+            ),
           ),
-        ),
-        Expanded(
-          child: DialPad(
-            outputMask: "(000) 000-0000",
-            hideSubtitle: true,
-            backspaceButtonIconColor: Colors.red,
-            buttonTextColor: Colors.black,
-            dialOutputTextColor: Colors.black,
-            makeCall: (number) {
-              print(number);
-            },
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -109,23 +119,23 @@ class DialCall_Widget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 children: [
                  SvgPicture.asset("assets/Bulk-Swap.svg") ,// Your icon here
-                  SizedBox(width: 20),
-                  Text('Top Up your account',style: TextStyle(color: Color(0xffAC83F6))),
+                  const SizedBox(width: 20),
+                  const Text('Top Up your account',style: TextStyle(color: Color(0xffAC83F6))),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
         SvgPicture.asset("assets/3 User.svg") ,
-                  SizedBox(width: 20),
-                  Text('Conference Call',style: TextStyle(color: Colors.black)),
+                  const SizedBox(width: 20),
+                  const Text('Conference Call',style: TextStyle(color: Colors.black)),
                 ],
               ),
               // Add more rows with icons and text as needed
