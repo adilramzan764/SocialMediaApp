@@ -20,14 +20,14 @@ class _MainChatScreensState extends State<MainChatScreens> {
       'name': 'Anna Bella',
       'description': 'Great! Thank you soo much',
       'time': '11:54 PM',
-      'messages': '1343',
+      'messages': '2',
     },
     {
       'image': 'assets/model2.jpg',
       'name': 'Zeeshan',
       'description': "Hey! Bro what's Going on",
       'time': '11:54 PM',
-      'messages': '100',
+      'messages': '3',
     },
     {
       'image': 'assets/model3.jpg',
@@ -209,7 +209,10 @@ class _MainChatScreensState extends State<MainChatScreens> {
                             width: messageCount < zeeshan ? 20 : 23,
                             decoration: BoxDecoration(
                                 color: Colors.blue, shape: BoxShape.circle),
-                            child: Row(
+                            child:
+
+
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 if (messageCount < zeeshan)

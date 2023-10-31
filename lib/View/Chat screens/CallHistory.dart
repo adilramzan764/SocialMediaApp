@@ -49,7 +49,7 @@ class _CallHistoryState extends State<CallHistory> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Get.back();
+                      Navigator.pop(context);
                     },
                     icon: Icon(
                       Icons.arrow_back_ios,

@@ -14,7 +14,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50, // Set your desired height here
+      height: MediaQuery.of(context).size.height*0.07, // Set your desired height here
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
