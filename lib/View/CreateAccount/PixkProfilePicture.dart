@@ -160,18 +160,26 @@ class PickProfilePicture extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
               child: CustomButton(
                 text: 'Next',
-                onPressed: () async {
-                  String? imageUrl = await _uploadImageToFirebase(_pickedImage.value);
-                  if (imageUrl != null) {
-                    await _saveImageUrlToFirestore(imageUrl);
-                  }
+                onPressed: (){
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UsernameCreation(),
-                    ),
-                  );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UsernameCreation(),
+                          ),
+                        );
                 },
+                // onPressed: () async {
+                //   String? imageUrl = await _uploadImageToFirebase(_pickedImage.value);
+                //   if (imageUrl != null) {
+                //     await _saveImageUrlToFirestore(imageUrl);
+                //   }
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => UsernameCreation(),
+                //     ),
+                //   );
+                // },
               ),
             ),
           ],

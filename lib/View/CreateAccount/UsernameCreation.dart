@@ -110,10 +110,10 @@ class _UsernameCreationState extends State<UsernameCreation> {
                   horizontal: MediaQuery.of(context).size.width * 0.1),
               child: CustomButton(
                 text: 'Next',
-              //   onPressed: () {
-              //     Get.to(()=>ContinueWithGoogle());
-              // },
-                onPressed: ()=>registerVM.signUp(),
+                onPressed: () {
+                  Get.to(()=>ContinueWithGoogle());
+              },
+              //   onPressed: ()=>registerVM.signUp(),
               ),
             )
 
