@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../View/BottomBarScreens/Home/Home.dart';
 import '../../View/Chat screens/MainChatScreens.dart';
@@ -28,9 +29,9 @@ class _StackedBottomNavigationBarState extends State<BottomNavBarV2> {
           _screens[_currentIndex],
           if(_currentIndex==1)
           Positioned(
-            left: 10,
-            right: 10,
-            bottom: 20,
+            left: 1.0.h,
+            right: 1.0.h,
+            bottom: 2.0.h,
             child: CustomBottomNavigationBar(
               currentIndex: _currentIndex,
               onTap: (int index) {

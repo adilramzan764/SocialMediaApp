@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../Components/BottomNavigationBar/BotttomBar_Widget.dart';
 import '../../../Components/Drawer/CustomDrawer.dart';
@@ -69,9 +70,9 @@ class _HomeState extends State<Home> {
           _screens[_currentIndex],
           if (_currentIndex != 2)
             Positioned(
-              left: 10,
-              right: 10,
-              bottom: 20,
+              left: 1.0.h,
+              right: 1.0.h,
+              bottom: 2.0.h,
               child: CustomBottomNavigationBar(
                 currentIndex: _currentIndex,
                 onTap: (int index) {
@@ -149,8 +150,8 @@ class HomeScreenContent extends StatelessWidget {
           ],
         ),
         Positioned(
-          bottom: 80,
-          right: 20,
+          bottom: 10.5.h,
+          right: 2.5.h,
           child: FloatingActionButton(
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
@@ -164,7 +165,7 @@ class HomeScreenContent extends StatelessWidget {
                   return UploadFedd_Dialog();
                 },
               );            },
-            child: const Icon(Icons.add, size: 30),
+            child:  Icon(Icons.add, size: 3.5.h),
           ),
         ),
       ],

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../CreatePost/UploadFeed_Dialog.dart';
 import 'CallBalance.dart';
 import 'CallHistory.dart';
 import 'NotificationScreen.dart';
@@ -234,19 +235,23 @@ class _MainChatScreensState extends State<MainChatScreens> {
                 );
               },
             ),
-          Positioned(
-              bottom: 80,
-              right: 20,
+            Positioned(
+              bottom: 10.5.h,
+              right: 2.5.h,
               child: FloatingActionButton(
                 shape: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(40),
                     borderSide: BorderSide(color: Colors.white.withOpacity(0.1))),
-                backgroundColor: Color(0xffAC83F6),
+                backgroundColor: const Color(0xffAC83F6),
                 foregroundColor: Colors.white,
                 onPressed: () {
-                  // Handle FAB tap event
-                },
-                child: Icon(Icons.add, size: 30),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return UploadFedd_Dialog();
+                    },
+                  );            },
+                child:  Icon(Icons.add, size: 3.5.h),
               ),
             ),
           ],
