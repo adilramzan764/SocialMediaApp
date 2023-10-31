@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/View/Chat%20screens/MainChatScreens.dart';
 import '../../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
 import '../../ViewModels/loginViewModel.dart';
 import '../CreateAccount/SignUp.dart';
@@ -121,7 +122,10 @@ class _SignInState extends State<SignIn> {
                 height: Get.height * 0.07,
               ),
               TextButton(
-                onPressed: ()=>LogInMV.LogIn(),
+                onPressed: () {
+                  Get.to(() => BottomNavBarV2());
+                },
+                // onPressed: ()=>LogInMV.LogIn(),
                 child: Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width * 0.7,

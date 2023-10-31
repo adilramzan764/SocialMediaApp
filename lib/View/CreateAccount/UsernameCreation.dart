@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:socialmediaapp/View/Chat%20screens/MainChatScreens.dart';
+import 'package:socialmediaapp/View/StarterScreens/ContinueWithGoogle.dart';
 import 'package:socialmediaapp/ViewModels/signUpViewModel.dart';
 
 import '../../Widgets/CustomButton.dart';
@@ -17,7 +19,7 @@ class UsernameCreation extends StatefulWidget {
 
 class _UsernameCreationState extends State<UsernameCreation> {
 
-  bool _isChecked = true;
+  // bool _isChecked = true;
   final registerVM = Get.put(RegisterViewModel()) ;
 
   @override
@@ -55,19 +57,19 @@ class _UsernameCreationState extends State<UsernameCreation> {
                     hintStyle: TextStyle(color: Colors.black.withOpacity(0.7),
                       fontSize: 10,
                     ),
-                    suffixIcon: Transform.scale(
-                      scale: 0.7,
-                      child: Checkbox(
-                        activeColor: Color(0xff3EA7FF), //The color to use when this checkbox is checked.
-
-                        value: _isChecked,
-                        onChanged: (bool? newValue) {
-                          setState(() {
-                            _isChecked = newValue ?? false;
-                          });
-                        },
-                      ),
-                    ),
+                    // suffixIcon: Transform.scale(
+                    //   scale: 0.7,
+                    //   child: Checkbox(
+                    //     activeColor: Color(0xff3EA7FF), //The color to use when this checkbox is checked.
+                    //
+                    //     // value: _isChecked,
+                    //     // onChanged: (bool? newValue) {
+                    //     //   setState(() {
+                    //     //     _isChecked = newValue ?? false;
+                    //     //   });
+                    //     // },
+                    //   ),
+                    // ),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
@@ -108,6 +110,9 @@ class _UsernameCreationState extends State<UsernameCreation> {
                   horizontal: MediaQuery.of(context).size.width * 0.1),
               child: CustomButton(
                 text: 'Next',
+              //   onPressed: () {
+              //     Get.to(()=>ContinueWithGoogle());
+              // },
                 onPressed: ()=>registerVM.signUp(),
               ),
             )

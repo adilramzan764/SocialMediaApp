@@ -33,12 +33,12 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: registerVM.globalKey,
+    return Form(
+      key: registerVM.globalSignUpKey,
+      child: Scaffold(backgroundColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
@@ -50,7 +50,7 @@ class _SignUpState extends State<SignUp> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back_ios_new,
                       size: 15,
                     ),
@@ -67,7 +67,7 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Get.height * 0.06,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Create your account',
@@ -113,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           Text(
                             '${_selectedDate.day}-${_selectedDate.month}-${_selectedDate.year}',
-                            style: TextStyle(fontSize: 10, color: Color(0xff707070)),
+                            style: const TextStyle(fontSize: 10, color: Color(0xff707070)),
                           ),
 
                         ],
@@ -127,12 +127,12 @@ class _SignUpState extends State<SignUp> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(PasswordScreen());
+                    Get.to(const PasswordScreen());
                   },
                   child: Container(
                     height: 40,
                     width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
@@ -142,7 +142,7 @@ class _SignUpState extends State<SignUp> {
                       color: Color(0xffAC83F6),
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Next",
                         style: TextStyle(color: Colors.white, fontSize: 13),

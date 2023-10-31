@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../Controllers/ProfileChatCamera.dart';
 import '../../Services/ChatFirebase_Services/ChatMessage_Model.dart';
 import '../../Services/ChatFirebase_Services/Firebase_Service.dart';
+import '../../Services/ChatFirebase_Services/ImageWidget.dart';
 import '../../Services/ChatFirebase_Services/ReceiverMessage.dart';
 import '../../Services/ChatFirebase_Services/SenderMessage.dart';
 import 'PhoneTab.dart';
@@ -29,6 +32,8 @@ class ProfileChatScreen extends StatefulWidget {
 
 class _ProfileChatScreenState extends State<ProfileChatScreen> {
   final FirebaseService _firebaseService = FirebaseService();
+
+
   Stream<List<Message>> getMessageStream(String userId) {
     return FirebaseFirestore.instance
         .collection('messages')
@@ -39,12 +44,17 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
       List<Message> messages = [];
       snapshot.docs.forEach((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        // Retrieve imageUrl from the data
+        String imageUrl = data['imageUrl'] ?? ''; // Use the actual field name from your Firestore document
+
         messages.add(Message(
           id: doc.id,
           senderId: data['senderId'],
           receiverId: data['receiverId'],
           content: data['content'],
           timestamp: data['timestamp'].toDate(),
+          imageUrl: imageUrl,
         ));
       });
       return messages;
@@ -72,30 +82,62 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
     return _controller;
   }
 
-  void _onCapturePressed() async {
-    try {
-      final XFile file = await _controller.takePicture();
-      // Handle the captured photo (file) as needed, for example, save it or display it.
-      print("Photo captured at: ${file.path}");
-      // Here you can upload the image to Firebase or save it locally, etc.
-    } catch (e) {
-      print("Error occurred while capturing photo: $e");
-    }
+  void _onCapturePressed(String imagePath) {
+    // Handle the captured image path here, for example, upload to Firebase Storage
+    _uploadImageToFirebaseStorage(imagePath);
   }
-  void _sendMessage(String message) {
-    if (message.trim().isNotEmpty) {
-      _firebaseService.sendMessage(
-        widget.userId, // Sender's ID
-        widget.receiverId, // Receiver's ID
-        message,
-      );
+
+
+  void _uploadImageToFirebaseStorage(String imagePath) async {
+    try {
+      File imageFile = File(imagePath);
+
+      // Reference to Firebase Storage
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+      // Upload the image to Firebase Storage
+      UploadTask uploadTask = storageReference.putFile(imageFile);
+
+      // Wait for the upload to complete
+      await uploadTask.whenComplete(() {
+        print('Image uploaded to Firebase Storage'); // Print this message after successful upload
+      });
+    } catch (e) {
+      print("Error occurred while uploading photo to Firebase Storage: $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error uploading photo to Firebase Storage. Please try again.'),
+      ));
     }
   }
 
+
+
+
+  void _sendMessage(String message) {
+    if (message.trim().isNotEmpty) {
+      // Update local list with sent message
+      setState(() {
+        _messages.add(message);
+      });
+
+      // Send message to Firebase
+      _firebaseService.sendMessage(
+        widget.userId,
+        widget.receiverId,
+        message,
+      );
+
+      // Clear the message input field
+      _messageController.clear();
+    }
+  }
 
 
   @override
   Widget build(BuildContext context) {
+    String userId = widget.userId;
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -251,26 +293,32 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
             ),
             Expanded(
               child: StreamBuilder<List<Message>>(
-                stream: getMessageStream(widget.userId),
+                stream: _firebaseService.getMessageStream(widget.userId),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<Message> messages = snapshot.data!;
-
-                    return Expanded(
-                      child: ListView.builder(
-                        itemCount: messages.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          Message message = messages[index];
-                          bool isSender = message.senderId == widget.userId;
-
-                          return isSender
-                              ? SenderMessage(message.content)
-                              : ReceiverMessage(message.content);
-                        },
-                      ),
-                    );
-                  } else {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('No Messages'));
+                  } else {
+                    List<Message> messages = snapshot.data!;
+                    return ListView.builder(
+                      reverse: true, // Yeh property list ko reverse order mein display karega
+                      itemCount: messages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Message message = messages[index];
+                        bool isSender = message.senderId == userId;
+                        return isSender
+                            ? SenderMessage(message.content)
+                            : Column(
+                          children: [
+                            ReceiverMessage(message.content, message.imageUrl),
+                            ImageWidget(message.imageUrl),
+                          ],
+                        );
+                      },
+                    );
                   }
                 },
               ),
@@ -312,18 +360,17 @@ class _ProfileChatScreenState extends State<ProfileChatScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               IconButton(
-                                icon: SvgPicture.asset(
-                                    "assets/Bold-Camera.svg"),
-                                onPressed: () {
-                                  // Open camera when the camera icon is tapped
-                                  Navigator.push(
+                                icon: SvgPicture.asset("assets/Bold-Camera.svg"),
+                                onPressed: ()async {
+                                  final imagePath = await Navigator.push<String>(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          CameraScreen(
-                                              controller, _onCapturePressed),
+                                      builder: (context) => CameraScreen(_controller),
                                     ),
                                   );
+                                  if (imagePath != null) {
+                                    _onCapturePressed(imagePath);
+                                  }
                                 },
                               ),
                               IconButton(

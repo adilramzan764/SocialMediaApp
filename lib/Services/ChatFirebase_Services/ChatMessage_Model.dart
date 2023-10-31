@@ -4,6 +4,7 @@ class Message {
   late String receiverId; // Receiver's user ID
   late String content; // Message content
   late DateTime timestamp; // Timestamp when the message was sent
+  late String imageUrl; // Image URL
 
   Message({
     required this.id,
@@ -11,6 +12,7 @@ class Message {
     required this.receiverId,
     required this.content,
     required this.timestamp,
+    this.imageUrl = '', // Provide a default value here
   });
 }
 

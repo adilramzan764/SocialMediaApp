@@ -68,5 +68,8 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-analytics:21.4.0'
+    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.1.2'
+    implementation 'com.google.firebase:firebase-appcheck-ktx:17.1.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

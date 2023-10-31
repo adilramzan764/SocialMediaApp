@@ -1,21 +1,16 @@
-import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:socialmediaapp/Services/authServices.dart';
 import 'package:socialmediaapp/Utis/utils.dart';
-import 'package:socialmediaapp/View/BottomBarScreens/Home/Home.dart';
-import 'package:socialmediaapp/View/Chat%20screens/MainChatScreens.dart';
-import 'package:socialmediaapp/Widgets/CustomDialog.dart';
-
 import '../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
-
 class LoginViewModel extends GetxController {
 
   GlobalKey<FormState>  globalKey=GlobalKey<FormState>();
-  final emailController = TextEditingController(text: "zee@gmail.com").obs ;
-  final passwordController = TextEditingController(text: "123456789").obs ;
+  final emailController = TextEditingController(text: "123@gmail.com").obs ;
+  final passwordController = TextEditingController(text: "12345678").obs ;
   final emailFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
 

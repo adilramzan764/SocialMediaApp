@@ -8,7 +8,7 @@ import 'package:socialmediaapp/Widgets/CustomDialog.dart';
 
 class RegisterViewModel extends GetxController {
 
-  GlobalKey<FormState>  globalKey=GlobalKey<FormState>();
+  GlobalKey<FormState>  globalSignUpKey=GlobalKey<FormState>();
   final nameController = TextEditingController().obs ;
   final emailController = TextEditingController().obs ;
   final phoneController = TextEditingController().obs ;
@@ -29,7 +29,7 @@ class RegisterViewModel extends GetxController {
 
   void signUp()async{
     loading.value = true ;
-    FormState form = globalKey.currentState!;
+    FormState form = globalSignUpKey.currentState!;
     form.save();
     if (!form.validate()) {
       validate = true;
@@ -55,7 +55,8 @@ class RegisterViewModel extends GetxController {
         // );
       }
       else{
-        Utils.snackBar('Signup',"Please fix the errors in red before submitting.");
+        Container();
+        // Utils.snackBar('Signup',"Please fix the errors in red before submitting.");
       }
     }
 

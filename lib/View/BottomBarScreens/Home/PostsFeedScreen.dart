@@ -94,6 +94,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
       backgroundColor: Colors.white,
       body: ListView.builder(
         shrinkWrap: true,
+        padding: EdgeInsets.zero,
         itemCount: filteredPosts.length,
         itemBuilder: (context, index) {
           final post = filteredPosts[index];

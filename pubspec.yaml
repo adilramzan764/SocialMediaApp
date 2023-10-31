@@ -40,7 +40,7 @@ dependencies:
   responsive_sizer: ^3.2.0
   smooth_page_indicator: ^1.1.0
   flutter_dialpad: ^1.0.5
-  firebase_core: ^2.17.0
+  firebase_core: ^2.20.0
   form_field_validator: ^1.1.0
   firebase_auth: ^4.10.1
   cloud_firestore: ^4.10.0
@@ -52,6 +52,9 @@ dependencies:
   image_picker: ^1.0.4
   syncfusion_flutter_datepicker: ^23.1.41
   camera: ^0.10.5+5
+  firebase_app_check: ^0.2.1+2
+  agora_rtc_engine: ^6.2.4
+  permission_handler: ^11.0.1
 
 
 

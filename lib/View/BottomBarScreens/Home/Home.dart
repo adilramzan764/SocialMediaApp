@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _screens = [
     HomeScreenContent(scaffoldKey: _scaffoldKey,),
     MainChatScreens(),
-    PhoneTab(),
+    const PhoneTab(),
   ];
 
   List<String> profileIcons = [
@@ -101,8 +101,8 @@ class HomeScreenContent extends StatelessWidget {
       children: [
         Column(
           children: [
-            SizedBox(
-              height: 60,
+            const SizedBox(
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +119,7 @@ class HomeScreenContent extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   'Explore',
                   style: TextStyle(
                       color: Colors.black,
@@ -135,7 +135,7 @@ class HomeScreenContent extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.to(NotificationScreen());
+                        Get.to(const NotificationScreen());
                       },
                       icon: SvgPicture.asset('assets/notification.svg',
                           height: 18, width: 18, color: Colors.black),
@@ -144,10 +144,7 @@ class HomeScreenContent extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(child: MyTabBar()),
+            const Expanded(child: MyTabBar()),
 
           ],
         ),
@@ -158,7 +155,7 @@ class HomeScreenContent extends StatelessWidget {
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
                 borderSide: BorderSide(color: Colors.white.withOpacity(0.1))),
-            backgroundColor: Color(0xffAC83F6),
+            backgroundColor: const Color(0xffAC83F6),
             foregroundColor: Colors.white,
             onPressed: () {
               showDialog(
@@ -167,7 +164,7 @@ class HomeScreenContent extends StatelessWidget {
                   return UploadFedd_Dialog();
                 },
               );            },
-            child: Icon(Icons.add, size: 30),
+            child: const Icon(Icons.add, size: 30),
           ),
         ),
       ],
