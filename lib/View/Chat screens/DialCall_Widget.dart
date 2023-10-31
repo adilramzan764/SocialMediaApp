@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../Balance_Sheets/CurrentBalance.dart';
+import '../BottomBarScreens/Home/Home.dart';
 class DialCall_Widget extends StatelessWidget {
   const DialCall_Widget({Key? key}) : super(key: key);
 
@@ -23,7 +24,7 @@ class DialCall_Widget extends StatelessWidget {
               InkWell(
                 child: Icon(Icons.arrow_back_ios, color: Colors.black, size: 16),
                 onTap: () {
-                  Get.back();
+                  Get.offAll(Home());
                 },
               ),
               Container(
