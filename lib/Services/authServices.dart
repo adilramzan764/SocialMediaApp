@@ -25,6 +25,7 @@ class AuthService {
     );
     if (res.user != null) {
       await saveUserToFirestore(name!,email!, res.user!, password!, dob!,userName!,photoUrl!);
+
       return true;
     } else {
       return false;

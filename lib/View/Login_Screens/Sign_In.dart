@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:socialmediaapp/View/Chat%20screens/MainChatScreens.dart';
 import '../../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
 import '../../ViewModels/loginViewModel.dart';
-import '../CreateAccount/SignUp.dart';
+import '../../ViewModels/signUpViewModel.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -13,9 +11,10 @@ class SignIn extends StatefulWidget {
   @override
   State<SignIn> createState() => _SignInState();
 }
-
 class _SignInState extends State<SignIn> {
   final LogInMV = Get.put(LoginViewModel()) ;
+  final RegisterViewModel registerVM = Get.find<RegisterViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +37,7 @@ class _SignInState extends State<SignIn> {
               SizedBox(
                 height: Get.height * 0.06,
               ),
-              Align(alignment: Alignment.centerLeft,
+              const Align(alignment: Alignment.centerLeft,
                 child: Text(
                   'Enter your Password',
                   style: TextStyle(
@@ -60,12 +59,12 @@ class _SignInState extends State<SignIn> {
                 child: TextFormField(controller:LogInMV.emailController.value ,
                   decoration: InputDecoration(
 
-                      hintStyle: TextStyle(color: Color(0XFF707070),
+                      hintStyle: const TextStyle(color: Color(0XFF707070),
                         fontSize: 11,
                       ),
 
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(30)),
@@ -89,14 +88,14 @@ class _SignInState extends State<SignIn> {
                   obscureText: true,
                   decoration: InputDecoration(
                       hintText: "      Password",
-                      hintStyle: TextStyle(color: Color(0XFF707070),
+                      hintStyle: const TextStyle(color: Color(0XFF707070),
                         fontSize: 11,
                       ),
                       suffixIcon:Transform.scale(scale: 0.5,
                           child: SvgPicture.asset("assets/Show.svg")) ,
 
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(30)),
@@ -113,7 +112,7 @@ class _SignInState extends State<SignIn> {
                 alignment: Alignment.topRight,
                 child: InkWell(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       'Forget Password',
                       style: TextStyle(color: Color(0xff707070), fontSize: 12),
                     )),
@@ -123,13 +122,22 @@ class _SignInState extends State<SignIn> {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => BottomNavBarV2());
+                  String enteredPassword = LogInMV.passwordController.value.text;
+                  String storedPassword = registerVM.password.value;
+
+                  if (enteredPassword == storedPassword) {
+                    // Password matches, navigate to the next screen
+                    Get.offAll(() => BottomNavBarV2());
+                  } else {
+                    // Password does not match, show error message
+                    Get.snackbar('Error', 'Incorrect password. Please try again.');
+                  }
                 },
                 // onPressed: ()=>LogInMV.LogIn(),
                 child: Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,
@@ -139,7 +147,7 @@ class _SignInState extends State<SignIn> {
                     color: Color(0xffAC83F6),
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Log in",
                       style: TextStyle(color: Colors.white, fontSize: 14),

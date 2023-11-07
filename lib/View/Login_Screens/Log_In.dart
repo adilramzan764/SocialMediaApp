@@ -38,7 +38,7 @@ class _LogInState extends State<LogIn> {
               SizedBox(
                 height: Get.height * 0.06,
               ),
-              Align(alignment: Alignment.centerLeft,
+              const Align(alignment: Alignment.centerLeft,
                 child: Text(
                   'To get started, first enter your phone, email\n address or @username',
                   style: TextStyle(
@@ -60,12 +60,12 @@ class _LogInState extends State<LogIn> {
                 child: TextFormField(controller:LogInMV.emailController.value ,
                   decoration: InputDecoration(
                       hintText: "    Phone,email address,or username",
-                      hintStyle: TextStyle(color: Color(0XFF707070),
+                      hintStyle: const TextStyle(color: Color(0XFF707070),
                         fontSize: 11,
                       ),
 
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(30)),
@@ -80,13 +80,13 @@ class _LogInState extends State<LogIn> {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => SignIn());
+                  Get.to(() => const SignIn());
                   // Get.to(() => BottomNavBarV2());
                 },
                 child: Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,
@@ -96,7 +96,7 @@ class _LogInState extends State<LogIn> {
                     color: Color(0xffAC83F6),
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Next",
                       style: TextStyle(color: Colors.white, fontSize: 14),
