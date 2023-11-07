@@ -1,10 +1,14 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:socialmediaapp/Services/authServices.dart';
 import 'package:socialmediaapp/Utis/utils.dart';
 import 'package:socialmediaapp/Widgets/CustomDialog.dart';
+
+import '../View/CreateAccount/PixkProfilePicture.dart';
+import '../View/StarterScreens/ContinueWithGoogle.dart';
 
 class RegisterViewModel extends GetxController {
 
@@ -25,7 +29,11 @@ class RegisterViewModel extends GetxController {
   RxBool loading = false.obs;
   AuthService auth = AuthService();
   bool validate = false;
+  RxString password = ''.obs;
 
+  void setPassword(String newPassword) {
+    password.value = newPassword;
+  }
 
   void signUp()async{
     loading.value = true ;
@@ -53,10 +61,11 @@ class RegisterViewModel extends GetxController {
         //     builder: (context) => ContactsPermission(),
         //   ),
         // );
+        Get.offAll(()=>PickProfilePicture());
       }
       else{
         Container();
-        // Utils.snackBar('Signup',"Please fix the errors in red before submitting.");
+        Utils.snackBar('Signup',"Please fix the errors in red before submitting.");
       }
     }
 

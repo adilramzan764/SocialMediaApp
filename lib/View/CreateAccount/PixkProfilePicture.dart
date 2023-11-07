@@ -10,19 +10,26 @@ import '../../ViewModels/signUpViewModel.dart';
 import '../../Widgets/CustomButton.dart';
 import 'UsernameCreation.dart';
 
-class PickProfilePicture extends StatelessWidget {
-  PickProfilePicture({Key? key}) : super(key: key);
+class PickProfilePicture extends StatefulWidget {
+  @override
+  _PickProfilePictureState createState() => _PickProfilePictureState();
+}
+
+class _PickProfilePictureState extends State<PickProfilePicture> {
   final registerVM = Get.put(RegisterViewModel());
   final ImagePicker _picker = ImagePicker();
   Rx<File?> _pickedImage = Rx<File?>(null);
+  bool _isUploading = false;
 
   Future<void> _pickImage() async {
     try {
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
       if (pickedFile != null) {
-        _pickedImage.value = File(pickedFile.path);
-        print("Image Path: ${_pickedImage.value!.path}");
+        setState(() {
+          _pickedImage.value = File(pickedFile.path);
+          print("Image Path: ${_pickedImage.value!.path}");
+        });
       }
     } catch (e) {
       print("Error picking image: $e");
@@ -58,9 +65,9 @@ class PickProfilePicture extends StatelessWidget {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         String userId = user.uid;
-        await FirebaseFirestore.instance.collection('users').doc(userId).set({
-          'profileImageUrl': imageUrl,
-        }, SetOptions(merge: true));
+        await FirebaseFirestore.instance.collection('users').doc(userId).update({
+          'photoUrl': imageUrl,
+        }, );
         print("Image URL saved in Firestore: $imageUrl");
       }
     } catch (e) {
@@ -75,114 +82,151 @@ class PickProfilePicture extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            SizedBox(height: Get.height * 0.1),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: 15,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: Get.height * 0.1),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 15,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: Get.height * 0.02),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "  Pick a Profile picture",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
+              SizedBox(height: Get.height * 0.02),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "  Pick a Profile picture",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: Get.height * 0.01),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Have a favorite Selfie? Upload it now",
-                style: TextStyle(color: Colors.black, fontSize: 10),
+              SizedBox(height: Get.height * 0.01),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Have a favorite Selfie? Upload it now",
+                  style: TextStyle(color: Colors.black, fontSize: 10),
+                ),
               ),
-            ),
-            SizedBox(height: Get.height * 0.06),
-            GestureDetector(
-              onTap: _pickImage,
-              child: Obx(() {
-                return Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 2,
-                        spreadRadius: 0.5,
-                        color: Colors.grey.withOpacity(0.3),
+              SizedBox(height: Get.height * 0.06),
+              GestureDetector(
+                onTap: _pickImage,
+                child: Obx(() {
+                  return Container(
+                    height: 150,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 2,
+                          spreadRadius: 0.5,
+                          color: Colors.grey.withOpacity(0.3),
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white,
+                        ),
                       ),
-                    ],
-                  ),
-                  child: _pickedImage.value != null
-                      ? Image.file(_pickedImage.value!, fit: BoxFit.cover)
-                      : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/Camera.svg', height: 50, width: 50),
-                      SizedBox(height: 15),
-                      Text(
-                        "Upload",
-                        style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            ),
-            SizedBox(height: 30),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
-              child: CustomButton(
-                text: 'Skip for now',
-                onPressed: () {
-                  // Handle skip button action
-                },
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
-              child: CustomButton(
-                text: 'Next',
-                onPressed: (){
-                  Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UsernameCreation(),
+                      child: Center(
+                        child: _pickedImage.value != null
+                            ? ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.file(
+                            _pickedImage.value!,
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit.cover,
                           ),
-                        );
-                },
-                // onPressed: () async {
-                //   String? imageUrl = await _uploadImageToFirebase(_pickedImage.value);
-                //   if (imageUrl != null) {
-                //     await _saveImageUrlToFirestore(imageUrl);
-                //   }
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => UsernameCreation(),
-                //     ),
-                //   );
-                // },
+                        )
+                            : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/Camera.svg',
+                                height: 50, width: 50),
+                            SizedBox(height: 15),
+                            Text(
+                              "Upload",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
-            ),
-          ],
+              SizedBox(height: 30),
+              _isUploading
+                  ? Center(
+                child: CircularProgressIndicator(),
+              )
+                  : Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
+                child: CustomButton(
+                  text: 'Skip for now',
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => UsernameCreation()));
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              _isUploading
+                  ? SizedBox.shrink()
+                  : Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
+                child: CustomButton(
+                  text: 'Next',
+                  onPressed: () async {
+                    setState(() {
+                      _isUploading = true;
+                    });
+
+                    String? imageUrl =
+                    await _uploadImageToFirebase(_pickedImage.value);
+
+                    setState(() {
+                      _isUploading = false;
+                    });
+
+                    if (imageUrl != null) {
+                      await _saveImageUrlToFirestore(imageUrl);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UsernameCreation(),
+                        ),
+                      );
+                    } else {
+                      // Handle the case when imageUrl is null (upload failed)
+                      // You might want to show an error message to the user
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

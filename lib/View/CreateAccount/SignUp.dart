@@ -127,7 +127,18 @@ class _SignUpState extends State<SignUp> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(const PasswordScreen());
+                    if (registerVM.nameController.value.text.isEmpty ||
+                        registerVM.emailController.value.text.isEmpty ||
+                        registerVM.dobController.value.text.isEmpty) {
+                      // Show an error message or snackbar indicating that all fields are required
+                      // You can use Get.snackbar or any other method to display the error message
+                      Get.snackbar('Error', 'All fields are required');
+
+                    } else {
+                      print("SignUp Successful");
+                     Navigator.push(context, MaterialPageRoute(builder: (_)=>PasswordScreen()));
+
+                    }
                   },
                   child: Container(
                     height: 40,
@@ -150,6 +161,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),

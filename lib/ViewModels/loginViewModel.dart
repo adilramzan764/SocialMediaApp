@@ -9,8 +9,8 @@ import '../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
 class LoginViewModel extends GetxController {
 
   GlobalKey<FormState>  globalKey=GlobalKey<FormState>();
-  final emailController = TextEditingController(text: "123@gmail.com").obs ;
-  final passwordController = TextEditingController(text: "12345678").obs ;
+  final emailController = TextEditingController().obs ;
+  final passwordController = TextEditingController().obs ;
   final emailFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
 

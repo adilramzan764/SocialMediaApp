@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
+import '../Components/BottomNavigationBar/MyBottomNavigationBar.dart';
 import '../View/Chat%20screens/MainChatScreens.dart';
 import '../View/Login_Screens/Log_In.dart';
 
@@ -38,7 +39,7 @@ class GoogleSignInController extends GetxController {
 
         if (isExistingUser) {
           // If user exists, navigate to MainChatScreens
-          Get.offAll(() => MainChatScreens());
+          Get.offAll(() => BottomNavBarV2());
           log('MainChatScreens()');
 
         } else {

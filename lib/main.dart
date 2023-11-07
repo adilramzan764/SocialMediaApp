@@ -6,13 +6,15 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:socialmediaapp/View/StarterScreens/starterscreen1.dart';
 import 'Utis/firebase_options.dart';
 import 'ViewModels/ProfileViewModel.dart';
+import 'ViewModels/signUpViewModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  configLoading(); // Move configLoading() here
+  configLoading();
+  Get.put(RegisterViewModel()); // Move configLoading() here
   Get.put(ProfileViewModel()); // Register ProfileViewModel
   runApp(const MyApp());
 }
