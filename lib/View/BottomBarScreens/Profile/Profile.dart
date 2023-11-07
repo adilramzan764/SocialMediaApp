@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart'; // Import GetX package
+import '../../../Controllers/GetuserdataDataController.dart';
 import '../../../Controllers/ProfileController.dart';
+import '../../../Utis/firebase.dart';
 import '../../../Widgets/CustomButton.dart';
 import '../../../Widgets/PicPost_Widget.dart';
 import '../Home/PostsFeedScreen.dart';
@@ -16,10 +18,17 @@ class Profile extends StatelessWidget {
   final bool otherUserProfile;
   final ProfileController controller = Get.put(ProfileController());
 
+
+
   Profile({Key? key, required this.otherUserProfile}) : super(key: key);
+  GetUserDataController getUserDataController =
+  Get.put(GetUserDataController()); // Create and register a new instance of GetUserDataController
+
 
   @override
   Widget build(BuildContext context) {
+    getUserDataController.getUserData(userId: 'Gv7IR5lT9ATUqONZCkDW1Gnajtf1'); // Replace 'user_id_here' with the actual user ID if needed.
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: DefaultTabController(
@@ -89,6 +98,7 @@ class Profile extends StatelessWidget {
                   ),
                   child: Obx(() {
                     final userProfile = controller.userProfile.value;
+
                     return Stack(
                       children: [
                         Container(
@@ -155,7 +165,9 @@ class Profile extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         Text(
-                                          userProfile.name,
+
+                                          getUserDataController.getUserDataRxModel.value?.name ?? '', // Use null-aware operators
+
                                           style: TextStyle(
                                             color: Color(0xff3EA7FF),
                                             fontWeight: FontWeight.w500,
@@ -304,42 +316,4 @@ class Profile extends StatelessWidget {
     );
   }
 
-  void _showBottomSlider(BuildContext context) {
-    showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(25),
-            topLeft: Radius.circular(25)), // Set circular border radius here
-      ),
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset("assets/Bulk-Send.svg"), // Your icon here
-                  SizedBox(width: 20),
-                  Text('Share on Profile',
-                      style: TextStyle(color: Colors.black)),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  SvgPicture.asset("assets/Bulk-Delete.svg"),
-                  SizedBox(width: 20),
-                  Text('Delete this post',
-                      style: TextStyle(color: Colors.black)),
-                ],
-              ),
-              // Add more rows with icons and text as needed
-            ],
-          ),
-        );
-      },
-    );
-  }
 }

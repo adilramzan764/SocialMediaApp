@@ -7,7 +7,7 @@ import '../../Controllers/ProfileController.dart';
 import '../BottomBarScreens/Profile/All_TAb.dart';
 class Drafts extends StatelessWidget {
   Drafts({Key? key}) : super(key: key);
-  final ProfileController controller = Get.put(ProfileController());
+  // final ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,36 +48,36 @@ class Drafts extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemCount: controller.userProfile.value.posts.length,
-              itemBuilder: (BuildContext context, int index) {
-                print(controller.userProfile.value.posts[index]);
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: AssetImage(controller.userProfile.value.posts[index]),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: SvgPicture.asset('assets/album.svg'),
-                    ),
-                  ),
-                );
-              },
-            ),
-          )
+          // Expanded(
+          //   child: GridView.builder(
+          //     shrinkWrap: true,
+          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 2,
+          //       crossAxisSpacing: 5.0,
+          //       mainAxisSpacing: 8.0,
+          //     ),
+          //     itemCount: controller.userProfile.value.posts.length,
+          //     itemBuilder: (BuildContext context, int index) {
+          //       print(controller.userProfile.value.posts[index]);
+          //       return Container(
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(15),
+          //           image: DecorationImage(
+          //             image: AssetImage(controller.userProfile.value.posts[index]),
+          //             fit: BoxFit.cover,
+          //           ),
+          //         ),
+          //         child: Padding(
+          //           padding: const EdgeInsets.all(15.0),
+          //           child: Align(
+          //             alignment: Alignment.topRight,
+          //             child: SvgPicture.asset('assets/album.svg'),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // )
         ],
       ),
     );

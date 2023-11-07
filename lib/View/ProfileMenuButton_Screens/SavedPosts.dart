@@ -10,7 +10,7 @@ import '../BottomBarScreens/Profile/All_TAb.dart';
 
 class Saved_Posts extends StatelessWidget {
    Saved_Posts({Key? key}) : super(key: key);
-  final ProfileController controller = Get.put(ProfileController());
+  // final ProfileController controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {

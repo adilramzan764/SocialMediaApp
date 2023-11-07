@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../Controllers/ProfileChatCamera.dart';
-import '../../Services/ChatFirebase_Services/ChatMessage_Model.dart';
+import '../../Models/ChatMessage_Model.dart';
 import '../../Services/ChatFirebase_Services/Firebase_Service.dart';
 import '../../Services/ChatFirebase_Services/ImageWidget.dart';
 import '../../Services/ChatFirebase_Services/ReceiverMessage.dart';

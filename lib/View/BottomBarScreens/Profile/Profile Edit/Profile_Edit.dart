@@ -14,28 +14,16 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  @override
-  void initState() {
-    super.initState();
-    // Fetch user data when the widget is initialized
-    final ProfileViewModel profileViewModel = Get.find();
-    profileViewModel.fetchUserData();
-  }
-
-  void saveUserData() async {
-    // profileViewModel..updateUserData();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final ProfileViewModel profileViewModel =
-        Get.find(); // Access the ProfileViewModel
-
-    print(
-      "name:" + profileViewModel.profile.value.name,
-    );
+    // final ProfileViewModel profileViewModel =
+    //     Get.find(); // Access the ProfileViewModel
+    //
+    // print(
+    //   "name:" + profileViewModel.profile.value.name,
+    // );
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -140,7 +128,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     child: Obx(
                       () => TextField(
                         decoration: InputDecoration(
-                          hintText: profileViewModel.profile.value.name,
+                          hintText: 'Minha Anjum',
                           hintStyle: TextStyle(
                             fontSize: 12,
                           ),
@@ -181,7 +169,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: profileViewModel.profile.value.dob,
+                        hintText: '12/5/2002',
                         hintStyle: TextStyle(
                           fontSize: 12,
                         ),
@@ -221,7 +209,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: profileViewModel.profile.value.location,
+                        hintText: 'Add Location',
                         hintStyle: TextStyle(
                           fontSize: 12,
                         ),
@@ -262,7 +250,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       child: TextField(
                         maxLines: null,
                         decoration: InputDecoration(
-                          hintText: profileViewModel.profile.value.bio,
+                          hintText: 'Add bio',
                           hintStyle: TextStyle(fontSize: 12),
                           contentPadding: EdgeInsets.all(8),
                           prefixIcon: Transform.scale(
@@ -291,7 +279,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ),
                   TextButton(
                     onPressed: () {
-                      saveUserData();
                     },
                     child: Container(
                       height: 50,

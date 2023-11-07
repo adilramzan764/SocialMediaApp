@@ -55,6 +55,10 @@ dependencies:
   firebase_app_check: ^0.2.1+2
   agora_rtc_engine: ^6.2.4
   permission_handler: ^11.0.1
+  json_annotation:
+  json_serializable:
+  build_runner: # Use the latest version of build_runner
+
 
 
 
