@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart'; // Import GetX package
+
+import 'package:get/get.dart';
 import '../../../Controllers/GetuserdataDataController.dart';
 import '../../../Controllers/ProfileController.dart';
-import '../../../Utis/firebase.dart';
+
 import '../../../Widgets/CustomButton.dart';
 import '../../../Widgets/PicPost_Widget.dart';
 import '../Home/PostsFeedScreen.dart';
@@ -12,22 +12,25 @@ import 'All_Tab.dart';
 import 'Profile Edit/Profile_Edit.dart';
 import 'ProfileWidgets.dart';
 import 'Profile_MoreButton.dart';
-import 'Profile_TabBar.dart';
 
-class Profile extends StatelessWidget {
+
+class Profile extends StatefulWidget {
   final bool otherUserProfile;
-  final ProfileController controller = Get.put(ProfileController());
-
-
 
   Profile({Key? key, required this.otherUserProfile}) : super(key: key);
-  GetUserDataController getUserDataController =
-  Get.put(GetUserDataController()); // Create and register a new instance of GetUserDataController
-
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final ProfileController controller = Get.put(ProfileController());
+
+  GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
+  // Create and register a new instance of GetUserDataController
+  @override
   Widget build(BuildContext context) {
-    getUserDataController.getUserData(userId: 'Gv7IR5lT9ATUqONZCkDW1Gnajtf1'); // Replace 'user_id_here' with the actual user ID if needed.
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -38,54 +41,54 @@ class Profile extends StatelessWidget {
             SliverAppBar(
               backgroundColor: Colors.white,
               leading: Padding(
-                    padding: const EdgeInsets.only(left: 15.0, top: 27),
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          CupertinoIcons.left_chevron,
-                          color: Colors.black,
-                        ),
-                    iconSize: 18,),
+                padding: const EdgeInsets.only(left: 15.0, top: 27),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.left_chevron,
+                    color: Colors.black,
                   ),
+                  iconSize: 18,),
+              ),
               automaticallyImplyLeading: false,
               expandedHeight: 400,
               pinned: true,
-              title: innerBoxIsScrolled && (otherUserProfile || !otherUserProfile)
+              title: innerBoxIsScrolled && (widget.otherUserProfile || !widget.otherUserProfile)
                   ? Padding(
-                    padding: const EdgeInsets.only(top: 26.0),
-                    child: Row(
+                padding: const EdgeInsets.only(top: 26.0),
+                child: Row(
+                  children: [
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Minha Anjum', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                            Text('5 Posts', style: TextStyle(fontSize: 10),),
-                        
-                        
-                          ],
-                        ),
-                        Expanded(child: Align(
-                            alignment: Alignment.centerRight,
-                            child: otherUserProfile ? Container(
-                                height: 25,
-                                width: 80,
-                                child: CustomButton(text: 'Follow', onPressed: () {  },)) :
+                        Text('Minha Anjum', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                        Text('5 Posts', style: TextStyle(fontSize: 10),),
 
 
-                            IconButton(icon: Icon(Icons.more_vert), onPressed: () {  },iconSize: 20,)
-                        ))
                       ],
                     ),
-                  )
+                    Expanded(child: Align(
+                        alignment: Alignment.centerRight,
+                        child: widget.otherUserProfile ? Container(
+                            height: 25,
+                            width: 80,
+                            child: CustomButton(text: 'Follow', onPressed: () {  },)) :
+
+
+                        IconButton(icon: const Icon(Icons.more_vert), onPressed: () {  },iconSize: 20,)
+                    ))
+                  ],
+                ),
+              )
                   : null,
 
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(30),
                     ),
@@ -104,9 +107,9 @@ class Profile extends StatelessWidget {
                         Container(
                           height: 170,
                           width: double.infinity,
-                          decoration: BoxDecoration(
+                          decoration:  BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage('assets/model1.jpg'),
+                                  image: NetworkImage(getUserDataController.getUserDataRxModel.value!.backgroundImage,),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.only(
                                   bottomRight: Radius.circular(25),
@@ -114,14 +117,14 @@ class Profile extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            SizedBox(height: 50),
+                            const SizedBox(height: 50),
                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: IconButton(
                                   onPressed: () {
                                     showModalBottomSheet(
-                                      shape: RoundedRectangleBorder(
+                                      shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.only(
                                             topRight: Radius.circular(25),
                                             topLeft: Radius.circular(
@@ -130,18 +133,18 @@ class Profile extends StatelessWidget {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           Profile_MoreButton(
-                                        otherUserProfile: otherUserProfile,
-                                      ),
+                                            otherUserProfile: widget.otherUserProfile,
+                                          ),
                                     );
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.more_vert,
                                     color: Colors.black,
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -150,13 +153,14 @@ class Profile extends StatelessWidget {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: ProfilePicWidget(
-                                      userProfile.profileimage,
+                                      picType: 'network',
+                                      getUserDataController.getUserDataRxModel.value!.profileimage,
                                       95,
                                       95,
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 25.0, right: 20),
@@ -168,13 +172,13 @@ class Profile extends StatelessWidget {
 
                                           getUserDataController.getUserDataRxModel.value?.name ?? '', // Use null-aware operators
 
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Color(0xff3EA7FF),
                                             fontWeight: FontWeight.w500,
                                             fontSize: 15,
                                           ),
                                         ),
-                                        if (otherUserProfile)
+                                        if (widget.otherUserProfile)
                                           Expanded(
                                             child: Align(
                                               alignment: Alignment.centerRight,
@@ -188,7 +192,7 @@ class Profile extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                        if (otherUserProfile)
+                                        if (widget.otherUserProfile)
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 5.0),
@@ -201,7 +205,7 @@ class Profile extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                        if (!otherUserProfile)
+                                        if (!widget.otherUserProfile)
                                           Expanded(
                                             child: Align(
                                               alignment: Alignment.centerRight,
@@ -221,14 +225,14 @@ class Profile extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 3),
+                                const SizedBox(height: 3),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 25.0),
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      userProfile.bio,
-                                      style: TextStyle(
+                                      getUserDataController.getUserDataRxModel.value?.bio ?? "" ,
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 11,
                                       ),
@@ -238,7 +242,7 @@ class Profile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -262,8 +266,8 @@ class Profile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 60),
-                            if (otherUserProfile) SizedBox(height: 20),
+                            const SizedBox(height: 60),
+                            if (widget.otherUserProfile) const SizedBox(height: 20),
                           ],
                         ),
                       ],
@@ -272,7 +276,7 @@ class Profile extends StatelessWidget {
                 ),
               ),
               forceElevated: innerBoxIsScrolled,
-              bottom: TabBar(
+              bottom: const TabBar(
                 indicatorSize: TabBarIndicatorSize.tab,
                 labelColor: Colors.black,
                 labelStyle: TextStyle(
@@ -295,13 +299,13 @@ class Profile extends StatelessWidget {
               children: [
                 PostFeedScreen(
                   saved_posts_Screen: false,
-                  ispersonalpost: !otherUserProfile,
+                  ispersonalpost: !widget.otherUserProfile,
                 ),
 
                 All_Tab(userprofile: controller.userProfile.value),
                 PostFeedScreen(
                   saved_posts_Screen: false,
-                  ispersonalpost: !otherUserProfile,
+                  ispersonalpost: !widget.otherUserProfile,
                 ),
 
                 // Center(child: InkWell(onTap: () {
@@ -315,5 +319,4 @@ class Profile extends StatelessWidget {
       ),
     );
   }
-
 }

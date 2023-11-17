@@ -1,21 +1,11 @@
-import 'dart:async';
-import 'dart:io';
-import 'dart:ui';
 
-import 'package:camera/camera.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../Controllers/ProfileChatCamera.dart';
-import '../../Models/ChatMessage_Model.dart';
-import '../../Services/ChatFirebase_Services/Firebase_Service.dart';
-import '../../Services/ChatFirebase_Services/ImageWidget.dart';
-import '../../Services/ChatFirebase_Services/ReceiverMessage.dart';
-import '../../Services/ChatFirebase_Services/SenderMessage.dart';
-import 'PhoneTab.dart';
+import '../../Controllers/GetuserdataDataController.dart';
+
 
 class ProfileChatScreen extends StatefulWidget {
   final String userId;
@@ -27,6 +17,8 @@ class ProfileChatScreen extends StatefulWidget {
 }
 
 class _ProfileChatScreenState extends State<ProfileChatScreen> {
+  GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
   @override
   void initState() {
     super.initState();

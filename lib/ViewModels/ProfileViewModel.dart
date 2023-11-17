@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Models/ProfileModels.dart';
 
 class ProfileViewModel extends GetxController {
-
-  final profile = ProfileModel(
+  final profile = ProfileModel(backgroundImage: "",
     profileimage: '',
     name: '',
     dob: '',
@@ -17,50 +15,76 @@ class ProfileViewModel extends GetxController {
     posts: [],
   ).obs;
 
-  // Method to fetch user data from Firebase Firestore and map it to ProfileModel
-  Future<void> fetchUserData() async {
+
+  Future<void> fetchUserData(String userId) async {
     try {
-      var userDoc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc('gFgJ5m3GoaPpZiB9bKW5VEe8Kdf1')
-          .get();
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+      await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
       if (userDoc.exists) {
-
-
-        // Map the data to a ProfileModel
-        profile.value = ProfileModel(
-          profileimage: userDoc['profileImage'] ??"",
-          name: userDoc['name']??" ",
-          dob : userDoc['dob'] ?? "",
-          location:  userDoc['location'] ?? " ",
-          bio: userDoc['bio'] ?? "",
-          numberOfPosts: userDoc['numberOfPosts'] ?? "",
-          numberOfFollowers: userDoc['numberOfFollowers'] ?? " ",
-          numberOfFollowings: userDoc['numberOfFollowings'] ?? "",
-          posts: List<String>.from(userDoc['posts']),
+        // Check if the field exists before accessing its value
+        profile.value = ProfileModel(backgroundImage: "",
+          profileimage: userDoc.get('profileImage') ?? "", // Check 'profileImage' field
+          name: userDoc.get('name') ?? "", // Check 'name' field
+          dob: userDoc.get('dob') ?? "", // Check 'dob' field
+          location: userDoc.get('location') ?? "", // Check 'location' field
+          bio: userDoc.get('bio') ?? "", // Check 'bio' field
+          numberOfPosts: userDoc.get('numberOfPosts') ?? "", // Check 'numberOfPosts' field
+          numberOfFollowers: userDoc.get('numberOfFollowers') ?? "", // Check 'numberOfFollowers' field
+          numberOfFollowings: userDoc.get('numberOfFollowings') ?? "", // Check 'numberOfFollowings' field
+          posts: List<String>.from(userDoc.get('posts') ?? []), // Check 'posts' field
         );
+      } else {
+        // Handle the case when the document does not exist
+        print('User document does not exist');
+        // You can set default values or show an error message to the user
+        // For example:
+        // profile.value = ProfileModel();
       }
     } catch (e) {
-      print('Error fetching user data: $e');
+      print("Error fetching user data: $e");
     }
   }
 
-  // Method to update user data in Firebase Firestore
-  Future<void> updateUserData() async {
+
+
+  Future<void> updateUserData({
+    required String userId,
+    String? name,
+    String? dob,
+    String? location,
+    String? bio,
+  }) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc('your_user_id')
-          .update({
-        // 'name': name.value,
-        // 'date_of_birth': dateOfBirth.value,
-        // 'location': location.value,
-        // 'bio': bio.value,
-      });
-      print('User data saved successfully');
+      DocumentReference userDocRef =
+      FirebaseFirestore.instance.collection('users').doc(userId);
+
+      // Check if the document exists before updating
+      DocumentSnapshot<Object?> userDoc = await userDocRef.get();
+
+      if (userDoc.exists) {
+        // Document exists, update data
+        await userDocRef.update({
+          'name': name ?? profile.value.name,
+          'dob': dob ?? profile.value.dob,
+          'location': location ?? profile.value.location,
+          'bio': bio ?? profile.value.bio,
+        });
+        print('User data saved successfully');
+      } else {
+        // Document does not exist, create a new one
+        await userDocRef.set({
+          'name': name ?? profile.value.name,
+          'dob': dob ?? profile.value.dob,
+          'location': location ?? profile.value.location,
+          'bio': bio ?? profile.value.bio,
+        });
+        print('New user document created and data saved successfully');
+      }
     } catch (e) {
       print('Error saving user data: $e');
     }
   }
+
+
 }

@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socialmediaapp/View/BottomBarScreens/Home/PostsFeedScreen.dart';
 
-class MyTabBar extends StatelessWidget {
+class MyTabBar extends StatefulWidget {
   const MyTabBar({Key? key}) : super(key: key);
 
+  @override
+  State<MyTabBar> createState() => _MyTabBarState();
+}
+
+class _MyTabBarState extends State<MyTabBar> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

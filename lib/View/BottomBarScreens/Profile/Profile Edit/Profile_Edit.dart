@@ -1,10 +1,12 @@
+import 'dart:io';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get_core/src/get_main.dart';
-
-import '../../../../ViewModels/ProfileViewModel.dart';
+import '../../../../Controllers/GetuserdataDataController.dart';
+import '../../../../Controllers/Profile_Edit_Controller.dart';
 
 class ProfileEdit extends StatefulWidget {
   ProfileEdit({Key? key}) : super(key: key);
@@ -14,17 +16,47 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
+  final ProfileEditController profileEditController =Get.put(ProfileEditController(),tag: "profileEditController");
+
+
+
+  GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Set the initial values from profileEditController
+    if (profileEditController.nameController.text.isEmpty) {
+      profileEditController.nameController.text =
+          profileEditController.getUserDataController.getUserDataRxModel.value!.name;
+    }
+    if (profileEditController.dOBController.text.isEmpty) {
+      profileEditController.dOBController.text =
+          profileEditController.getUserDataController.getUserDataRxModel.value!.dob;
+    }
+    if (profileEditController.bioController.text.isEmpty) {
+      profileEditController.bioController.text =
+          getUserDataController.getUserDataRxModel.value!.bio;
+    }
+    if (profileEditController.locationController.text.isEmpty) {
+      profileEditController.locationController.text =
+          getUserDataController.getUserDataRxModel.value!.location;
+    }
+  }
+
+
 
 
   @override
   Widget build(BuildContext context) {
-    // final ProfileViewModel profileViewModel =
-    //     Get.find(); // Access the ProfileViewModel
-    //
-    // print(
-    //   "name:" + profileViewModel.profile.value.name,
-    // );
-    return Scaffold(
+
+
+
+
+    return Obx(() =>  Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -32,12 +64,12 @@ class _ProfileEditState extends State<ProfileEdit> {
             Stack(
               children: [
                 // First Image
-                Container(
+                profileEditController.selectedCoverImage?.value != null ?  Container(
                   height: 170,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration:  BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/model4.jpg'),
+                      image: FileImage(profileEditController.selectedCoverImage?.value ?? File('path/to/default/image')),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.only(
@@ -50,62 +82,132 @@ class _ProfileEditState extends State<ProfileEdit> {
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: Container(
-                    height: 25,
+                          height: 25,
                           width: 75,
                           decoration: BoxDecoration(
                             color: Colors.black38,
-                    borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
 
                           ),
-                          child: TextButton(onPressed: () {  }, child: Text("Edit Cover",style: TextStyle(color: Colors.white,fontSize: 8),),)),
+                          child: TextButton(onPressed: () {
+                            profileEditController.coverPickedImage();
+
+
+                          }, child: const Text(
+                            "Edit Cover", style: TextStyle(
+                              color: Colors.white, fontSize: 8),),)),
+                    ),
+                  ),
+                ):Container(
+                  height: 170,
+                  width: double.infinity,
+                  decoration:  BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(getUserDataController.getUserDataRxModel.value!.backgroundImage,),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                          height: 25,
+                          width: 75,
+                          decoration: BoxDecoration(
+                            color: Colors.black38,
+                            borderRadius: BorderRadius.circular(10),
+
+                          ),
+                          child: TextButton(onPressed: () {
+                            profileEditController.coverPickedImage();
+
+
+                          }, child: const Text(
+                            "Edit Cover", style: TextStyle(
+                              color: Colors.white, fontSize: 8),),)),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.16,
-                    left: 20,
-                  ),
-                  child: Container(
-                    height: 95,
-                    width: 95,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Color(0xffAC83F6)),
-                            image: DecorationImage(
-                              image: AssetImage('assets/model1.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Color(0xffAC83F6)),
-                            ),
-                            child: Center(
-                              child: SvgPicture.asset("assets/Edit.svg"),
-                            ),
-                          ),
-                        ),
-                      ],
+                    padding: EdgeInsets.only(
+                      top: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.16,
+                      left: 20,
                     ),
-                  ),
+                    child:Container(
+                      height: 95,
+                      width: 95,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: Stack(
+                        children: [
+                          profileEditController.selectedProfileImage?.value != null ? Container(
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: const Color(0xffAC83F6)),
+                                image: DecorationImage( image: FileImage(profileEditController.selectedProfileImage?.value ?? File('path/to/default/image'),),fit: BoxFit.cover
+                                )
+                            ),
+                            // child: Icon(
+                            //   Icons.camera_alt,
+                            //   size: 40,
+                            //   color: const Color(0xffAC83F6),
+                            // ),
+                          ): Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: const Color(0xffAC83F6)),
+                                image: DecorationImage( image: NetworkImage(getUserDataController.getUserDataRxModel.value!.profileimage,), fit: BoxFit.cover),
+                              )
+                          ),
+                          // child: Icon(
+                          //   Icons.camera_alt,
+                          //   size: 40,
+                          //   color: const Color(0xffAC83F6),
+                          // ),
+
+                          InkWell(onTap: () {
+                            profileEditController.profilePickedImage();
+                          },
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: const Color(0xffAC83F6)),
+                                ),
+                                child: Center(
+                                  child: InkWell(onTap: () {
+                                    profileEditController.profilePickedImage();
+                                  },
+                                      child: SvgPicture.asset("assets/Edit.svg")),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
@@ -117,63 +219,74 @@ class _ProfileEditState extends State<ProfileEdit> {
                 children: [
                   Container(
                     height: 40,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(color: Colors.grey, blurRadius: 2),
                       ],
                     ),
-                    child: Obx(
-                      () => TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Minha Anjum',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
+                    child: TextField(
+                      controller: profileEditController.nameController,
+
+                      decoration: InputDecoration(
+                        hintText: 'Minha Anjum',
+                        hintStyle: const TextStyle(
+                          fontSize: 12,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.4,
+                          child: SvgPicture.asset(
+                            'assets/Iconly-Bulk-Profile.svg',
                           ),
-                          prefixIcon: Transform.scale(
-                            scale: 0.4,
-                            child: SvgPicture.asset(
-                              'assets/Iconly-Bulk-Profile.svg',
-                            ),
+                        ),
+                        contentPadding: const EdgeInsets.all(8),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.white,
                           ),
-                          contentPadding: EdgeInsets.all(8),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
+
                   ),
                   SizedBox(
                     height: Get.height * 0.02,
                   ),
                   Container(
                     height: 40,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(color: Colors.grey, blurRadius: 2),
                       ],
                     ),
                     child: TextField(
+                      readOnly: true,onTap: () {
+                      profileEditController.selectDOB(context);
+                    },
+                      controller: profileEditController.dOBController,
                       decoration: InputDecoration(
-                        hintText: '12/5/2002',
-                        hintStyle: TextStyle(
+                        hintText: 'dd MMM yyyy',
+                        hintStyle: const TextStyle(
                           fontSize: 12,
                         ),
-                        contentPadding: EdgeInsets.all(8),
+                        contentPadding: const EdgeInsets.all(8),
                         prefixIcon: Transform.scale(
                           scale: 0.4,
                           child: SvgPicture.asset(
@@ -181,12 +294,12 @@ class _ProfileEditState extends State<ProfileEdit> {
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        filled: true,
+
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -199,21 +312,25 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ),
                   Container(
                     height: 40,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(color: Colors.grey, blurRadius: 2),
                       ],
                     ),
                     child: TextField(
+                      controller:profileEditController.locationController,
                       decoration: InputDecoration(
                         hintText: 'Add Location',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           fontSize: 12,
                         ),
-                        contentPadding: EdgeInsets.all(8),
+                        contentPadding: const EdgeInsets.all(8),
                         prefixIcon: Transform.scale(
                           scale: 0.4,
                           child: SvgPicture.asset(
@@ -222,7 +339,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.white,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -240,19 +357,25 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ),
                   Container(
                     height: 100,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
-                      boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)],
+                      boxShadow: const [
+                        BoxShadow(color: Colors.grey, blurRadius: 2)
+                      ],
                     ),
                     child: SingleChildScrollView(
                       child: TextField(
+                        controller: profileEditController.bioController,
                         maxLines: null,
                         decoration: InputDecoration(
                           hintText: 'Add bio',
-                          hintStyle: TextStyle(fontSize: 12),
-                          contentPadding: EdgeInsets.all(8),
+                          hintStyle: const TextStyle(fontSize: 12),
+                          contentPadding: const EdgeInsets.all(8),
                           prefixIcon: Transform.scale(
                             scale: 0.4,
                             child: SvgPicture.asset(
@@ -261,7 +384,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.white,
                             ),
                             borderRadius: BorderRadius.circular(20),
@@ -269,7 +392,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           filled: true,
                           fillColor: Colors.white,
                           border:
-                              OutlineInputBorder(borderSide: BorderSide.none),
+                          const OutlineInputBorder(borderSide: BorderSide.none),
                         ),
                       ),
                     ),
@@ -279,11 +402,21 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ),
                   TextButton(
                     onPressed: () {
+                      profileEditController.updateProfileHandler(
+                        userName: profileEditController.nameController.text,
+                        userBio: profileEditController.bioController.text,
+                        userDOB: profileEditController.dOBController.text,
+                        userLocation: profileEditController.locationController.text,
+                      );
+
                     },
                     child: Container(
                       height: 50,
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      decoration: BoxDecoration(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.6,
+                      decoration: const BoxDecoration(
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey,
@@ -293,7 +426,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                         color: Color(0xffAC83F6),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Save",
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -310,7 +443,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                     },
                     child: Container(
                       height: 50,
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.6,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -319,13 +455,14 @@ class _ProfileEditState extends State<ProfileEdit> {
                           ),
                         ],
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(15)),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Cancel",
                           style:
-                              TextStyle(color: Color(0xffAC83F6), fontSize: 16),
+                          TextStyle(color: Color(0xffAC83F6), fontSize: 16),
                         ),
                       ),
                     ),
@@ -336,6 +473,6 @@ class _ProfileEditState extends State<ProfileEdit> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../Controllers/GetuserdataDataController.dart';
 import '../../View/Balance_Sheets/CurrentBalance.dart';
 import '../../View/BottomBarScreens/Profile/Profile.dart';
 import '../../View/BottomBarScreens/Profile/ProfileWidgets.dart';
@@ -25,6 +26,8 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetUserDataController getUserDataController =
+    Get.put(GetUserDataController());
     return Drawer(
       backgroundColor: Colors.white,
       shape: OutlineInputBorder(
@@ -48,7 +51,9 @@ class MyDrawer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: ProfilePicWidget("assets/model1.jpg", 80, 80),
+                child: ProfilePicWidget(
+                    picType: 'network',
+                    getUserDataController.getUserDataRxModel.value!.profileimage, 80, 80),
               ),
             ),
             SizedBox(height: 10),
@@ -56,7 +61,7 @@ class MyDrawer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Minha Anjum"),
+                child: Text(getUserDataController.getUserDataRxModel.value?.name ?? '',),
               ),
             ),
             SizedBox(height: 20),

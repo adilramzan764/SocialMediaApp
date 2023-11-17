@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,8 +13,9 @@ class SignIn extends StatefulWidget {
   @override
   State<SignIn> createState() => _SignInState();
 }
+
 class _SignInState extends State<SignIn> {
-  final LogInMV = Get.put(LoginViewModel()) ;
+  final LogInMV = Get.put(LoginViewModel());
   final RegisterViewModel registerVM = Get.find<RegisterViewModel>();
 
   @override
@@ -37,11 +40,13 @@ class _SignInState extends State<SignIn> {
               SizedBox(
                 height: Get.height * 0.06,
               ),
-              const Align(alignment: Alignment.centerLeft,
+              const Align(
+                alignment: Alignment.centerLeft,
                 child: Text(
                   'Enter your Password',
                   style: TextStyle(
-                    color: Colors.black,fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
                     fontSize: 13,
                   ),
                 ),
@@ -53,25 +58,32 @@ class _SignInState extends State<SignIn> {
                 height: 40,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                    boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-                child: TextFormField(controller:LogInMV.emailController.value ,
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.3), spreadRadius: 1)
+                  ],
+                ),
+                child: TextFormField(
+                  controller: LogInMV.emailController.value,
                   decoration: InputDecoration(
-
-                      hintStyle: const TextStyle(color: Color(0XFF707070),
-                        fontSize: 11,
+                    hintStyle: const TextStyle(
+                      color: Color(0XFF707070),
+                      fontSize: 11,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.white,
                       ),
-
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(30)),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30))),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -81,28 +93,38 @@ class _SignInState extends State<SignIn> {
                 height: 40,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                    boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1)]),
-                child: TextFormField(controller:LogInMV.passwordController.value ,
-                  obscureText: true,
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.3), spreadRadius: 1)
+                  ],
+                ),
+                child: TextFormField(
+                  controller: LogInMV.passwordController.value,
+                  obscureText: false,
                   decoration: InputDecoration(
-                      hintText: "      Password",
-                      hintStyle: const TextStyle(color: Color(0XFF707070),
-                        fontSize: 11,
+                    hintText: "      Password",
+                    hintStyle: const TextStyle(
+                      color: Color(0XFF707070),
+                      fontSize: 11,
+                    ),
+                    suffixIcon: Transform.scale(
+                      scale: 0.5,
+                      child: SvgPicture.asset("assets/Show.svg"),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.white,
                       ),
-                      suffixIcon:Transform.scale(scale: 0.5,
-                          child: SvgPicture.asset("assets/Show.svg")) ,
-
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(30)),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30))),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -111,29 +133,20 @@ class _SignInState extends State<SignIn> {
               Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
-                    onTap: () {},
-                    child: const Text(
-                      'Forget Password',
-                      style: TextStyle(color: Color(0xff707070), fontSize: 12),
-                    )),
+                  onTap: () {},
+                  child: const Text(
+                    'Forget Password',
+                    style: TextStyle(color: Color(0xff707070), fontSize: 12),
+                  ),
+                ),
               ),
               SizedBox(
                 height: Get.height * 0.07,
               ),
               TextButton(
                 onPressed: () {
-                  String enteredPassword = LogInMV.passwordController.value.text;
-                  String storedPassword = registerVM.password.value;
-
-                  if (enteredPassword == storedPassword) {
-                    // Password matches, navigate to the next screen
-                    Get.offAll(() => BottomNavBarV2());
-                  } else {
-                    // Password does not match, show error message
-                    Get.snackbar('Error', 'Incorrect password. Please try again.');
-                  }
+                  LogInMV.logIn();
                 },
-                // onPressed: ()=>LogInMV.LogIn(),
                 child: Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width * 0.7,

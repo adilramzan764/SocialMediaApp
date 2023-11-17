@@ -9,22 +9,34 @@ class AuthService {
   }
 
 //create a firebase user
-  Future<bool> createUser(
-      {String? name,
-        String? email,
-        User? user,
-        String? password,
-        String? dob,
-        String? userName,
-        String? photoUrl,
-        String? phone,
-      }) async {
+  Future<bool> createUser({
+    String? name,
+    String? email,
+    User? user,
+    String? password,
+    String? dob,
+    String? userName,
+    String? photoUrl,
+    String? backgroundImage,
+    String? phone,
+  }) async {
     var res = await firebaseAuth.createUserWithEmailAndPassword(
       email: '$email',
       password: '$password',
     );
+
     if (res.user != null) {
-      await saveUserToFirestore(name!,email!, res.user!, password!, dob!,userName!,photoUrl!);
+      await saveUserToFirestore(
+        name: name,
+        email: email,
+        user: res.user,
+        password: password,
+        dob: dob,
+        userName: userName,
+        photoUrl: photoUrl,
+        backgroundImage: backgroundImage,
+        phone: phone,
+      );
 
       return true;
     } else {
@@ -33,16 +45,28 @@ class AuthService {
   }
 
 //this will save the details inputted by the user to firestore.
-  saveUserToFirestore(
-      String name,String email, User user, String password, String dob,String userName,String photoUrl) async {
-    await usersRef.doc(user.uid).set({
+  Future<void> saveUserToFirestore({
+    String? name,
+    String? email,
+    User? user,
+    String? password,
+    String? dob,
+    String? userName,
+    String? photoUrl,
+    String? backgroundImage,
+    String? phone,
+  }) async {
+    await usersRef.doc(user!.uid).set({
       'name': name,
       'email': email,
       'time': Timestamp.now(),
       'id': user.uid,
       'photoUrl': user.photoURL ?? '',
+      'backgroundImage':  backgroundImage ?? "",
       'dob': dob,
       'userName':userName,
+
+
     });
   }
 
@@ -89,6 +113,8 @@ class AuthService {
     } else if (e.contains('firebase_auth/requires-recent-login')) {
       return 'This operation is sensitive and requires recent authentication.'
           ' Log in again before retrying this request.';
+    } else if (e.contains('INVALID_LOGIN_CREDENTIAL')) {
+      return 'INVALID LOGIN CREDENTIAL';
     } else {
       return e;
     }

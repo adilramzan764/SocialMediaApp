@@ -120,7 +120,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 TextButton(
                   onPressed: () {
                     if (isPasswordValid(registerVM.passwordController.value.text)) {
-                      registerVM.setPassword(registerVM.passwordController.value.text);
                       registerVM.signUp();
 
                       // Get.to(() => PickProfilePicture());

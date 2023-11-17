@@ -43,7 +43,7 @@ dependencies:
   firebase_core: ^2.20.0
   form_field_validator: ^1.1.0
   firebase_auth: ^4.10.1
-  cloud_firestore: ^4.10.0
+  cloud_firestore: ^4.13.1
   flutter_easyloading: ^3.0.5
   google_sign_in: ^6.1.5
   firebase_storage: ^11.2.8
@@ -58,6 +58,7 @@ dependencies:
   json_annotation:
   json_serializable:
   build_runner: # Use the latest version of build_runner
+  intl: ^0.18.1
 
 
 

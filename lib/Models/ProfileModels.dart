@@ -3,8 +3,8 @@ class ProfileModel {
   late String name;
   final String dob;
   final location;
-
-  late String bio;
+ final String backgroundImage;
+  final String bio;
   final String numberOfPosts;
   final String numberOfFollowers;
   final String numberOfFollowings;
@@ -20,35 +20,41 @@ class ProfileModel {
     required this.numberOfFollowers,
     required this.numberOfFollowings,
     required this.posts,
+    required this.backgroundImage
   });
 
   // Create a factory method to deserialize from a Map
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
-      profileimage: json['profileimage'] ?? '',
+      profileimage: json['photoUrl'] ?? '',
       name: json['name'] ?? '',
       dob: json['dob'] ?? '',
-      location: json['location'] ?? '',
-      bio: json['bio'] ?? '',
+      location: json['userLocation'] ?? '',
+      bio: json['userBio'] ?? '',
       numberOfPosts: json['numberOfPosts'] ?? '',
       numberOfFollowers: json['numberOfFollowers'] ?? '',
       numberOfFollowings: json['numberOfFollowings'] ?? '',
       posts: List<String>.from(json['posts'] ?? []),
+      backgroundImage: json['backgroundImage'] ?? '',
+
     );
   }
+
 
   // Create a method to serialize to a Map
   Map<String, dynamic> toJson() {
     return {
-      'profileimage': profileimage,
+      'photoUrl': profileimage,
       'name': name,
       'dob': dob,
-      'location': location,
-      'bio': bio,
       'numberOfPosts': numberOfPosts,
       'numberOfFollowers': numberOfFollowers,
       'numberOfFollowings': numberOfFollowings,
       'posts': posts,
+     'backgroundImage': backgroundImage,
+      'userLocation': location,
+       'userBio': bio,
+      // Add other fields
     };
   }
 }

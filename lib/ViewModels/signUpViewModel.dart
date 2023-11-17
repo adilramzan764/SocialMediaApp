@@ -31,9 +31,7 @@ class RegisterViewModel extends GetxController {
   bool validate = false;
   RxString password = ''.obs;
 
-  void setPassword(String newPassword) {
-    password.value = newPassword;
-  }
+
 
   void signUp()async{
     loading.value = true ;

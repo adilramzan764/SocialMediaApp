@@ -9,8 +9,6 @@ class GetUserDataController extends GetxController {
   var isGetUserDataLoading = false.obs;
   ProfileModel? userModel;
   Rxn<ProfileModel> getUserDataRxModel = Rxn<ProfileModel>();
-
-
   final userData = FirebaseFirestore.instance
       .collection('users')
       .withConverter<ProfileModel>(
@@ -26,10 +24,10 @@ class GetUserDataController extends GetxController {
         .get()
         .then((snapshot) => snapshot.data()));
 
-    getUserDataRxModel.value = userModel!;
+    getUserDataRxModel.value = userModel;
 
     isGetUserDataLoading.value = false;
-    // log(getUserDataRxModel.value!.userEmail.toString());
+    log(getUserDataRxModel.value!.name.toString());
   }
 
 

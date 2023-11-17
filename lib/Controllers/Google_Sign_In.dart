@@ -18,6 +18,8 @@ class GoogleSignInController extends GetxController {
 
       if (googleUser == null) {
         // User canceled Google Sign-In process
+
+
         return;
       }
 

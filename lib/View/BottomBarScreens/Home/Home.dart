@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../Components/BottomNavigationBar/BotttomBar_Widget.dart';
 import '../../../Components/Drawer/CustomDrawer.dart';
+import '../../../Controllers/GetuserdataDataController.dart';
 import '../../../Controllers/ProfileController.dart';
 import '../../../Widgets/MyTabBar.dart';
 import '../../../Widgets/PicPost_Widget.dart';
@@ -27,6 +28,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
   final ProfileController controller = Get.put(ProfileController());
   int _currentIndex = 1;
   bool isDrawerOpen = false;
@@ -49,6 +52,11 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    if(getUserDataController.getUserDataRxModel.value == null){
+      getUserDataController.getUserData();
+
+    }
+
 
     final userProfile = controller.userProfile.value;
 
@@ -98,6 +106,8 @@ class HomeScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetUserDataController getUserDataController =
+    Get.put(GetUserDataController());
     return Stack(
       children: [
         Column(
@@ -114,7 +124,8 @@ class HomeScreenContent extends StatelessWidget {
                       scaffoldKey.currentState!.openDrawer();
                     },
                     icon:  ProfilePicWidget(
-                      'assets/model1.jpg',
+                      picType: 'network',
+                      getUserDataController.getUserDataRxModel.value!.profileimage,
                       30,
                       30,
                     ),

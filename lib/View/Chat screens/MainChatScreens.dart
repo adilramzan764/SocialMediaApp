@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:socialmediaapp/View/Chat%20screens/minihomescreen.dart';
 
+import '../../Controllers/GetuserdataDataController.dart';
 import '../CreatePost/UploadFeed_Dialog.dart';
 import 'CallBalance.dart';
 import 'CallHistory.dart';
@@ -15,6 +17,8 @@ class MainChatScreens extends StatefulWidget {
 }
 
 class _MainChatScreensState extends State<MainChatScreens> {
+  GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
   final List<Map<String, dynamic>> data = [
     {
       'image': 'assets/model2.jpg',
@@ -106,9 +110,11 @@ class _MainChatScreensState extends State<MainChatScreens> {
                     Padding(
                       padding: const EdgeInsets.only(left: 6,top: 8),
                       child: Row(
-                        children: [CircleAvatar(
+                        children: [
+                          CircleAvatar(
                           radius: 20,
-                          backgroundImage:AssetImage(data[0]["image"],),
+                          backgroundImage:AssetImage(
+                              'assets/model3.jpg',),
                         ),
 
                           Expanded(
@@ -248,9 +254,10 @@ class _MainChatScreensState extends State<MainChatScreens> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return UploadFedd_Dialog();
+                      return HomeScreen();
                     },
                   );            },
+
                 child:  Icon(Icons.add, size: 3.5.h),
               ),
             ),
